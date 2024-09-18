@@ -2,15 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image";
-import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
-} from "@/components/ui/menubar"
 import { useState } from "react";
 import logo from '../../app/logo.png';
 
