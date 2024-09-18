@@ -2,7 +2,7 @@
 const Footer = () => {
     return (
         <div>
-            This is footer
+            This is footer || Abrarul is currently working on it...
         </div>
     );
 };
