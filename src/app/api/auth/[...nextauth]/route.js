@@ -1,10 +1,11 @@
-
 import { connectDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const handler = NextAuth({
+
     secret : process.env.NEXT_PUBLIC_AUTH_SECRET,
     session : {
         strategy : 'jwt',
@@ -66,7 +67,7 @@ export const handler = NextAuth({
             } else {
                 return user;
             }
-        }
+        },
     }
 })
 
