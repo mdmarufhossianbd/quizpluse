@@ -11,9 +11,7 @@ import './banner.css';
 
 const Banner = () => {
     return (
-        <div>
-            <h1>Slider</h1>
-
+        <div className='mt-10'>
             <Swiper
                 style={{
                     '--swiper-navigation-color': '#fff',
