@@ -2,7 +2,7 @@
 const Admin = () => {
     return (
         <div>
-            Welcome to admin
+            Welcome to admin dahsboard
         </div>
     );
 };
