@@ -1,10 +1,12 @@
-import Welcome from "@/components/homePage/welcome";
-
+import Banner from "@/components/homePage/banner";
+import PartnerSection from "@/components/homePage/partnerSection";
+import PopularQuize from "@/components/homePage/popular/popularQuize";
 export default function Home() {
   return ( 
     <main>
-      <Welcome />
+      <Banner />
+      <PopularQuize />
+      <PartnerSection/>
     </main>
-
   );
 }

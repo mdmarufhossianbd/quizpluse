@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 // import required modules
-import { Parallax, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination, Parallax } from 'swiper/modules';
 import './banner.css';
-import banner1 from '../../app/assets/banner1.jpg';
 
-const banner = () => {
+const Banner = () => {
     return (
         <div>
             <h1>Slider</h1>
@@ -39,7 +37,7 @@ const banner = () => {
                     slot="container-start"
                     className="parallax-bg"
                     style={{
-                        'backgroundImage': 'url(https://i.ibb.co.com/NS79yVJ/banner2.jpg)',
+                        'backgroundImage': 'url(https://i.ibb.co.com/NS79yVJ/Banner2.jpg)',
                     }}
                     data-swiper-parallax="-23%"
                 ></div>
@@ -102,4 +100,4 @@ const banner = () => {
     );
 };
 
-export default banner;
+export default Banner;
