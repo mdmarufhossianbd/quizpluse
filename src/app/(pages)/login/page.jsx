@@ -3,8 +3,6 @@ import Image from "next/image";
 import loginImage from '../../../../public/assets/login.webp';
 const Login = () => {
 
-    
-
     return (
         <div className="my-10 md:my-14 lg:my-16 xl:my-20">
             <div className="max-w-7xl mx-auto flex gap-10 items-center bg-[#f5f5f5] rounded-md">

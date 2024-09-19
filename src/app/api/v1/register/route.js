@@ -21,7 +21,7 @@ export async function POST(requset) {
         const userName = generateUserName[0];
         const userRole = 'generale-user';
         const userLavel = 'basic';
-        const userProfileImage = ''
+        const userProfileImage = null;
         const password = bcrypt.hashSync(userPassword, 14)
         const userInfo = {
             userAccountOpeningDate, userName, userFullName, userEmail, password, userRole, userLavel, userProfileImage
