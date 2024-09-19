@@ -52,11 +52,11 @@ const Header = () => {
 
                     {/* Right: Button */}
                     <div className="hidden md:flex">
-                        <Link href={'/login'}>
-                            <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
-                                Sign In
-                            </Button>
-                        </Link>
+
+                        <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
+                            <Link href={'/login'}> Sign In</Link>
+                        </Button>
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -92,7 +92,7 @@ const Header = () => {
                         navLinks.map((item, index) => <Link className="px-4 py-1.5 rounded hover:bg-[#5C0096] hover:text-white" key={index} href={item.path}>{item.title}</Link>)
                     }
                     <Button className="w-full text-center bg-[#5C0096] text-white hover:bg-[#500081] mt-2">
-                        Login In
+                        <Link href={'/login'}> Sign In</Link>
                     </Button>
                 </div>
             </div>
