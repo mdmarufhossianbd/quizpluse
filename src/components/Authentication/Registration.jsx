@@ -14,6 +14,10 @@ const Registration = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
+
+
+
+        
         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
             <div className="bg-base-200 p-8 md:p-12 lg:p-16 rounded-xl shadow-lg w-full max-w-4xl">
                 <div className="flex flex-col lg:flex-row-reverse lg:gap-10">
@@ -25,8 +29,11 @@ const Registration = () => {
                         <p className="flex lg:hidden  text-lg lg:text-xl mb-6">
                             Register now and start your quiz journey! Track your scores, compete with friends, and unlock exclusive quizzes to win exciting rewards!
                         </p>
+
+                     
                      
                     </div>
+                    <h2 className="lg:flex hidden text-2xl lg:text-4xl w-full  ml-16  font-semibold">Register Now!</h2>
 
 
                         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-x-6 mt-8">
@@ -89,7 +96,10 @@ const Registration = () => {
                             <div className="form-control mt-4 md:col-span-2 flex justify-center">
                                 <button type="submit" className="btn btn-primary w-full">Register</button>
                             </div>
+                            
                         </form>
+
+                        
 
                         <div className="space-y-2 mt-6">
                             <button className="btn w-full btn-outline lg:text-[18px] text-[15px]">
@@ -99,20 +109,25 @@ const Registration = () => {
                                 <FaGithub /> Sign in with Github
                             </button> */}
                         </div>
-                    </div>
 
-                    <div className="w-full lg:w-1/2 text-center lg:text-left pt-12 lg:mt-0 ">
-                        <h1 className="lg:flex hidden text-3xl lg:text-5xl font-bold text-primary mb-4">QuizPluse</h1>
-                        <h2 className="lg:flex hidden text-2xl lg:text-4xl font-semibold mb-4">Register Now!</h2>
-                        <p className="lg:flex hidden text-lg lg:text-xl mb-6">
-                            Register now and start your quiz journey! Track your scores, compete with friends, and unlock exclusive quizzes to win exciting rewards!
-                        </p>
-                        <p className='text-lg'>
+                        <p className='text-lg mt-2'>
                             Already have an account? <a href="/login" className='text-blue-600'>Login</a>
                         </p>
                     </div>
+
+                    <div className="w-full lg:w-1/2 text-center lg:text-left pt-12 lg:mt-14 ">
+                        <h1 className="lg:flex hidden text-3xl lg:text-5xl font-bold text-primary mb-4">QuizPluse</h1>
+                        {/* <h2 className="lg:flex hidden text-2xl lg:text-4xl font-semibold mb-4">Register Now!</h2> */}
+                        <p className="lg:flex hidden text-lg lg:text-xl mb-6">
+                            Register now and start your quiz journey! Track your scores, compete with friends, and unlock exclusive quizzes to win exciting rewards!
+                        </p>
+                        {/* <p className='text-lg'>
+                            Already have an account? <a href="/login" className='text-blue-600'>Login</a>
+                        </p> */}
+                    </div>
                 </div>
             </div>
+            cls
         </div>
     );
 };
