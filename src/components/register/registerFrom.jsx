@@ -1,5 +1,6 @@
 'use client'
 import axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ImSpinner9 } from "react-icons/im";
@@ -8,7 +9,6 @@ import SocialLogin from '../shared/socialLogin';
 
 const RegisterFrom = () => {
     const [loading, setLoading] = useState(false)
-    const [registerBtnDisabled, setRegisterBtnDisabled] = useState(false)
     const router = useRouter();
 
     const handleRegister = async(e) => {
@@ -40,10 +40,9 @@ const RegisterFrom = () => {
                 setLoading(false)
                 toast.success(res.data.message)
                 e.target.reset()
-                router.push('/user')
+                router.push('/login')
             } else if(res.data.status === 406) {
                 setLoading(false)
-                e.target.reset()
                 toast.error(res.data.message)
             }
             setLoading(false)
@@ -62,9 +61,13 @@ const RegisterFrom = () => {
                 <label className='font-semibold'>Confirm Password</label>
                 <input className="border focus:outline-none px-5 py-2 rounded" type="password" name="confirmPassword" placeholder="Enter password" />
                 {
-                    loading ? <button disabled className='cursor-not-allowed flex items-center gap-2 justify-center py-2 rounded border     bg-[#5C0096] hover:bg-[#500081] text-white border-none'><ImSpinner9 className='animate-spin' /> Creating account</button> : <input disabled={registerBtnDisabled && 'disabled' } className="py-2 rounded border hover:cursor-pointer bg-[#5C0096] hover:bg-[#500081] text-white border-none" type="submit" value="Login" />
+                    loading ? <button disabled className='cursor-not-allowed flex items-center gap-2 justify-center py-2 rounded border     bg-[#5C0096] hover:bg-[#500081] text-white border-none'><ImSpinner9 className='animate-spin' /> Creating account</button> : <input className="py-2 rounded border hover:cursor-pointer bg-[#5C0096] hover:bg-[#500081] text-white border-none" type="submit" value="Register" />
                 }
             </form>
+            <div className='mt-5 text-center'>
+                <p>or</p>
+                <p className='my-5'>Already have an account? <Link href={'/login'} className='underline font-semibold'>Login</Link></p>
+            </div>
             <SocialLogin />
         </div>
     );
