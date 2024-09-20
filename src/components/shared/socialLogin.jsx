@@ -1,27 +1,23 @@
 'use client'
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "../ui/button";
+import { useSearchParams } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
+import { Toaster } from "sonner";
 
 const SocialLogin = () => {
-    const router = useRouter();
     const searchParams = useSearchParams();
-    // const session = useSession()
     const path = searchParams.get('redirect')
 
-    const handleGoogleLogin = async(provider) => {
-        const res = await signIn(provider, {
-            redirect : true,
-            callbackUrl : path ? path : '/admin'
+    const handleGoogleLogin = async (provider) => {
+       await signIn(provider, {
+            redirect: true,
+            callbackUrl: path ? path : '/user-dashboard'
         })
-
-        console.log(res);
     }
     return (
-        <div>
-            <div className="my-5 max-w-full mx-auto border">
-                <Button onClick={() => handleGoogleLogin('google')}>Login with Google</Button>
-            </div>
+        <div className="my-5 max-w-full mx-auto w-full">
+            <Toaster richColors position="top-right" />
+            <button onClick={() => handleGoogleLogin('google')} className="py-2 bg-white text-black w-full border-none rounded-xl hover:bg-[#5C0096] hover:text-white duration-300 flex gap-3 items-center justify-center"><FcGoogle size={22} /> Login with Google</button>
         </div>
     );
 };

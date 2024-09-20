@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,7 +9,7 @@ import logo from '../../app/logo.png';
 
 
 const Header = () => {
-
+    const { data } = useSession()
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
@@ -34,6 +35,10 @@ const Header = () => {
         },
     ]
 
+    const handleLogout = () => {
+        signOut()
+    }
+
     return (
         <div className="bg-[#F5F5F5] sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b">
@@ -52,10 +57,12 @@ const Header = () => {
 
                     {/* Right: Button */}
                     <div className="hidden md:flex">
+                        {
+                            data?.user ? <Button onClick={handleLogout} className="bg-[#5C0096] text-white hover:bg-[#500081]">Logout</Button> : <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
+                                <Link href={'/login'}> Sign In</Link>
+                            </Button>
+                        }
 
-                        <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
-                            <Link href={'/login'}> Sign In</Link>
-                        </Button>
 
                     </div>
 
@@ -91,9 +98,11 @@ const Header = () => {
                     {
                         navLinks.map((item, index) => <Link className="px-4 py-1.5 rounded hover:bg-[#5C0096] hover:text-white" key={index} href={item.path}>{item.title}</Link>)
                     }
-                    <Button className="w-full text-center bg-[#5C0096] text-white hover:bg-[#500081] mt-2">
-                        <Link href={'/login'}> Sign In</Link>
-                    </Button>
+                    {
+                        data?.user ? <Button onClick={handleLogout} className="bg-[#5C0096] text-white hover:bg-[#500081]">Logout</Button> : <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
+                            <Link href={'/login'}> Sign In</Link>
+                        </Button>
+                    }
                 </div>
             </div>
         </div>
