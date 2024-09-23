@@ -14,11 +14,11 @@ const RegisterFrom = () => {
     const handleRegister = async(e) => {
         setLoading(true)
         e.preventDefault()
-        const userFullName = e.target.name.value;
-        const userEmail = e.target.email.value;
+        const name = e.target.name.value;
+        const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value
-        if(!userEmail || !password){
+        if(!email || !password){
             setLoading(false)
             return toast.error('Please enter email and password.')
         }
@@ -30,9 +30,7 @@ const RegisterFrom = () => {
             setLoading(false)
             return toast.error("Don't match your password.")
         }
-        const loginInfo = {
-            userFullName, userEmail, userPassword : password
-        }
+        const loginInfo = {name, email, password}
         
         await axios.post('/api/v1/register', loginInfo)
         .then(res => {
