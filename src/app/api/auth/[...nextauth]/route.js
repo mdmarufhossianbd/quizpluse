@@ -39,10 +39,7 @@ export const handler = NextAuth({
                 if (!connectDB) {
                     return null
                 }
-                const user = await db.collection('users').findOne({
-                    userEmail: email
-                });
-                console.log(user);
+                const user = await db.collection('users').findOne({email: email});
                 const passwordMatch = bcrypt.compareSync(password, user.password)
                 if (!passwordMatch) {
                     return null
@@ -54,7 +51,7 @@ export const handler = NextAuth({
             clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
             clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRECT
         })
-    ],
+    ], 
     pages: {
         signIn: '/login',
     },
@@ -63,29 +60,37 @@ export const handler = NextAuth({
         async signIn({user, account}) {
             if (account.provider === 'google') {
                 const {name, email, image} = user;
-                const userAccountOpeningDate = new Date();
-                const uesrRole = 'generale-user'
-                const userLavel = 'basic'
+                const createAt= new Date();
                 const generateUserName = email.split('@')
-                const userName = generateUserName[0]
+                const username = generateUserName[0]
+                const password = '';
+                const role = 'general-user';
+                const level = 'basic';
+                const createdQuizes = [];
+                const results = [];
+                const participatedQuizes = [];
                 const userInfo = {
-                    userName,
-                    userFullName : name,
-                    userEmail : email,
-                    userProfileImage : image,
-                    userAccountOpeningDate,
-                    uesrRole,
-                    userLavel,
+                    createAt,
+                    name,
+                    username,
+                    email,
+                    password,
+                    role,
+                    level,
+                    createdQuizes,
+                    results,
+                    participatedQuizes,
+                    image
                 }
                 try {
                     const db = await connectDB();
                     const userCollection = db.collection('users');
-                    const user = await userCollection.findOne({userEmail : email});
-                    if (!user) {
-                        await userCollection.insertOne(userInfo)
+                    const existingUser = await userCollection.findOne({email : email});
+                    if (!existingUser) {
+                       const user = await userCollection.insertOne(userInfo)
                         return user;
                     } else {
-                        return user;
+                        return existingUser;
                     }
                 } catch (error) {
                     console.log(error);
@@ -96,24 +101,27 @@ export const handler = NextAuth({
         },
         // add user data in token
         async jwt({token, user}) {
-            console.log(user);
             if(user){
-                token.name = user.name;
-                token.email = user.email;
-                token.image = user.image || null;
-                token.userRole = 'general-user';
-                token.userLevel = 'basic';
+                const db = await connectDB();
+                const userCollection = db.collection('users');
+                const existingUser = await userCollection.findOne({email : user.email});
+                if(existingUser){
+                    token.name = existingUser.name;
+                    token.email = existingUser.email;
+                    token.username = existingUser.username;
+                    token.role = existingUser.role;
+                    token.image = existingUser.image
+                }
             }
             return token
         },
         // add user data in session
         async session({session, token}) {
-            session.user.username = token.username;
             session.user.name = token.name;
             session.user.email = token.email;
-            session.user.picture = token.picture;
-            session.user.userLavel = token.userLavel;
-            session.user.uesrRole = token.uesrRole;
+            session.user.username = token.username;
+            session.user.role = token.role;
+            session.user.image = token.image;
             return session
         }
     }
