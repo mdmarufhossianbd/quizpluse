@@ -19,7 +19,7 @@ export async function POST(requset) {
         const createAt = new Date();
         const generateUserName = email.split('@');
         const username = generateUserName[0];
-        const role = 'generale-user';
+        const role = 'general-user';
         const level = 'basic';
         const image = null;
         const passwordEncrypt = bcrypt.hashSync(password, 14)
