@@ -62,7 +62,6 @@ const UserTable = () => {
           className="border-none"
         />
       </div>
-
       <Table className="w-full border-collapse border border-purple-300 shadow-md">
         <TableHeader>
           <TableRow className="bg-purple-200 text-xl">
