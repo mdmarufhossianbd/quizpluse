@@ -1,66 +1,142 @@
-'use client'
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { Input } from "@/components/ui/input"
-
-
+import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 const UserTable = () => {
-
   const [searchEmail, setSearchEmail] = useState("");
+  const [page, setPage] = useState(1);
+  const [users, setUsers] = useState([]);
+  const [more, setMore] = useState(true); 
+  const limit = 5; 
+  const totalPages = 10; 
 
-  // Sample list of users (you can replace this with your dynamic data)
-  const users = [
-    { name: "User One", email: "user1@gmail.com" },
-    { name: "User Two", email: "user2@gmail.com" },
-    { name: "User Three", email: "user3@gmail.com" },
-  ];
+  useEffect(() => {
+    const getAllUsers = async () => {
+      try {
+        const res = await axios.get(
+          `/api/v1/user?email=${searchEmail}&page=${page}&limit=${limit}`
+        );
+        const userData = res.data.result;
+        setUsers(userData);
 
-  // Filter users based on the searchEmail
-  const filteredUsers = users.filter(user =>
-    user.email.toLowerCase().includes(searchEmail.toLowerCase())
-  );
+        setMore(userData.length === limit);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    getAllUsers();
+  }, [page, searchEmail]);
 
+  const handlePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (more) {
+      setPage(page + 1);
+    }
+  };
 
   return (
-    <div className="p-4 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">User Management</h2>
-        <Input type="email" name='email' placeholder="Email" />
+    <div className="p-4 w-full">
+      <h2 className="font-semibold text-4xl text-center py-10 text-purple-950">Manage Users</h2>
+      <div className="mb-4 w-56 border border-purple-300 rounded-xl">
+        <Input
+          type="email"
+          name="email"
+          placeholder="Search by email"
+          value={searchEmail}
+          onChange={(e) => setSearchEmail(e.target.value)}
+          className="border-none"
+        />
       </div>
 
-      <Table className="w-full border-collapse border border-gray-200 shadow-md">
-        <TableCaption className="text-gray-600">
-          A list of your recent users.
-        </TableCaption>
+      <Table className="w-full border-collapse border border-purple-300 shadow-md">
         <TableHeader>
-          <TableRow className="bg-gray-100">
-            <TableHead className="w-[150px] p-4 text-left">Name</TableHead>
-            <TableHead className="p-4 text-left">Email</TableHead>
-            <TableHead className="p-4 text-left">Action</TableHead>
+          <TableRow className="bg-purple-200 text-xl">
+            <TableHead className="p-4 font-bold text-black">No.</TableHead>
+            <TableHead className="p-4 font-bold text-black">Name</TableHead>
+            <TableHead className="p-4 font-bold text-black">Email</TableHead>
+            <TableHead className="p-4 font-bold text-black">Action</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
-          <TableRow className="hover:bg-gray-50 transition-colors">
-            <TableCell className="p-4 font-medium">User</TableCell>
-            <TableCell className="p-4">user1@gmail.com</TableCell>
-            <TableCell className="p-4">
-              <Button variant="ghost" className="text-blue-600 hover:underline">
-                View Profile
-              </Button>
-            </TableCell>
-          </TableRow>
+        <TableBody className="text-lg font-medium">
+          {users.length > 0 ? (
+            users.map((user, index) => (
+              <TableRow
+                key={user._id}
+                className="hover:bg-gray-50 transition-colors"
+              >
+                <TableCell className="p-4 font-bold">
+                  {(page - 1) * limit + index + 1}
+                </TableCell>
+                <TableCell className="p-4 font-medium">
+                  {user.userFullName || user.username}
+                </TableCell>
+                <TableCell className="p-4">
+                  {user.userEmail || user.email}
+                </TableCell>
+                <TableCell className="p-4">
+                  <Button
+                    variant="ghost"
+                    className="text-blue-600 hover:underline text-lg"
+                  >
+                    View Profile
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={4} className="p-4 text-center">
+                No users found.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
+
+      {/* Pagination*/}
+    
+      <div className="flex justify-between mt-4">
+      <div>
+      <span className="text-lg font-bold text-purple-800">
+          Page: {page} of {totalPages}
+        </span>
+      </div>
+
+       <div className="flex gap-3">
+       <Button
+         
+          className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+          onClick={handlePrevPage}
+          disabled={page === 1}
+        >
+          ← Previous
+        </Button>
+        
+        <Button
+          
+          className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+          onClick={handleNextPage}
+          disabled={!more}
+        >
+          Next →
+        </Button>
+       </div>
+      </div>
     </div>
   );
 };

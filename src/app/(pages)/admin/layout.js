@@ -4,10 +4,9 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default function AdminLayout({ children }) {
   return (
-     <div className="flex gap-4 max-w-[1230px] mx-auto mt-10 mb-10">
-      <div>
-        <AdminSidebar/>
-      </div>
+     <div className="flex flex-col md:flex-row lg:p-4 lg:my-4">
+     
+       <AdminSidebar/>
       {children}
      </div>
   );
