@@ -7,8 +7,8 @@ export async function POST(requset) {
     const userCollection = db.collection('users')
     try {
         const data = await requset.json()
-        const {userFullName, userEmail, userPassword} = data;
-        const userChecked = await userCollection.findOne({userEmail : userEmail});
+        const {name, email, password} = data;
+        const userChecked = await userCollection.findOne({email : email});
         if(userChecked){
             return NextResponse.json({
                 message : 'You have already have an account. Please login',
@@ -16,17 +16,21 @@ export async function POST(requset) {
                 success : false
             })
         }
-        const userAccountOpeningDate = new Date();
-        const generateUserName = userEmail.split('@');
-        const userName = generateUserName[0];
-        const userRole = 'generale-user';
-        const userLavel = 'basic';
-        const userProfileImage = null;
-        const password = bcrypt.hashSync(userPassword, 14)
-        const userInfo = {
-            userAccountOpeningDate, userName, userFullName, userEmail, password, userRole, userLavel, userProfileImage
-        }
-        
+        const createAt = new Date();
+        const generateUserName = email.split('@');
+        const username = generateUserName[0];
+<<<<<<< HEAD
+        const role = 'generale-user';
+=======
+        const role = 'general-user';
+>>>>>>> 6c2232db837ab30863443cf2c4a23a24f26fc771
+        const level = 'basic';
+        const image = null;
+        const passwordEncrypt = bcrypt.hashSync(password, 14)
+        const createdQuizes = [];
+        const results = [];
+        const participatedQuizes = []
+        const userInfo = {createAt, username, name, email, password : passwordEncrypt, role, level, image, createdQuizes, results, participatedQuizes}
         const result = await userCollection.insertOne(userInfo)
         return NextResponse.json({
             message : 'Successfully create your account',

@@ -1,7 +1,7 @@
 import LoginFrom from "@/components/login/loginFrom";
 import Image from "next/image";
 import loginImage from '../../../../public/assets/login.webp';
-const Login = () => {
+const Login = async(req) => {
 
     return (
         <div className="my-10 md:my-14 lg:my-16 xl:my-20">
