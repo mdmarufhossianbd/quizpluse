@@ -1,28 +1,34 @@
 "use client"
 
+import SimpleLoading from '@/components/shared/simpleLoading';
+import { IconPencil } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { FaComment, FaPen, FaUserFriends } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
-const page = () => {
-    const { data } = useSession()
-    const [currentUser, setCurrentUser] = useState(null);
+const ProfilePage = () => {
+    const { data, status } = useSession()
+    const [currentUser, setCurrentUser] = useState(null)
+    const userEmail = data?.user?.email;
 
-    // const userEmail = data?.user?.email;
     useEffect(() => {
-        const getUser = async () => {
-            await axios.get(`/api/v1/user?email=${data?.user?.email}`)
+        const getUserInfo = async () => {
+            await axios.get(`/api/v1/user/user-details?email=${userEmail}`)
                 .then(res => {
-                    // setCurrentUser(res?.data?.result)
-                    console.log(res.data);
+                    setCurrentUser(res.data?.result)
                 })
         }
-        getUser()
-    }, [])
+        getUserInfo()
+    }, [userEmail])
 
-    console.log(currentUser)
+    if (status === 'loading') {
+        return <SimpleLoading />
+    }
+
+    const handleEdit = () => {
+
+    }
 
     return (
         <div className='rounded-xl' style={{
@@ -32,17 +38,17 @@ const page = () => {
             backgroundRepeat: "no-repeat",
         }}>
             <div className="flex justify-center items-center min-h-screen p-4 lg:p-10 pt-8 " >
-                <div className="bg-white rounded-lg shadow-lg  p-5 md:p-5 lg:p-10 w-full md:w-5/8 lg:w-3/5 text-center relative mt-14 lg:mt-10">
+                <div className="bg-white rounded-lg shadow-lg p-5 md:p-5 lg:p-10 w-full md:w-5/8 lg:w-3/5 text-center relative mt-14 lg:mt-10">
 
                     {/* Profile Image */}
-                    <div className="absolute mx-auto -top-16 left-[25%] md:left-[35%] lg:left-[38%] w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                        <Image src={data?.user?.image} alt="User Image" width={96} height={96} className="w-full h-full object-cover" />
+                    <div className="absolute mx-auto -top-16 left-[25%] md:left-[35%] lg:left-[45%] w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                        <Image src={currentUser?.userProfileImage} alt={currentUser?.userFullName} width={96} height={96} className="w-full h-full object-cover" />
                     </div>
 
                     {/* User Info */}
                     <div className='mt-14 mb-8'>
-                        <h2 className="text-2xl font-semibold text-gray-800">{data?.user?.name}</h2>
-                        <p className="text-gray-500 mb-4">{data?.user?.email}</p>
+                        <h2 className="text-2xl font-semibold text-gray-800">{currentUser?.userFullName}</h2>
+                        <p className="text-gray-500 mb-4">{currentUser?.userEmail}</p>
                     </div>
 
 
@@ -62,25 +68,21 @@ const page = () => {
                         </div>
                     </div>
 
-                    {/* Action Buttons */}
-                    {/* 
-                        <button className="flex items-center justify-center px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                            <FaComment className="mr-2" /> Status: 
+                   
+
+
+                    {/* profile edit */}
+                    <div className='flex items-center justify-center gap-3'>
+                        <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-5 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors"><IconPencil stroke={2} /> Change Password
                         </button>
-                    </div> */}
-
-
-                    {/* Show More Button */}
-                    <button onClick={"handleEdit"} className=" bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white rounded-full transition-colors">
-                        <div className='flex items-center justify-center'>
-                            <FaPen className="mr-2" /> Edit
-                        </div>
-                    </button>
+                        <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-5 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors"><IconPencil stroke={2} /> Update Profile
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default page;
+export default ProfilePage;
 

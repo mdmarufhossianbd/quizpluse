@@ -3,8 +3,7 @@
 import UserSidebar from '@/components/userDashboard/userSidebar';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import { useState } from 'react';
 
 const Layout = ({ children }) => {
     const { data } = useSession();
@@ -16,15 +15,11 @@ const Layout = ({ children }) => {
     };
 
     return (
-        <div className="min-h-screen flex  max-w-7xl mx-auto">
+        <div className="min-h-screen flex ">
             {/* Mobile Menu Toggle Button */}
-            <button
-                className="md:hidden  fixed top-3 right-3 z-50 h-10 w-10 border-2 border-[#5C0096] rounded-full"
-                onClick={toggleSidebar}
-            >
+            <button className="md:hidden fixed top-3 right-3 z-50 h-10 w-10 border-2 border-[#5C0096] rounded-full" onClick={toggleSidebar}>
                 {/* <FaBars className="text-xl" /> */}
-                <Image src={data?.user?.image} alt="User Image" width={34} height={34} className="w-full h-full object-cover rounded-full " />
-
+                <Image src={data?.user?.image} alt={data?.user?.name} width={34} height={34} className="w-full h-full object-cover rounded-full" />
             </button>
 
             {/* Sidebar Component */}
