@@ -115,6 +115,8 @@ const AddQuiz = () => {
     const handleSubmitForm = (e) => {
         e.preventDefault();
         console.log(formData);
+        //Send data to database from here..
+
     }
 
     const openModal = () => {
