@@ -19,11 +19,11 @@ const Layout = ({ children }) => {
         <div className="min-h-screen flex  max-w-7xl mx-auto">
             {/* Mobile Menu Toggle Button */}
             <button
-                className="md:hidden  fixed top-2 left-2 z-50 h-10 w-10"
+                className="md:hidden  fixed top-3 right-3 z-50 h-10 w-10 border-2 border-[#5C0096] rounded-full"
                 onClick={toggleSidebar}
             >
-                <FaBars className="text-xl" />
-                {/* <Image src={data?.user?.image} alt="User Image" width={34} height={34} className="w-full h-full object-cover rounded-full " /> */}
+                {/* <FaBars className="text-xl" /> */}
+                <Image src={data?.user?.image} alt="User Image" width={34} height={34} className="w-full h-full object-cover rounded-full " />
 
             </button>
 
