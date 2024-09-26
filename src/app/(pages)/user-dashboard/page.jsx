@@ -6,7 +6,6 @@ const UserDashboard = () => {
     if (status === 'loading') {
         return <p>Loading</p>
     }
-    console.log(data);
     return (
         <div>
             <div>
@@ -41,9 +40,9 @@ const UserDashboard = () => {
                     <h2 className="text-3xl font-bold mb-4 text-[#5C0096]">Recent Activities</h2>
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <ul className="list-disc ml-6">
-                            <li>Quiz &quot;JavaScript Basics&quot; was attempted by 5 users.</li>
-                            <li>New quiz &quot;React Fundamentals&quot; created.</li>
-                            <li>Updated settings for &quot;HTML & CSS&quot; quiz.</li>
+                            <li>Quiz &apos;JavaScript Basics&apos; was attempted by 5 users.</li>
+                            <li>New quiz &apos;React Fundamentals&apos; created.</li>
+                            <li>Updated settings for &apos;HTML & CSS&apos; quiz.</li>
                             {/* Add more activities here */}
                         </ul>
                     </div>
