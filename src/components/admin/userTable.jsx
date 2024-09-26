@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -8,16 +8,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "../ui/button";
-import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 const UserTable = () => {
   const [searchEmail, setSearchEmail] = useState("");
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
   const [more, setMore] = useState(true); 
-  const limit = 5; 
+  const limit = 10; 
   const totalPages = 10; 
 
   useEffect(() => {
