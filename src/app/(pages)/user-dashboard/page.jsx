@@ -1,6 +1,5 @@
 'use client'
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 
 const UserDashboard = () => {
     const { data, status } = useSession();
@@ -42,9 +41,9 @@ const UserDashboard = () => {
                     <h2 className="text-3xl font-bold mb-4 text-[#5C0096]">Recent Activities</h2>
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <ul className="list-disc ml-6">
-                            <li>Quiz "JavaScript Basics" was attempted by 5 users.</li>
-                            <li>New quiz "React Fundamentals" created.</li>
-                            <li>Updated settings for "HTML & CSS" quiz.</li>
+                            <li>Quiz &quot;JavaScript Basics&quot; was attempted by 5 users.</li>
+                            <li>New quiz &quot;React Fundamentals&quot; created.</li>
+                            <li>Updated settings for &quot;HTML & CSS&quot; quiz.</li>
                             {/* Add more activities here */}
                         </ul>
                     </div>
