@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
 
-// JSON data for partners
 const partners = [
   {
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYMgyndp2kyygISgypCYhLxsAbi8gl1rjpZA&s",

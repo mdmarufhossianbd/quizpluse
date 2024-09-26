@@ -1,18 +1,27 @@
 "use client";
 
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { ImSpinner9 } from 'react-icons/im';
+import { toast, Toaster } from 'sonner';
+import ImageUpload from '../../shared/imageUpload';
+import SimpleLoading from '../../shared/simpleLoading';
+import QuizCategory from './quizCategory';
 
-const AddQuiz = () => {
+const CreateQuiz = () => {
+    const {data, status} = useSession()
     const [step, setStep] = useState(1);
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         quizName: '',
+        quizCategory: '',
         totalQuestions: '',
         questions: [],
         totalDuration: '',
         quizImage: '',
-        createdAt: new Date().toISOString(),
-        creator: "user"
+        quizCreatorEmail: "",
+        quizCreatorName: ""
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,10 +37,12 @@ const AddQuiz = () => {
                 correctOption: '',
             }));
             setFormData((prev) => ({ ...prev, questions: updatedQuestions }));
+            setFormData((prev) => ({ ...prev, quizCreatorEmail: data?.user?.email }));
+            setFormData((prev) => ({ ...prev, quizCreatorName: data?.user?.name }));
         } else {
             setFormData((prev) => ({ ...prev, questions: [] }));
         }
-    }, [formData.totalQuestions]);
+    }, [formData.totalQuestions, data?.user?.name, data?.user?.email]);
 
     const nextStep = () => {
         if (step < totalSteps) {
@@ -73,25 +84,7 @@ const AddQuiz = () => {
             : step === 3
                 ? formData.totalDuration
                 : true;
-
-    const handleImageUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        // Upload to Cloudinary
-        const formDataImg = new FormData();
-        formDataImg.append('file', file);
-        formDataImg.append('upload_preset', 'dnvoamke7'); // replace with your Cloudinary upload preset
-
-        try {
-            const response = await axios.post(`https://api.cloudinary.com/v1_1/${process.env.NEXT_CLOUDYNARY_CLOUD_NAME}/image/upload`, formDataImg); // replace with your Cloudinary URL
-            setFormData((prev) => ({ ...prev, quizImage: response.data.secure_url })); // Get the image URL
-        } catch (error) {
-            console.error('Error uploading image:', error);
-        }
-    };
-
-    console.log(process.env.NEXT_CLOUDINARY_URL)
+    
 
     const renderQuizPreview = () => (
         <div>
@@ -112,9 +105,26 @@ const AddQuiz = () => {
         </div>
     );
 
-    const handleSubmitForm = (e) => {
+    const handleSubmitForm = async(e) => {
+        setLoading(true)
         e.preventDefault();
         console.log(formData);
+        try {
+          await axios.post('/api/v1/quiz', formData)
+          .then(res => {
+            if(res.data.result.acknowledged){
+                toast.success(res.data.message)
+                setLoading(false)
+            } else {
+                toast.error(res.data.message)
+                setLoading(false)
+            }
+          })
+        } catch (error) {
+            console.log(error);
+            setLoading(false)
+        }
+        
     }
 
     const openModal = () => {
@@ -127,6 +137,10 @@ const AddQuiz = () => {
 
     return (
         <div className="max-w-xl mx-auto my-8">
+            {
+                status === 'loading' && <SimpleLoading />
+            }
+            <Toaster position='top-right' richColors />
             <h1 className="text-3xl font-bold mb-4 text-center">Create a Quiz</h1>
 
             {/* Progress Indicator */}
@@ -151,11 +165,12 @@ const AddQuiz = () => {
                                 name="quizName"
                                 value={formData.quizName}
                                 onChange={handleInputChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none"
                                 required
                             />
                         </div>
-                        <div className="mb-4">
+                        <QuizCategory setFormData={setFormData} />
+                        <div className="my-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Total Questions:
                             </label>
@@ -164,7 +179,7 @@ const AddQuiz = () => {
                                 name="totalQuestions"
                                 value={formData.totalQuestions}
                                 onChange={handleInputChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                                 min="1"
                             />
@@ -255,27 +270,13 @@ const AddQuiz = () => {
                                 name="totalDuration"
                                 value={formData.totalDuration}
                                 onChange={handleInputChange}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                             />
                         </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Quiz Image:
-                            </label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleImageUpload}
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                required
-                            />
-                        </div>
-                        {formData.quizImage && (
-                            <img src={formData.quizImage} alt="Quiz" className="mb-4" />
-                        )}
+                        <ImageUpload setFormData={setFormData} />
 
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between my-5'>
                             <div>
                                 <button
                                     type="button"
@@ -292,12 +293,10 @@ const AddQuiz = () => {
                                     Review Quiz
                                 </button>
                             </div>
-                            <button
-                                type="submit"
-                                className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]"
-                            >
-                                Submit Quiz
-                            </button>
+                            {
+                                loading ? <button disabled className="flex items-center gap-2 px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081] disabled:cursor-not-allowed"><ImSpinner9 className='animate-spin' />Creating Quiz ...</button> :
+                                <button type="submit" className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]">Submit Quiz</button>
+                            }
                         </div>
                     </div>
                 )}
@@ -328,4 +327,4 @@ const AddQuiz = () => {
     );
 };
 
-export default AddQuiz;
+export default CreateQuiz;
