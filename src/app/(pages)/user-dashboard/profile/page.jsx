@@ -11,9 +11,9 @@ const page = () => {
     return (
         <div className='rounded-xl' style={{
             backgroundImage: 'url("/assets/quizpulse.png")',
-            backgroundSize: "cover", // Use "contain" to keep the image within its original aspect ratio
-            backgroundPosition: "center", // Center the image
-            backgroundRepeat: "no-repeat", // Prevent image from repeating
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
         }}>
             <div className="flex justify-center items-center min-h-screen p-8" >
                 <div className="bg-white rounded-lg shadow-lg  p-10 w-full md:w-3/5  text-center relative mt-10">
