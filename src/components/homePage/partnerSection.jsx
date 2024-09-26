@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
-// JSON data for partners
+
 const partners = [
   {
     logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYMgyndp2kyygISgypCYhLxsAbi8gl1rjpZA&s",
@@ -25,6 +25,7 @@ const PartnerSection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
         {partners.map((partner, index) => (
           <Card key={index} className="w-full p-5">
+           
             <CardContent className="text-center">
               <div className="relative w-full h-[200px] overflow-hidden rounded-lg">
                 <Image
@@ -37,6 +38,7 @@ const PartnerSection = () => {
               </div>
               <p className="mt-4 text-lg font-medium">{partner.universityName}</p>
             </CardContent>
+          
           </Card>
         ))}
       </div>
