@@ -63,12 +63,9 @@ const page = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    {/* <div className="flex justify-around mt-4">
+                    {/* 
                         <button className="flex items-center justify-center px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                            <FaUserFriends className="mr-2" /> Connect
-                        </button>
-                        <button className="flex items-center justify-center px-4 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition-colors">
-                            <FaComment className="mr-2" /> Message
+                            <FaComment className="mr-2" /> Status: 
                         </button>
                     </div> */}
 

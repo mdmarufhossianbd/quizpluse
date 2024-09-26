@@ -1,10 +1,14 @@
 "use client";
 
 import UserSidebar from '@/components/userDashboard/userSidebar';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 
 const Layout = ({ children }) => {
+    const { data } = useSession();
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -15,10 +19,12 @@ const Layout = ({ children }) => {
         <div className="min-h-screen flex  max-w-7xl mx-auto">
             {/* Mobile Menu Toggle Button */}
             <button
-                className="md:hidden p-3 text-white bg-[#5C0096] fixed top-3 left-3 z-50 rounded-full"
+                className="md:hidden  fixed top-2 right-2 z-50 "
                 onClick={toggleSidebar}
             >
-                <FaBars className="text-xl" />
+                {/* <FaBars className="text-xl" /> */}
+                <Image src={data?.user?.image} alt="User Image" width={34} height={34} className="w-full h-full object-cover rounded-full " />
+
             </button>
 
             {/* Sidebar Component */}

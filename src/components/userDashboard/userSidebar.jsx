@@ -21,8 +21,11 @@ const UserSidebar = ({ isOpen, onClose }) => {
             <div className="flex items-center mb-8">
                 <div className="h-10 w-10 rounded-full mr-3">
                     {/* <FaUser className="w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800" /> */}
+                    {data ?
+                        <Image src={data?.user?.image} alt="User Image" width={96} height={96} className="w-full h-full object-cover rounded-full" />
+                        :
+                        <FaUser className="w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800" />}
 
-                    <Image src={data?.user?.image} alt="User Image" width={96} height={96} className="w-full h-full object-cover rounded-full" />
 
                 </div>
                 <div>
