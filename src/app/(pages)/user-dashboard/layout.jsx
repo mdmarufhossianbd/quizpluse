@@ -1,20 +1,3 @@
-// import UserSidebar from '@/components/userDashboard/userSidebar';
-// import React from 'react';
-
-// const Layout = ({ children }) => {
-//     return (
-//         <div className="min-h-screen flex">
-//             <UserSidebar />
-//             <div className="flex-1 p-6 bg-[#f5f5f5]">
-//                 {children}
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Layout;
-
-
 "use client";
 
 import UserSidebar from '@/components/userDashboard/userSidebar';
