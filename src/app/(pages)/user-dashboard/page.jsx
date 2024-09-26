@@ -51,8 +51,6 @@ const UserDashboard = () => {
                 </div>
             </div>
 
-            <p>logged in your name is {data?.user?.name}</p>
-            <Link className="btn p-6 my-8 text-purple-800 font-extrabold" href='/user-dashboard/add-quiz'>Add Quiz</Link>
         </div>
     );
 };

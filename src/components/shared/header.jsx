@@ -44,7 +44,7 @@ const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b">
                 <div className="flex justify-between h-16 items-center">
                     {/* Left: Brand Logo */}
-                    <div className="flex-shrink-0">
+                    <div className="flex-shrink-0 pl-12 md:pl-0">
                         <Link href={'/'}><Image src={logo} alt="Brand Logo" className="h-10 w-auto" /></Link>
                     </div>
 
