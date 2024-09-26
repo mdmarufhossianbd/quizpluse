@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { FaHome, FaPlusCircle, FaListAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaPlusCircle, FaListAlt, FaCog, FaSignOutAlt, FaPen, FaPenAlt, FaUserAlt, FaUser } from 'react-icons/fa';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 
@@ -18,7 +18,10 @@ const UserSidebar = () => {
     return (
         <div className="w-64 min-h-screen bg-[#5C0096] text-white p-4 flex flex-col">
             <div className="flex items-center mb-8">
-                <div className="h-10 w-10 rounded-full bg-white mr-3"></div>
+
+                <div className="h-10 w-10 rounded-full mr-3">
+                    <FaUser className='w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800'></FaUser>
+                </div>
                 <div>
                     <h2 className="text-lg font-semibold"> {data?.user?.name}</h2>
                     <p className="text-sm text-gray-300">{data?.user?.email}</p>
@@ -36,9 +39,9 @@ const UserSidebar = () => {
                         <FaPlusCircle className="mr-2" /> Add Quiz
                     </p>
                 </Link>
-                <Link href="/user-dashboard/manage-quizzes">
+                <Link href="/user-dashboard/manageQuizzes">
                     <p className="flex items-center mb-4 hover:bg-[#500081] p-2 rounded">
-                        <FaListAlt className="mr-2" /> Manage Quizzes
+                        <FaPen className="mr-2" /> Manage Quizzes
                     </p>
                 </Link>
                 <Link href="/user-dashboard/participatedQuizzes">
@@ -48,7 +51,7 @@ const UserSidebar = () => {
                 </Link>
                 <Link href="/user-dashboard/profile">
                     <p className="flex items-center mb-4 hover:bg-[#500081] p-2 rounded">
-                        <FaCog className="mr-2" /> Profile
+                        <FaUserAlt className="mr-2" /> Profile
                     </p>
                 </Link>
             </nav>
