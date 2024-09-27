@@ -10,7 +10,7 @@ import SimpleLoading from '../../shared/simpleLoading';
 import QuizCategory from './quizCategory';
 
 const CreateQuiz = () => {
-    const {data, status} = useSession()
+    const { data, status } = useSession()
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
@@ -84,7 +84,7 @@ const CreateQuiz = () => {
             : step === 3
                 ? formData.totalDuration
                 : true;
-    
+
 
     const renderQuizPreview = () => (
         <div>
@@ -105,26 +105,26 @@ const CreateQuiz = () => {
         </div>
     );
 
-    const handleSubmitForm = async(e) => {
+    const handleSubmitForm = async (e) => {
         setLoading(true)
         e.preventDefault();
         console.log(formData);
         try {
-          await axios.post('/api/v1/quiz', formData)
-          .then(res => {
-            if(res.data.result.acknowledged){
-                toast.success(res.data.message)
-                setLoading(false)
-            } else {
-                toast.error(res.data.message)
-                setLoading(false)
-            }
-          })
+            await axios.post('/api/v1/quiz', formData)
+                .then(res => {
+                    if (res.data.result.acknowledged) {
+                        toast.success(res.data.message)
+                        setLoading(false)
+                    } else {
+                        toast.error(res.data.message)
+                        setLoading(false)
+                    }
+                })
         } catch (error) {
             console.log(error);
             setLoading(false)
         }
-        
+
     }
 
     const openModal = () => {
@@ -295,7 +295,7 @@ const CreateQuiz = () => {
                             </div>
                             {
                                 loading ? <button disabled className="flex items-center gap-2 px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081] disabled:cursor-not-allowed"><ImSpinner9 className='animate-spin' />Creating Quiz ...</button> :
-                                <button type="submit" className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]">Submit Quiz</button>
+                                    <button type="submit" className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]">Submit Quiz</button>
                             }
                         </div>
                     </div>
@@ -304,11 +304,13 @@ const CreateQuiz = () => {
 
                 {/* Modal for Quiz Review */}
                 {isModalOpen && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                        <div className="bg-white p-6 rounded-md w-96">
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 overflow-y-auto">
+                        <div className="bg-white p-6 rounded-md w-96 ">
                             <h2 className="text-xl font-semibold mb-4 text-center">Quiz Review</h2>
+                            <div className='max-h-[60vh] overflow-y-auto'>
+                                {renderQuizPreview()}
+                            </div>
 
-                            {renderQuizPreview()}
                             <div className="flex justify-end mt-4">
                                 <button
                                     onClick={closeModal}
