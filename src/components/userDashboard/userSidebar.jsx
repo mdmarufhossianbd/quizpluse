@@ -21,7 +21,7 @@ const UserSidebar = ({ isOpen, onClose }) => {
                 <div className="h-10 w-10 rounded-full mr-3">
                     {/* <FaUser className="w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800" /> */}
                     {data ?
-                        <Image src={data?.user?.image} alt="User Image" width={96} height={96} className="w-full h-full object-cover rounded-full" />
+                        <Image src={data?.user?.image ? data?.user?.image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu2RIsrYrlbEcNP7xnxLQ2gYiylcUqzsrVSwKR1wrvLV4x06yFGVbnYB7rnbBE2gRxxjU&usqp=CAU'} alt="User Image" width={96} height={96} className="w-full h-full object-cover rounded-full" />
                         :
                         <FaUser className="w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800" />}
                 </div>
