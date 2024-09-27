@@ -21,7 +21,7 @@ export async function POST(requset) {
         const username = generateUserName[0];
         const role = 'general-user';
         const level = 'basic';
-        const image = null;
+        const image = 'https://avatar.iran.liara.run/public/boy?username=Ash';
         const passwordEncrypt = bcrypt.hashSync(password, 14)
         const createdQuizes = [];
         const results = [];

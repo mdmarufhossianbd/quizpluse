@@ -39,7 +39,8 @@ export const handler = NextAuth({
                 if (!connectDB) {
                     return null
                 }
-                const user = await db.collection('users').findOne({email: email});
+                const userCollection = db.collection('users')
+                const user = await userCollection.findOne({email: email});
                 const passwordMatch = bcrypt.compareSync(password, user.password)
                 if (!passwordMatch) {
                     return null
