@@ -54,18 +54,18 @@ const AdminSidebar = () => {
       {/* Sidebar */}
       <nav
         ref={sidebarRef}
-        className={`fixed lg:relative top-0 left-0 h-full bg-purple-200 text-gray-900 w-64 p-6 rounded-lg transition-transform transform ${
+        className={`fixed lg:relative top-10 lg:top-0 left-0 h-full bg-purple-200 text-gray-900 w-64 p-6 rounded-lg transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 lg:static z-40`}
       >
         <ul className="space-y-4">
           <li>
             <Link
-              href="/admin/dashboard"
+              href="/"
               className="flex items-center p-4 font-bold rounded-lg hover:bg-gray-300 transition"
             >
               <Home className="mr-3" />
-              <span>Dashboard</span>
+              <span>Home</span>
             </Link>
           </li>
           <li>
