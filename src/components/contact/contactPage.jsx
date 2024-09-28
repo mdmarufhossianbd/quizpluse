@@ -2,6 +2,9 @@
 import React from "react";
 import Input from "@/components/contact/input";
 import Image from "next/image";
+import { MessageCircle } from "lucide-react";
+import { AiFillMessage } from "react-icons/ai";
+
 
 const ContactPage = () => {
   const handleSubmit = (e) => {
@@ -38,7 +41,7 @@ const ContactPage = () => {
       </section>
 
       <section className="m-12 flex flex-col md:flex-row justify-center gap-5">
-        <div className="w-full md:w-1/2 bg-gray-100 p-3 pt-10 rounded-lg shadow-md text-center space-y-10">
+        <div className="w-full md:w-1/2 bg-purple-100 p-3 pt-10 rounded-lg shadow-md text-center space-y-10">
           <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
           <div className="text-xl ">
             <p>
@@ -48,14 +51,22 @@ const ContactPage = () => {
             </p>
           </div>
           <div className="mb-5">
+          
             <p className="text-lg font-semibold">Massage us directly at</p>
+            
             <a href="quizePulse@gmail.com" className="text-xl text-blue-500">
+              
               quizePulse@gmail.com
+            
+              
             </a>
+         
           </div>
           <div>
             <button className="bg-purple-900 text-white py-2 px-4 rounded">
-              Chat
+            {/* <MessageCircle/> */}
+            <AiFillMessage className="ml-2"/>
+            chat
             </button>
           </div>
         </div>
@@ -80,12 +91,16 @@ const ContactPage = () => {
               rows="5"
               placeholder="Enter your message here..."
             ></textarea>
+
+            <div className="flex justify-center">
             <button
               type="submit"
-              className="mt-4 bg-purple-900 w-full text-white py-2 px-4 rounded hover:bg-purple-500"
+              className="mt-4 bg-purple-900 text-white py-2 px-4 rounded hover:bg-purple-500 w-64"
             >
               Submit
             </button>
+            </div>
+
           </div>
         </form>
       </section>
