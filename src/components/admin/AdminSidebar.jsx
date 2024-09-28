@@ -1,5 +1,5 @@
 "use client";
-
+import { signOut, useSession } from "next-auth/react";
 import { Home, BarChart, Users, Book, Menu } from "lucide-react";
 import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
@@ -7,6 +7,11 @@ import React, { useState, useEffect, useRef } from "react";
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef(null);
+  const { data } = useSession();
+
+  const handleLogout = () => {
+    signOut();
+  };
 
   const navLinks = [
     {
@@ -45,7 +50,7 @@ const AdminSidebar = () => {
   }, [isOpen]);
 
   return (
-    <div className="lg:flex lg:mt-12 relative">
+    <div className="lg:flex relative">
       {/* Mobile Menu Button */}
       <button className="lg:hidden p-4" onClick={() => setIsOpen(!isOpen)}>
         <Menu className="text-gray-900" />
@@ -54,9 +59,9 @@ const AdminSidebar = () => {
       {/* Sidebar */}
       <nav
         ref={sidebarRef}
-        className={`fixed lg:relative top-10 lg:top-0 left-0 h-full bg-purple-200 text-gray-900 w-64 p-6 rounded-lg transition-transform transform ${
+        className={`fixed lg:relative top-0 left-0 h-full bg-purple-200 text-gray-900 w-64 transition-transform transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:static z-40`}
+        } lg:translate-x-0 lg:static z-40 py-16 lg:py-0`}
       >
         <ul className="space-y-4">
           <li>

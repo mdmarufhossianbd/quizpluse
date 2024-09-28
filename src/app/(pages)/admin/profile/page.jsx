@@ -6,9 +6,8 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-const ProfilePage = () => {
-  const { data, status } = useSession();
+const AdminProfile = () => {
+    const { data, status } = useSession();
   const [currentUser, setCurrentUser] = useState(null);
   const userEmail = data?.user?.email;
 
@@ -103,4 +102,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default AdminProfile;

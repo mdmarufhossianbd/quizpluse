@@ -16,9 +16,9 @@ const UserTable = () => {
   const [searchEmail, setSearchEmail] = useState("");
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
-  const [more, setMore] = useState(true); 
-  const limit = 10; 
-  const totalPages = 10; 
+  const [more, setMore] = useState(true);
+  const limit = 10;
+  const totalPages = 10;
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -51,7 +51,9 @@ const UserTable = () => {
 
   return (
     <div className="p-4 w-full">
-      <h2 className="font-semibold text-4xl text-center py-10 text-purple-950">Manage Users</h2>
+      <h2 className="font-semibold text-4xl text-center py-10 text-purple-950">
+        Manage Users
+      </h2>
       <div className="mb-4 w-56 border border-purple-300 rounded-xl">
         <Input
           type="email"
@@ -65,10 +67,10 @@ const UserTable = () => {
       <Table className="w-full border-collapse border border-purple-300 shadow-md">
         <TableHeader>
           <TableRow className="bg-purple-200 text-xl">
-            <TableHead className="p-4 font-bold text-black">No.</TableHead>
-            <TableHead className="p-4 font-bold text-black">Name</TableHead>
-            <TableHead className="p-4 font-bold text-black">Email</TableHead>
-            <TableHead className="p-4 font-bold text-black">Action</TableHead>
+            <TableHead className="p-2 font-bold text-black">No.</TableHead>
+            <TableHead className="p-2 font-bold text-black">Name</TableHead>
+            <TableHead className="p-2 font-bold text-black">Email</TableHead>
+            <TableHead className="p-2 font-bold text-black">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="text-lg font-medium">
@@ -78,16 +80,16 @@ const UserTable = () => {
                 key={user._id}
                 className="hover:bg-gray-50 transition-colors"
               >
-                <TableCell className="p-4 font-bold">
+                <TableCell className="p-1 font-bold">
                   {(page - 1) * limit + index + 1}
                 </TableCell>
-                <TableCell className="p-4 font-medium">
+                <TableCell className="p-1 font-medium">
                   {user.userFullName || user.username}
                 </TableCell>
-                <TableCell className="p-4">
+                <TableCell className="p-1">
                   {user.userEmail || user.email}
                 </TableCell>
-                <TableCell className="p-4">
+                <TableCell className="p-1">
                   <Button
                     variant="ghost"
                     className="text-blue-600 hover:underline text-lg"
@@ -108,33 +110,31 @@ const UserTable = () => {
       </Table>
 
       {/* Pagination*/}
-    
-      <div className="flex justify-between mt-4">
-      <div>
-      <span className="text-lg font-bold text-purple-800">
-          Page: {page} of {totalPages}
-        </span>
-      </div>
 
-       <div className="flex gap-3">
-       <Button
-         
-          className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
-          onClick={handlePrevPage}
-          disabled={page === 1}
-        >
-          ← Previous
-        </Button>
-        
-        <Button
-          
-          className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
-          onClick={handleNextPage}
-          disabled={!more}
-        >
-          Next →
-        </Button>
-       </div>
+      <div className="flex justify-between mt-4">
+        <div>
+          <span className="text-lg font-bold text-purple-800">
+            Page: {page} of {totalPages}
+          </span>
+        </div>
+
+        <div className="flex gap-3">
+          <Button
+            className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+            onClick={handlePrevPage}
+            disabled={page === 1}
+          >
+            ← Previous
+          </Button>
+
+          <Button
+            className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+            onClick={handleNextPage}
+            disabled={!more}
+          >
+            Next →
+          </Button>
+        </div>
       </div>
     </div>
   );
