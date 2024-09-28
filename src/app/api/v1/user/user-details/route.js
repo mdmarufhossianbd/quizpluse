@@ -1,12 +1,20 @@
 import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
 
-export async function GET(params) {
+export async function POST(request) {
     const db = await connectDB();
     const userCollection = db.collection('users');
     try {
-        const {email} = params;
-        const result = await userCollection.findOne({email : email})
+        const data = await request.json();
+        const query = {email : data.email}
+        const result = await userCollection.findOne(query)
+        if(!result){
+            return NextResponse.json({
+                message : 'Invalid Credentials',
+                status : 401,
+                success : false
+            })
+        }
         return NextResponse.json({
             message : 'user data',
             success : true,

@@ -31,7 +31,11 @@ const UserSidebar = ({ isOpen, onClose }) => {
           {/* <FaUser className="w-10 h-10 p-1 text-center border-2 rounded-full text-purple-800" /> */}
           {data ? (
             <Image
-              src={data?.user?.image}
+              src={
+                data?.user?.image
+                  ? data?.user?.image
+                  : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu2RIsrYrlbEcNP7xnxLQ2gYiylcUqzsrVSwKR1wrvLV4x06yFGVbnYB7rnbBE2gRxxjU&usqp=CAU"
+              }
               alt="User Image"
               width={96}
               height={96}

@@ -7,14 +7,14 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 const AdminProfile = () => {
-    const { data, status } = useSession();
+  const { data, status } = useSession();
   const [currentUser, setCurrentUser] = useState(null);
   const userEmail = data?.user?.email;
 
   useEffect(() => {
     const getUserInfo = async () => {
       await axios
-        .get(`/api/v1/user/user-details?email=${userEmail}`)
+        .get(`/api/v1/admin/user-details?email=${userEmail}`)
         .then((res) => {
           setCurrentUser(res.data?.result);
         });

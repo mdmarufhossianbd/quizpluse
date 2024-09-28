@@ -31,3 +31,19 @@ export async function GET(request) {
         })
     }
 }
+
+// user profile update
+export async function PUT(request) {
+    const db = await connectDB();
+    const userCollection = db.collection('users')
+    try {
+        const data = await request.json()
+        const {email, name, _id} = data
+    } catch (error) {
+        return NextResponse.json({
+            message : 'Something went wrong',
+            status : 500,
+            success : false
+        })
+    }
+}
