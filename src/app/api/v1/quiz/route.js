@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
+import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -55,6 +56,26 @@ export async function POST(request) {
             message : 'Something went wrong',
             status : 500,
             success : false
+        })
+    }
+}
+
+export async function DELETE(request) {
+    const db = await connectDB()
+    const quizCollection = db.collection('quizes')
+    try {
+        const data = await request.json()
+        const query = {_id : new ObjectId(data._id)}
+        const result = await quizCollection.deleteOne(query);
+        return NextResponse.json({
+            message : 'Requested quiz deleted done',
+            result,
+            success : true,
+            status : 200
+        })
+    } catch (error) {
+        return NextResponse.json({
+            message : 'Something went wrong'
         })
     }
 }
