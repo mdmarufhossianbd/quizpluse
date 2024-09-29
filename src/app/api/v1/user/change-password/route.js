@@ -1,6 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
-import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 
@@ -9,11 +8,12 @@ export async function PUT(request) {
     const userCollection = db.collection('users')
     try {
         const data = await request.json()
-        // {need data in data _id, password, newPassword}
+        console.log(data);
         const password = data.password
         const hashNewPassWord = bcrypt.hashSync(data.newPassword, 14)
-        const query = {_id : new ObjectId(data._id)}
+        const query = {email : data.email}
         const existingUser = await userCollection.findOne(query);
+        console.log('found user',existingUser);
         if(!existingUser){
             return NextResponse.json({
                 message : 'Invalid Credentials',
