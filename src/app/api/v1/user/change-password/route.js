@@ -8,12 +8,10 @@ export async function PUT(request) {
     const userCollection = db.collection('users')
     try {
         const data = await request.json()
-        console.log(data);
         const password = data.password
         const hashNewPassWord = bcrypt.hashSync(data.newPassword, 14)
         const query = {email : data.email}
         const existingUser = await userCollection.findOne(query);
-        console.log('found user',existingUser);
         if(!existingUser){
             return NextResponse.json({
                 message : 'Invalid Credentials',
