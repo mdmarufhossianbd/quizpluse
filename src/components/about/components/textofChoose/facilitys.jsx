@@ -34,11 +34,11 @@ const Facilitys = () => {
       ]
       
   return (
-    <div className='grid grid-cols-3 gap-3 my-2 justify-center'>
+    <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 my-2 justify-center'>
       {FacilityList.slice(0,3).map((item, index) => (
           <Card key={index} className="w-full p-5 border-2 border-[#7555FD]">
             <CardContent >
-                <p className='font-extrabold text-5xl'>0{index+1}.</p>
+                <p className='font-extrabold lg:text-5xl md:text-3xl text-xl'>0{index+1}.</p>
               <p className="mt-4 text-2xl  font-bold">{item.title}</p>
               <p>{item.short_description}</p>
             </CardContent>

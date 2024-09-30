@@ -8,7 +8,7 @@ import State from './textofChoose/state'
 const ChooseUs = () => {
   return (
     <>
-      <section className='flex justify-between w-[100%] items-center'>
+      <section className='flex sm:justify-center md:justify-between w-[100%] items-center'>
         <ChooseText></ChooseText>
         <PhotoGallary></PhotoGallary>
       </section>
