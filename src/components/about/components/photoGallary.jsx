@@ -1,14 +1,4 @@
 'use client';
-import LightGallery from 'lightgallery/react';
-
-// import styles
-import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
-import 'lightgallery/css/lg-thumbnail.css';
-
-// import plugins if needed
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
 
 function PhotoGallery() {
     const onInit = () => {
@@ -44,11 +34,7 @@ function PhotoGallery() {
 
     return (
         <div className="App">
-            <LightGallery
-                onInit={onInit}
-                speed={500}
-                plugins={[lgThumbnail, lgZoom]}
-            >
+    
                 {/* Grid container */}
                 <div className="grid grid-cols-3 gap-4 m-4">
                     {/* Map through the photos array */}
@@ -72,7 +58,7 @@ function PhotoGallery() {
                         );
                     })}
                 </div>
-            </LightGallery>
+           
         </div>
     );
 }
