@@ -1,9 +1,10 @@
+import ManageQuiz from '@/components/userDashboard/manageQuiz/manageQuiz';
 import React from 'react';
 
 const ManageQuizzes = () => {
     return (
         <div>
-            ManageQuizzes
+            <ManageQuiz></ManageQuiz>
         </div>
     );
 };
