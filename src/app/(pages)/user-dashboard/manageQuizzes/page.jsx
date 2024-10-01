@@ -4,7 +4,7 @@ import React from 'react';
 const ManageQuizzes = () => {
     return (
         <div>
-            <ManageQuiz></ManageQuiz>
+            <ManageQuiz className="overflow-x-auto"></ManageQuiz>
         </div>
     );
 };

@@ -17,10 +17,9 @@ const ManageQuiz = () => {
             if (sessionData?.user?.email) {
                 try {
                     const response = await axios.get(`/api/v1/quiz/user-wise-quiz?email=${sessionData?.user?.email}&page=${page}&limit=${limit}`);
-                    setQuizzes(response.data.result);
-
-                    const totalQuizzes = response.data.result || 0;
-                    setTotalPages(Math.ceil(totalQuizzes / limit));
+                    setQuizzes(response?.data?.result);
+                    console.log(response?.data);
+                    setTotalPages(response?.data?.totalPages);
                 } catch (error) {
                     console.error("Error fetching quiz data", error);
                 }
@@ -28,8 +27,7 @@ const ManageQuiz = () => {
         };
         getQuizData();
     }, [sessionData?.user?.email, page]);
-
-    console.log(quizzes)
+    console.log(page, totalPages)
 
     // Pagination controls
     const handleNextPage = () => {
@@ -52,17 +50,19 @@ const ManageQuiz = () => {
                 <button
                     onClick={handlePreviousPage}
                     disabled={page === 1}
-                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                    className="px-4 py-2 bg-[#5C0096] text-white hover:bg-[#500081] rounded disabled:opacity-50"
                 >
                     Previous
                 </button>
                 <span className="text-sm">
                     Page {page} of {totalPages}
                 </span>
+
+
                 <button
                     onClick={handleNextPage}
                     disabled={page === totalPages}
-                    className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+                    className="px-4 py-2 rounded bg-[#5C0096] text-white hover:bg-[#500081] disabled:opacity-50"
                 >
                     Next
                 </button>
