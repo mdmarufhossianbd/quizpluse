@@ -12,19 +12,19 @@ const ProfilePage = () => {
     const [currentUser, setCurrentUser] = useState(null)
 
     const userEmail = data?.user?.email
-    
+
     useEffect(() => {
         const getUserInfo = async () => {
-            await axios.post(`/api/v1/user/user-details`, {email : userEmail})
-            .then(res => {
-                console.log(res.data);
-                setCurrentUser(res.data?.result)
-            })
+            await axios.post(`/api/v1/user/user-details`, { email: userEmail })
+                .then(res => {
+                    console.log(res.data);
+                    setCurrentUser(res.data?.result)
+                })
         }
         getUserInfo()
     }, [userEmail, status])
-    
-    if(status === 'loading'){
+
+    if (status === 'loading') {
         return <SimpleLoading />
     }
 
@@ -44,7 +44,7 @@ const ProfilePage = () => {
 
                     {/* Profile Image */}
                     <div className="absolute mx-auto -top-16 left-[25%] md:left-[35%] lg:left-[45%] w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-white shadow-lg">
-                        <Image src={currentUser?.image === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu2RIsrYrlbEcNP7xnxLQ2gYiylcUqzsrVSwKR1wrvLV4x06yFGVbnYB7rnbBE2gRxxjU&usqp=CAU' : currentUser?.image} alt={currentUser?.userFullName} width={96} height={96} className="w-full h-full object-cover" />
+                        <Image src={currentUser?.image === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu2RIsrYrlbEcNP7xnxLQ2gYiylcUqzsrVSwKR1wrvLV4x06yFGVbnYB7rnbBE2gRxxjU&usqp=CAU' : currentUser?.image} alt={currentUser === null ? "User Photo" : currentUser?.userFullName} width={96} height={96} className="w-full h-full object-cover" />
                     </div>
 
                     {/* User Info */}
@@ -53,7 +53,7 @@ const ProfilePage = () => {
                         <p className="text-gray-500">Email : {currentUser?.email}</p>
                         <p className="text-gray-500 mb-4">username: @{currentUser?.username}</p>
                     </div>
-                    
+
                     <div>
                         <p>User Role : {currentUser?.role}</p>
                         <p className='flex items-center justify-center'>Account Status : {currentUser?.status === 'active' ? <IconPointFilled className='text-green-500' /> : <IconPointFilled className='text-red-500' />}</p>
