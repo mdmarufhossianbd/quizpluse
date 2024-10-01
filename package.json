@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.0",
     "clsx": "^2.1.1",
+    "lightgallery": "^2.7.2",
     "framer-motion": "^11.7.0",
     "lucide-react": "^0.441.0",
     "mongodb": "^6.9.0",
