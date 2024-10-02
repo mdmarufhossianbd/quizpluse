@@ -3,6 +3,7 @@ import HideHeader from "@/components/userDashboard/hideHeader";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "./service/authProvider";
+import { Providers } from "./service/nextUiProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,9 +26,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <AuthProvider>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <Providers>
           <HideHeader />
           {children}
           <HideFooter />
+          </Providers>
         </body>
       </AuthProvider>
     </html>
