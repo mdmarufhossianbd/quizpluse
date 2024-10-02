@@ -27,9 +27,7 @@ const ManageQuiz = () => {
         };
         getQuizData();
     }, [sessionData?.user?.email, page]);
-    console.log(page, totalPages)
 
-    // Pagination controls
     const handleNextPage = () => {
         if (page < totalPages) setPage(page + 1);
     };
@@ -38,14 +36,12 @@ const ManageQuiz = () => {
         if (page > 1) setPage(page - 1);
     };
 
-
     return (
         <div>
             <h1 className="text-2xl font-bold mb-6 text-center">Manage Quizzes</h1>
             <div className="overflow-x-auto">
                 <QuizTable quizzes={quizzes} />
             </div>
-            {/* Pagination Controls */}
             <div className="flex justify-between items-center mt-4">
                 <button
                     onClick={handlePreviousPage}
@@ -57,8 +53,6 @@ const ManageQuiz = () => {
                 <span className="text-sm">
                     Page {page} of {totalPages}
                 </span>
-
-
                 <button
                     onClick={handleNextPage}
                     disabled={page === totalPages}
