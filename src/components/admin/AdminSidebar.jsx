@@ -3,14 +3,7 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaHome,
-  FaPen,
-  FaPlusCircle,
-  FaSignOutAlt,
-  FaUser,
-  FaUserAlt,
-} from "react-icons/fa";
+import { FaHome, FaPen, FaPlusCircle, FaSignOutAlt, FaUser, FaUserAlt, } from "react-icons/fa";
 
 const AdminSidebar = ({ isOpen, onClose }) => {
   const { data } = useSession();
