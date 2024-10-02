@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import logo from "../../app/logo.png";
+import UserInfo from "../header/userInfo";
 
 const Header = () => {
   const { data } = useSession();
@@ -33,10 +34,6 @@ const Header = () => {
       path: "/contact",
     },
   ];
-
-  const handleLogout = () => {
-    signOut();
-  };
 
   return (
     <div className="bg-[#F5F5F5] sticky top-0 z-50">
@@ -88,14 +85,9 @@ const Header = () => {
           </div>
 
           {/* Right: Button */}
-          <div className="hidden md:flex">
+          <div className="flex justify-end w-full md:w-fit">
             {data?.user ? (
-              <Button
-                onClick={handleLogout}
-                className="bg-[#5C0096] text-white hover:bg-[#500081]"
-              >
-                Logout
-              </Button>
+              <UserInfo user={data?.user} />
             ) : (
               <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
                 <Link href={"/login"}> Sign In</Link>
@@ -121,18 +113,6 @@ const Header = () => {
               {item.title}
             </Link>
           ))}
-          {data?.user ? (
-            <Button
-              onClick={handleLogout}
-              className="bg-[#5C0096] text-white hover:bg-[#500081]"
-            >
-              Logout
-            </Button>
-          ) : (
-            <Button className="bg-[#5C0096] text-white hover:bg-[#500081]">
-              <Link href={"/login"}> Sign In</Link>
-            </Button>
-          )}
         </div>
       </div>
     </div>
