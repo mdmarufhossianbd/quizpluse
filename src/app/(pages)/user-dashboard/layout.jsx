@@ -4,17 +4,42 @@ import Sidebar from '@/components/shared/sidebar';
 import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 
 const Layout = ({ children }) => {
     const { data } = useSession();
-
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const sidebarRef = useRef(null);
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
+
+    // Handle click outside the sidebar
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // If the click is outside the sidebar and not on the toggle button, toggle the sidebar
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !event.target.closest('button')) {
+                setIsSidebarOpen(false);
+            }
+        };
+
+        // Check if the click is on the sidebar toggle button
+        const handlePageClick = (event) => {
+            if (!event.target.closest('.sidebar-toggle-button')) {
+                handleClickOutside(event);
+            }
+        };
+
+        document.addEventListener('mousedown', handlePageClick);
+
+        return () => {
+            document.removeEventListener('mousedown', handlePageClick);
+        };
+    }, [sidebarRef]);
+
+
 
     const navLinks = [
         {
@@ -73,7 +98,10 @@ const Layout = ({ children }) => {
             </button>
 
             {/* Sidebar Component */}
-            <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
+            <div ref={sidebarRef}>
+                <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
+            </div>
+
 
             {/* Main Content Area */}
             <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
