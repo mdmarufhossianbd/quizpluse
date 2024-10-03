@@ -5,17 +5,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaUser } from "react-icons/fa";
 import logo from "../.../../../../public/assets/logo.png";
-const Sidebar = ({navLinks}) => {
+const Sidebar = ({ navLinks, isSidebarOpen }) => {
     const { data } = useSession();
     const pathname = usePathname()
-    
+
 
     const handleLogout = () => {
         signOut();
     };
 
     return (
-        <div className="bg-[#f5f5f5] w-[270px]">
+        <div className={`bg-[#f5f5f5] w-[270px] fixed top-0 right-2 min-h-screen flex flex-col transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} lg:relative lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}>
             <div>
                 <Link href={'/'} target="_blank">
                     <Image src={logo} width={230} height={80} alt="Logo" />
@@ -47,12 +47,12 @@ const Sidebar = ({navLinks}) => {
             </div>
             {/* nav links */}
             <nav className="overflow-hidden">
-                    {
-                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
-                            <Link href={item.url} className="flex items-center gap-2">{item.icon}{item.name}</Link>
-                        </div>)
-                    }
-                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
+                {
+                    navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
+                        <Link href={item.url} className="flex items-center gap-2">{item.icon}{item.name}</Link>
+                    </div>)
+                }
+                <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
             </nav>
             {/* Upgrade */}
             <div>
