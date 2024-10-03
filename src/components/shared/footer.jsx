@@ -1,20 +1,12 @@
-"use client";
 import Image from "next/image";
 import logo from "../../app/logo.png";
-import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const path = usePathname();
-  // const adminPaths = path
+  
 
   return (
     <div>
-      {path === "/admin" ? (
-        ""
-      ) : path === "/admin/users" ? (
-        ""
-      ) : (
-        <div>
+      <div>
           <footer className="bg-[#F2E9F1] text-black py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center space-y-6 md:space-y-0 gap-5">
@@ -120,7 +112,6 @@ const Footer = () => {
             </div>
           </footer>
         </div>
-      )}
     </div>
   );
 };

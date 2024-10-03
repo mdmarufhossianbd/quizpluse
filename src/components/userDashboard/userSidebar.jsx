@@ -77,7 +77,7 @@ const UserSidebar = ({ isOpen, onClose }) => {
             <FaPlusCircle className="mr-2" /> Add Quiz
           </p>
         </Link>
-        <Link href="/user-dashboard/manageQuizzes">
+        <Link href="/user-dashboard/manage-quizzes">
           <p
             onClick={onClose}
             className="flex items-center mb-4 hover:bg-[#500081] p-2 rounded cursor-pointer"
