@@ -14,7 +14,7 @@ const AdminSidebar = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 w-64 min-h-screen bg-[#5C0096] text-white p-4 flex flex-col transform ${
+      className={`fixed top-0 right-0 w-64 min-h-screen bg-[#f5f5f5] text-white p-4 flex flex-col transform ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } md:relative md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
     >
