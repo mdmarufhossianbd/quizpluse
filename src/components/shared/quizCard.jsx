@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 const QuizCard = ({ item }) => {
     return (
@@ -24,9 +24,8 @@ const QuizCard = ({ item }) => {
             </div>
 
             <Button className="hidden group-hover:flex absolute left-[40%] top-[40%]">
-                <Link href={`/quiz/${item?._id}`}>Start Now</Link>
+                <Link href={`/quizes/${item?._id}`}>Start Now</Link>
             </Button>
-
         </div>
     );
 };
