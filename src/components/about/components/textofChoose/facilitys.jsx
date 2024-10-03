@@ -44,7 +44,7 @@ const Facilitys = () => {
             </CardContent>
           </Card>
         ))}
-        <CustomBtn></CustomBtn>
+        <CustomBtn title="Discover More"></CustomBtn>
     </div>
   )
 }

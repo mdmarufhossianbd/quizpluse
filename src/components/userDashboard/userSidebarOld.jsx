@@ -12,6 +12,7 @@ import {
   FaUser,
   FaUserAlt,
 } from "react-icons/fa";
+import { GiProgression } from "react-icons/gi";
 
 const UserSidebar = ({ isOpen, onClose }) => {
   const { data } = useSession();
@@ -60,6 +61,14 @@ const UserSidebar = ({ isOpen, onClose }) => {
             <FaHome className="mr-2" /> Dashboard
           </p>
         </Link>
+        <Link href="/user-dashboard/progressTracking">
+          <p
+            onClick={onClose}
+            className="flex items-center mb-4 hover:bg-[#500081] p-2 rounded cursor-pointer"
+          >
+            <GiProgression className="mr-2" /> progress Tracking
+          </p>
+        </Link>
         <Link href="/user-dashboard/add-quiz">
           <p
             onClick={onClose}
@@ -92,6 +101,8 @@ const UserSidebar = ({ isOpen, onClose }) => {
             <FaUserAlt className="mr-2" /> Profile
           </p>
         </Link>
+
+        
       </nav>
 
       <div>

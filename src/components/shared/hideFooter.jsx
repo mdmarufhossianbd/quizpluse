@@ -1,17 +1,16 @@
 'use client'
 import { usePathname } from "next/navigation";
-import Header from "../shared/header";
+import Footer from "./footer";
 
-const HideHeader = () => {
+const HideFooter = () => {
     const pathname = usePathname();
     const hideHeaderFooterPaths = ['/admin', '/admin/', '/user-dashboard', '/user-dashboard/'];
     const hideHeaderFooter = hideHeaderFooterPaths.some((path) => pathname.startsWith(path));
-
     return (
         <>
-            {!hideHeaderFooter && <Header />}
+            {!hideHeaderFooter && <Footer />}
         </>
     );
 };
 
-export default HideHeader;
+export default HideFooter;

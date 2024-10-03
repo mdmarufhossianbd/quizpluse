@@ -1,5 +1,5 @@
-import HideFooter from "@/components/userDashboard/hideFooter";
-import HideHeader from "@/components/userDashboard/hideHeader";
+import HideFooter from "@/components/shared/hideFooter";
+import HideHeader from "@/components/shared/hideHeader";
 import localFont from "next/font/local";
 import "./globals.css";
 import AuthProvider from "./service/authProvider";
