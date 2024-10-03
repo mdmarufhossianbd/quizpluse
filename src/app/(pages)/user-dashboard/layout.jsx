@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from '@/components/shared/sidebar';
-import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconUserFilled } from '@tabler/icons-react';
+import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
@@ -34,6 +34,11 @@ const Layout = ({ children }) => {
             name : 'Participated Quiz',
             url : '/user-dashboard/participated-quiz',
             icon : <IconRosetteDiscountCheckFilled />
+        },
+        {
+            name : 'Progress',
+            url : '/user-dashboard/progress',
+            icon : <IconTimelineEventFilled />
         },
         {
             name : 'Profile',
