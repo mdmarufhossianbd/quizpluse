@@ -51,22 +51,22 @@ const ContactPage = () => {
             </p>
           </div>
           <div className="mb-5">
-          
+
             <p className="text-lg font-semibold">Massage us directly at</p>
-            
+
             <a href="quizePulse@gmail.com" className="text-xl text-blue-500">
-              
+
               quizePulse@gmail.com
-            
-              
+
+
             </a>
-         
+
           </div>
           <div>
             <button className="bg-purple-900 text-white py-2 px-4 rounded">
-            {/* <MessageCircle/> */}
-            <AiFillMessage className="ml-2"/>
-            chat
+              {/* <MessageCircle/> */}
+              <AiFillMessage className="ml-2" />
+              chat
             </button>
           </div>
         </div>
@@ -93,12 +93,12 @@ const ContactPage = () => {
             ></textarea>
 
             <div className="flex justify-center">
-            <button
-              type="submit"
-              className="mt-4 bg-purple-900 text-white py-2 px-4 rounded hover:bg-purple-500 w-64"
-            >
-              Submit
-            </button>
+              <button
+                type="submit"
+                className="mt-4 bg-purple-900 text-white py-2 px-4 rounded hover:bg-purple-500 w-64"
+              >
+                Submit
+              </button>
             </div>
 
           </div>
