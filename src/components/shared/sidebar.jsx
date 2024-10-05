@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaUser } from "react-icons/fa";
 import logo from "../.../../../../public/assets/logo.png";
+import UpgreadCard from "./upgreadCard";
+import SimpleCardPromo from "./simpleCardPromo";
 const Sidebar = ({ navLinks, isSidebarOpen }) => {
     const { data } = useSession();
     const pathname = usePathname()
@@ -55,8 +57,9 @@ const Sidebar = ({ navLinks, isSidebarOpen }) => {
                 <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
             </nav>
             {/* Upgrade */}
-            <div>
-
+            <div className='relative top-20'>
+            {/* <UpgreadCard></UpgreadCard> */}
+            <SimpleCardPromo></SimpleCardPromo>
             </div>
         </div>
     );

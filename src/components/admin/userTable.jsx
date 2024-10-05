@@ -1,114 +1,91 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Pagination from "../shared/pagination";
+import SimpleLoading from "../shared/simpleLoading";
 import { Button } from "../ui/button";
 
 const UserTable = () => {
   const [searchEmail, setSearchEmail] = useState("");
+  const [totalUsers, setTotalUsers] = useState(0)
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
-  const [totalPages, setTotalPages] = useState(1); 
-  const [more, setMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [totalPages, setTotalPages] = useState(1)
 
   useEffect(() => {
     const getAllUsers = async () => {
-      try {
-        const res = await axios.get(
-          `/api/v1/user?email=${searchEmail}&page=${page}`
-        );
-        const userData = res.data.result;
-        setUsers(userData);
-
-        // Assuming the API returns the total number of pages in res.data.totalPages
-        setTotalPages(res.data.totalPages);
-        setMore(page < res.data.totalPages);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
+      setLoading(true)
+      await axios.get(`/api/v1/user?email=${searchEmail}&page=${page}&limit=10`)
+      .then(res => {
+        console.log(res.data);
+        if(res.data.success){
+          setUsers(res.data.result);
+          setPage(res.data.currentPage);
+          setTotalPages(res.data.totalPages);
+          setTotalUsers(res.data.totalUsers);
+          setLoading(false)
+        }
+      })
     };
     getAllUsers();
   }, [page, searchEmail]);
+  
+  const handleSearch = (e) => {
+    e.preventDefault()
+    const email = e.target.email.value;    
+    setSearchEmail(email)
+  }
 
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (more) {
-      setPage(page + 1);
-    }
-  };
+  if(loading){
+    return <SimpleLoading />
+  }
 
   return (
     <div className="p-4 w-full">
       <h2 className="font-semibold text-4xl text-center py-10 text-purple-950">
         Manage Users
       </h2>
-      <div className="mb-4 w-56 border border-purple-300 rounded-xl">
-        <Input
-          type="email"
-          name="email"
-          placeholder="Search by email"
-          value={searchEmail}
-          onChange={(e) => setSearchEmail(e.target.value)}
-          className="border-none"
-        />
+      <div className="flex items-center justify-between mb-5">
+        <form onSubmit={handleSearch}>
+          <input className='border-l border-y px-4 py-1.5 rounded-l-full focus:outline-[#7556ff]' type="text" name="email" id="" placeholder='Enter your email' />
+          <input className='border-r border-y px-4 py-1.5 rounded-r-full bg-[#7556ff] text-white hover:cursor-pointer' type="submit" value="Search" />
+        </form>
+        <p className='font-medium'>Total User Found : {totalUsers}</p>
       </div>
-      <Table className="w-full border-collapse border border-purple-300 shadow-md">
-        <TableHeader>
-          <TableRow className="bg-purple-200 text-xl">
-            <TableHead className="p-2 font-bold text-black">No.</TableHead>
-            <TableHead className="p-2 font-bold text-black">Name</TableHead>
-            <TableHead className="p-2 font-bold text-black">Email</TableHead>
-            <TableHead className="p-2 font-bold text-black">Action</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="text-lg font-medium">
-          {users.length > 0 ? (
-            users.map((user, index) => (
-              <TableRow
-                key={user._id}
-                className="hover:bg-gray-50 transition-colors"
-              >
-                <TableCell className="p-1 font-bold">
-                  {(page - 1) * users.length + index + 1}
-                </TableCell>
-                <TableCell className="p-1 font-medium">
-                  {user.userFullName || user.username}
-                </TableCell>
-                <TableCell className="p-1">
-                  {user.userEmail || user.email}
-                </TableCell>
-                <TableCell className="p-1">
-                  <Button
-                    variant="ghost"
-                    className="text-blue-600 hover:underline text-lg"
-                  >
-                    View Profile
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={4} className="p-4 text-center">
-                No users found.
-              </TableCell>
+      <div className='rounded-md border'>
+        <Table className='overflow-hidden'>
+          <TableHeader>
+            <TableRow className="bg-[#f2e9f1] text-lg">
+              <TableHead className="text-black">SL.</TableHead>
+              <TableHead className="text-black">Full Name</TableHead>
+              <TableHead className="text-black">Username</TableHead>
+              <TableHead className="text-black">User Role</TableHead>
+              <TableHead className="text-black">Account Level</TableHead>
+              <TableHead className="text-black">Email</TableHead>
+              <TableHead className="text-black">View</TableHead>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody className="text-lg font-medium">
+            {
+              users.map((item, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{idx +1}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.username}</TableCell>
+                  <TableCell>{item.role}</TableCell>
+                  <TableCell>{item.level}</TableCell>
+                  <TableCell>{item.email}</TableCell>
+                  <TableCell>
+                    <Button className='bg-[#7556ff] hover:bg-[#563fc0]'>View Profile</Button>
+                  </TableCell>
+                </TableRow>
+              ))
+            }
+          </TableBody>
+        </Table>
+      </div>
 
       {/* Pagination */}
 
@@ -131,7 +108,7 @@ const UserTable = () => {
           <Button
             className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
             onClick={handleNextPage}
-            disabled={page === totalPages}
+            disabled={!more}
           >
             Next →
           </Button>

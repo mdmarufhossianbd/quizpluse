@@ -1,11 +1,13 @@
 "use client";
 
 import Sidebar from '@/components/shared/sidebar';
+import UpgreadCard from '@/components/shared/upgreadCard';
 import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+
 
 const Layout = ({ children }) => {
     const { data } = useSession();
@@ -72,6 +74,7 @@ const Layout = ({ children }) => {
             url: '/user-dashboard/profile',
             icon: <IconUserFilled />
         },
+        
     ]
 
     return (
@@ -96,17 +99,20 @@ const Layout = ({ children }) => {
                     )}
                 </div>
             </button>
-
+            
             {/* Sidebar Component */}
             <div ref={sidebarRef}>
                 <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
+                
             </div>
 
 
             {/* Main Content Area */}
             <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
+                <h2>Logo here</h2>
                 {children}
             </div>
+
         </div>
     );
 };

@@ -26,19 +26,16 @@ const ManageQuizzes = () => {
   useEffect(() => {
     const getQuizData = async () => {
       setLoading(true);
-      if (data?.user?.email) {
-        try {
-          const response = await axios.get(
-            `/api/v1/quiz/user-wise-quiz?email=${data?.user?.email}&page=${page}&limit=10`
-          );
-          setQuizzes(response?.data?.result);
-          setTotalPages(response?.data?.totalPages);
-          setLoading(false);
-        } catch (error) {
-          console.error("Error fetching quiz data", error);
-          setLoading(false);
+     await axios.get(`/api/v1/quiz?page=${page}&limit=10`)
+     .then(res =>{
+        if(res.data.success){
+            setQuizzes(res.data.result);
+            setPage(res.data.currentPage);
+            setTotalPages(res.data.totalPage);
+            setLoading(false);
         }
-      }
+
+     });
       setLoading(false);
     };
     getQuizData();
@@ -64,6 +61,7 @@ const ManageQuizzes = () => {
           <TableRow key={idx}>
             <TableCell>{idx + 1}</TableCell>
             <TableCell>{item.quizName}</TableCell>
+            <TableCell>{item.quizCreatorEmail}</TableCell>
             <TableCell>{item.quizCategory}</TableCell>
             <TableCell>{item.totalQuestions}</TableCell>
             <TableCell>{item.quizDuration}</TableCell>
