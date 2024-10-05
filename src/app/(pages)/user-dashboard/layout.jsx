@@ -109,6 +109,7 @@ const Layout = ({ children }) => {
 
             {/* Main Content Area */}
             <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
+                <h2>Logo here</h2>
                 {children}
             </div>
 
