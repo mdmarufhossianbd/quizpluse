@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const ProgressHistory = () => {
   const performanceGraph = ProgressData[0]?.performanceGraph;

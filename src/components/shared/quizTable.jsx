@@ -61,7 +61,7 @@ const QuizTable = ({ quizzes }) => {
                     </TableRow>)
                 }
             </TableBody>
-        </Table>    
+        </Table>
     );
 };
 

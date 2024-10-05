@@ -1,8 +1,7 @@
-
 import ProgressHistory from '@/components/userDashboard/progressTracking/progressHistory'
-import React from 'react'
 
-const page = () => {
+
+const ProcessTracking = () => {
   return (
     <div>
         <ProgressHistory></ProgressHistory>
@@ -10,7 +9,7 @@ const page = () => {
   )
 }
 
-export default page
+export default ProcessTracking
 
 
   

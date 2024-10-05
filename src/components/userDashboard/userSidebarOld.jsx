@@ -23,9 +23,8 @@ const UserSidebar = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 w-64 min-h-screen bg-[#5C0096] text-white p-4 flex flex-col transform ${
-        isOpen ? "translate-x-0" : "translate-x-full"
-      } md:relative md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
+      className={`fixed top-0 right-0 w-64 min-h-screen bg-[#5C0096] text-white p-4 flex flex-col transform ${isOpen ? "translate-x-0" : "translate-x-full"
+        } md:relative md:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
     >
       <div className="flex items-center mb-8">
         <div className="h-10 w-10 rounded-full mr-3">

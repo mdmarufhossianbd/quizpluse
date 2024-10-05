@@ -47,7 +47,7 @@ const ProgressHistory = () => {
           {/* <Captions title="Rewards"></Captions> */}
           <h1 className=" md:text-3xl text-2xl">Rewards</h1>
           <Card className="my-4 py-2 grid justify-center bg-gradient-to-r from-indigo-500">
-            <Image src={gift} height={250} width={200}></Image>
+            <Image src={gift} height={250} width={200} alt="gift"/>
             <CustomBtn title="Reward"></CustomBtn>
           </Card>
         </div>
