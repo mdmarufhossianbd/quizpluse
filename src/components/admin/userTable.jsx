@@ -16,20 +16,21 @@ const UserTable = () => {
   const [searchEmail, setSearchEmail] = useState("");
   const [page, setPage] = useState(1);
   const [users, setUsers] = useState([]);
+  const [totalPages, setTotalPages] = useState(1); 
   const [more, setMore] = useState(true);
-  const limit = 10;
-  const totalPages = 10;
 
   useEffect(() => {
     const getAllUsers = async () => {
       try {
         const res = await axios.get(
-          `/api/v1/user?email=${searchEmail}&page=${page}&limit=${limit}`
+          `/api/v1/user?email=${searchEmail}&page=${page}`
         );
         const userData = res.data.result;
         setUsers(userData);
 
-        setMore(userData.length === limit);
+        // Assuming the API returns the total number of pages in res.data.totalPages
+        setTotalPages(res.data.totalPages);
+        setMore(page < res.data.totalPages);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -81,7 +82,7 @@ const UserTable = () => {
                 className="hover:bg-gray-50 transition-colors"
               >
                 <TableCell className="p-1 font-bold">
-                  {(page - 1) * limit + index + 1}
+                  {(page - 1) * users.length + index + 1}
                 </TableCell>
                 <TableCell className="p-1 font-medium">
                   {user.userFullName || user.username}
@@ -109,7 +110,7 @@ const UserTable = () => {
         </TableBody>
       </Table>
 
-      {/* Pagination*/}
+      {/* Pagination */}
 
       <div className="flex justify-between mt-4">
         <div>
@@ -130,7 +131,7 @@ const UserTable = () => {
           <Button
             className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
             onClick={handleNextPage}
-            disabled={!more}
+            disabled={page === totalPages}
           >
             Next →
           </Button>
