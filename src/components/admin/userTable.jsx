@@ -88,8 +88,8 @@ const UserTable = () => {
       </div>
 
       {/* Pagination */}
-
-      <div className="flex justify-between mt-4">
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+      {/* <div className="flex justify-between mt-4">
         <div>
           <span className="text-lg font-bold text-purple-800">
             Page: {page} of {totalPages}
@@ -113,7 +113,7 @@ const UserTable = () => {
             Next →
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
