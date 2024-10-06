@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import QuizProgress from './quizProgress';
+import { useState } from 'react';
 import Link from 'next/link';
+import QuizNavigation from './quizNavigation';
 
 const QuizQuestion = ({ quiz, timeLimit }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -14,7 +14,7 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
         setUserAnswers(newAnswers);
     };
 
-    // Handle navigation to next question
+    // Handle navigation to next question or submitting the quiz
     const handleNext = () => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -48,13 +48,13 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
                 </ul>
                 <div className='flex justify-between'>
                     <button
-                        className="bg-purple-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-purple-700 transition-all duration-200"
+                        className=" px-4 py-2 rounded-lg text-white font-medium transition-all duration-200 bg-[#7500be] hover:bg-[#500081]"
 
                     >
                         <Link href="/">Home</Link>
                     </button>
                     <button
-                        className="bg-purple-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-purple-700 transition-all duration-200"
+                        className=" px-4 py-2 rounded-lg text-white font-medium transition-all duration-200 bg-[#7500be] hover:bg-[#500081]"
                         onClick={() => window.location.reload()}
                     >
                         Retake Quiz
@@ -67,9 +67,8 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
 
     return (
         <div className="rounded-lg shadow-md p-6 md:p-8 lg:p-10 max-w-2xl mx-auto my-8 bg-white">
-            {/* Progress Bar */}
-            {/* <QuizProgress current={currentQuestionIndex + 1} total={quiz.questions.length} /> */}
-            {/* Question Header */}
+
+            {/* Quiz Progress  */}
             <h2 className="text-lg bg-[#5C0096] text-white p-1 rounded-xl px-2 mb-4 inline-block shadow">
                 Question {currentQuestionIndex + 1} of {quiz.questions.length}
             </h2>
@@ -97,23 +96,7 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-6">
-                <button
-                    className="bg-gray-300 px-4 py-2 rounded-lg font-medium text-purple-700 hover:bg-purple-100 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handlePrev}
-                    disabled={currentQuestionIndex === 0}
-                >
-                    Previous
-                </button>
-
-                <button
-                    className="bg-[#7500be] px-4 py-2 rounded-lg text-white font-medium hover:bg-[#500081] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleNext}
-                    disabled={userAnswers[currentQuestionIndex] === null}
-                >
-                    Next
-                </button>
-            </div>
+            <QuizNavigation handlePrev={handlePrev} handleNext={handleNext} currentQuestionIndex={currentQuestionIndex} userAnswers={userAnswers} totalQuestions={quiz.questions.length} />
         </div>
     );
 };
