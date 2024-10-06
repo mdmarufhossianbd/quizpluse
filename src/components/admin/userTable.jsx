@@ -87,10 +87,33 @@ const UserTable = () => {
         </Table>
       </div>
 
-      {/* Pagination*/}
+      {/* Pagination */}
 
-      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
-      
+      <div className="flex justify-between mt-4">
+        <div>
+          <span className="text-lg font-bold text-purple-800">
+            Page: {page} of {totalPages}
+          </span>
+        </div>
+
+        <div className="flex gap-3">
+          <Button
+            className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+            onClick={handlePrevPage}
+            disabled={page === 1}
+          >
+            ← Previous
+          </Button>
+
+          <Button
+            className="text-lg bg-purple-200 text-black font-semibold hover:bg-slate-100"
+            onClick={handleNextPage}
+            disabled={!more}
+          >
+            Next →
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
