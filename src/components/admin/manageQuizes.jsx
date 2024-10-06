@@ -1,6 +1,6 @@
 "use client";
 
-import { Chip, Tooltip, Tab, Tabs } from "@nextui-org/react";
+import { Chip, Tooltip, Tabs, Tab } from "@nextui-org/react";
 import {
   Table,
   TableBody,
@@ -19,57 +19,53 @@ import SimpleLoading from "../shared/simpleLoading";
 const ManageQuizzes = () => {
   const { data } = useSession();
   const [quizzes, setQuizzes] = useState([]);
-  const [categories, setCategories] = useState(["All"]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState("all");
+
+  const fetchQuizzes = async (type) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`/api/v1/quiz?type=${type}&page=${page}&limit=10`);
+
+      if (response.data.success) {
+        setQuizzes(response.data.result);
+        setPage(response.data.currentPage);
+        setTotalPages(response.data.totalPage);
+      }
+    } catch (error) {
+      console.error("Error fetching quiz data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getQuizData = async () => {
-      setLoading(true);
-      try {
-        const categoryQuery = selectedCategory === "All" ? "" : `&category=${selectedCategory}`;
-        const response = await axios.get(`/api/v1/quiz?page=${page}&limit=10${categoryQuery}`);
-        
-        if (response.data.success) {
-          setQuizzes(response.data.result);
-          setPage(response.data.currentPage);
-          setTotalPages(response.data.totalPage);
+    fetchQuizzes(activeTab);
+  }, [page, activeTab]);
 
-          
-          const quizCategories = [
-            "All",
-            ...new Set(response.data.result.map((item) => item.quizCategory)),
-          ];
-          setCategories(quizCategories);
-
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching quiz data", error);
-        setLoading(false);
-      }
-    };
-  
-
-    getQuizData();
-  }, [page, selectedCategory]);
-  const handleTabChange = (category) => {
-    setSelectedCategory(category);
-    setPage(1); 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setPage(1);
   };
 
   return (
     <div>
-      {loading && <SimpleLoading />}
-      <Tabs value={selectedCategory} onValueChange={handleTabChange}>
-        {categories.map((category, idx) => (
-          <Tab key={idx} title={category} value={category}>
-            {category}
-          </Tab>
-        ))}
+      <Tabs selectedKey={activeTab} onChange={handleTabChange}>
+        <Tab key="all" title="All Quizzes">
+          All Quizzes
+        </Tab>
+        <Tab key="upcoming" title="Upcoming Quizzes">
+          Upcoming Quizzes
+        </Tab>
+        <Tab key="most_participating" title="Most Participating Quizzes">
+          Most Participating Quizzes
+        </Tab>
       </Tabs>
+
+      {loading && <SimpleLoading />}
+
       <Table>
         <TableHeader>
           <TableColumn>Serial</TableColumn>
@@ -129,6 +125,7 @@ const ManageQuizzes = () => {
           ))}
         </TableBody>
       </Table>
+
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
