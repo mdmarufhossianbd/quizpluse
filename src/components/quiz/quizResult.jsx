@@ -18,7 +18,7 @@ const QuizResult = ({ correctCount, incorrectCount, userAnswers, quiz }) => {
             <p className='text-xl font-bold mb-2'>Quiz Details:</p>
             <ul className="mb-6">
                 {quiz.questions.map((q, index) => (
-                    <li key={index}>
+                    <li key={index} className='mb-2'>
                         <p className='font-semibold'>Question {index + 1}:</p>
                         <p className="font-medium"> {q.question}</p>
                         <p>
