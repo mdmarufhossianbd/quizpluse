@@ -1,6 +1,6 @@
 "use client";
 
-import { Chip, Tooltip, Tabs, Tab } from "@nextui-org/react";
+import { Chip, Tab, Tabs, Tooltip } from "@nextui-org/react";
 import {
   Table,
   TableBody,
@@ -9,12 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { IconEyeShare, IconTrash } from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Pagination from "../shared/pagination";
 import SimpleLoading from "../shared/simpleLoading";
+import PreviewModal from "./manageQuiz/previewModal";
 
 const ManageQuizzes = () => {
   const { data } = useSession();
@@ -24,24 +25,23 @@ const ManageQuizzes = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
 
-  const fetchQuizzes = async (type) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`/api/v1/quiz?type=${type}&page=${page}&limit=10`);
-
-      if (response.data.success) {
-        setQuizzes(response.data.result);
-        setPage(response.data.currentPage);
-        setTotalPages(response.data.totalPage);
-      }
-    } catch (error) {
-      console.error("Error fetching quiz data", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchQuizzes = async (type) => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`/api/v1/quiz?type=${type}&page=${page}&limit=10`);
+        if (response.data.success) {
+          setQuizzes(response.data.result);
+          setPage(response.data.currentPage);
+          setTotalPages(response.data.totalPage);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching quiz data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchQuizzes(activeTab);
   }, [page, activeTab]);
 
@@ -106,11 +106,9 @@ const ManageQuizzes = () => {
                 )}
               </TableCell>
               <TableCell className="flex justify-start gap-2">
-                <Tooltip content="Details">
-                  <span className="text-lg cursor-pointer active:opacity-50">
-                    <button>
-                      <IconEyeShare stroke={2} />
-                    </button>
+                <Tooltip content="Preview">
+                  <span className="text-lg cursor-pointer active:opacity-50">                    
+                    <PreviewModal id={item._id} />  
                   </span>
                 </Tooltip>
                 <Tooltip color="danger" content="Delete Quiz">
