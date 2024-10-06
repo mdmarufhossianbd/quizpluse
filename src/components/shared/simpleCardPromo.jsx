@@ -1,16 +1,17 @@
-import { Button } from 'radix-ui';
-import React from 'react'
-import { FcApproval } from "react-icons/fc";
-
+import Image from "next/image"
+import Link from "next/link"
+import robot from "../../../public/assets/3d robot.png"
 const SimpleCardPromo = () => {
   return (
-    <div  className='hover:bg-[#dfdbf2] grid border-2 border-[#7556FF] m-3 bg-white rounded-md'>
-        <div className='flex justify-between items-center m-2 p-2'>
-            <h1 className='font-bold text-2xl'>pro</h1>
-        <FcApproval className='text-2xl'></FcApproval>
-        </div>
-        <p className='font-bold text-xl m-2 p-2'><span className='text-4xl'>49$</span>/month</p>
-        <button className='bg-[#7556FF] m-2 p-2 rounded-lg bottom-0 text-white font-bold'>Upgrade</button>
+    <div className='hover:bg-[#7556ff] duration-250 p-2 border bg-[#6e00ff] rounded-md mb-5 ml-2 shadow-xl'>
+      <Image className='absolute -top-32 left-1/2' src={robot} alt='robot' height={200} weight={50} />
+      <div className='flex justify-center items-center flex-col pt-1 my-10'>
+        <h1 className='font-semibold text-xl text-white py-2'>Upgrade to Premium</h1>
+        <p className='font-medium text-gray-200'>Go pro to unlock more features</p>
+      </div>
+      <Link href={'/'}>
+        <button className='bg-white px-5 py-2 w-full rounded-md bottom-0 text-[#7556FF] font-bold mb-1'>Upgrade</button>
+      </Link>
     </div>
   )
 }
