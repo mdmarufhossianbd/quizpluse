@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import QuizNavigation from './quizNavigation';
 import QuizResult from './quizResult';
+import { useSession } from 'next-auth/react';
 
-const QuizQuestion = ({ quiz, timeLimit }) => {
+const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
+    const { data } = useSession();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState(Array(quiz.questions.length).fill(null));
     const [quizCompleted, setQuizCompleted] = useState(false);
@@ -16,31 +18,11 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
         setUserAnswers(newAnswers);
     };
 
-    // Handle navigation to next question or submitting the quiz
-    const handleNext = () => {
-        if (currentQuestionIndex < quiz.questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
-        } else {
-            calculateResult(); // Calculate the result when quiz is completed
-            setQuizCompleted(true);
-        }
-    };
-
-    // Handle navigation to previous question
-    const handlePrev = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(currentQuestionIndex - 1);
-        }
-    };
-
     // Calculate correct and incorrect answers
     const calculateResult = () => {
         let correct = 0;
         let incorrect = 0;
         quiz.questions.forEach((question, index) => {
-            console.log("User Answer: ", userAnswers[index]);
-            console.log("Correct Answer: ", question.correctAnswer);
-
             if (userAnswers[index] !== null) {
                 if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
                     correct++;
@@ -53,14 +35,54 @@ const QuizQuestion = ({ quiz, timeLimit }) => {
         setIncorrectCount(incorrect);
     };
 
+    // Handle navigation to next question or submitting the quiz
+    const handleNext = () => {
+        if (currentQuestionIndex < quiz.questions.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        } else {
+            calculateResult(); // Calculate the result when quiz is completed
+            setQuizCompleted(true);
+            setTimeLeft(0); // Stop the timer
+        }
+    };
+
+    // Handle navigation to previous question
+    const handlePrev = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        }
+    };
+
+    // Submit result to the database
+    const submitResult = () => {
+        const quizResult = {
+            quizId: quiz?._id,
+            quizName: quiz?.quizName,
+            userEmail: data?.user?.email,
+            earnedPoint: correctCount,
+            totalPoint: quiz?.totalQuestions,
+        };
+        console.log(quizResult);
+        // Send the quizResult to the database here
+    };
+
+    // Call submitResult after quiz is completed and correctCount is updated
+    useEffect(() => {
+        if (quizCompleted) {
+            submitResult();
+        }
+    }, [quizCompleted, correctCount]);
+
     // Display result when quiz is completed or time runs out
     if (quizCompleted || timeLimit === 0) {
-        return <QuizResult
-            correctCount={correctCount}
-            incorrectCount={incorrectCount}
-            userAnswers={userAnswers}
-            quiz={quiz}
-        />;
+        return (
+            <QuizResult
+                correctCount={correctCount}
+                incorrectCount={incorrectCount}
+                userAnswers={userAnswers}
+                quiz={quiz}
+            />
+        );
     }
 
     return (

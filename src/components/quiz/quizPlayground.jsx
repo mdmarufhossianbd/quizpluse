@@ -19,7 +19,6 @@ const QuizPlayground = ({ quiz }) => {
         const remainingSeconds = seconds % 60;
         return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
     };
-
     return (
         <div className="min-h-screen flex items-center bg-gradient-to-r from-[#371168] via-[#731E95] to-[#371168] p-4 text-white">
             <div className="max-w-3xl w-full mx-auto shadow-lg p-4 mb-8 space-y-4">
@@ -35,7 +34,7 @@ const QuizPlayground = ({ quiz }) => {
                 </div>
 
                 <div>
-                    <QuizQuestion quiz={quiz} timeLimit={timeLeft} />
+                    <QuizQuestion quiz={quiz} timeLimit={timeLeft} setTimeLeft={setTimeLeft} />
                 </div>
             </div>
         </div>

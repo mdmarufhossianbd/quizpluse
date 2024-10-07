@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { GrValidate } from "react-icons/gr";
 import { ImCheckboxChecked, ImCross } from 'react-icons/im';
 
 const QuizResult = ({ correctCount, incorrectCount, userAnswers, quiz }) => {
-    console.log(userAnswers)
+
+
     return (
         <div className="bg-white text-black p-6 max-w-2xl mx-auto my-8 rounded-lg">
             <h2 className="text-2xl font-semibold mb-6 text-center">Quiz Completed!</h2>
@@ -36,6 +36,14 @@ const QuizResult = ({ correctCount, incorrectCount, userAnswers, quiz }) => {
                 >
                     <Link href="/quizes">Take Another Quiz</Link>
                 </button>
+                {/* <div className="mt-6 flex justify-center">
+                    <button
+                        className="px-4 py-2 bg-[#5C0096] text-white rounded-lg hover:bg-[#500081] transition-all"
+                        onClick={onClose}
+                    >
+                        Close
+                    </button>
+                </div> */}
             </div>
         </div>
     );
