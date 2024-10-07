@@ -2,6 +2,7 @@
 
 import Sidebar from '@/components/shared/sidebar';
 import UpgreadCard from '@/components/shared/upgreadCard';
+import UserDashNavBar from '@/components/shared/userDashNavBar';
 import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -109,6 +110,7 @@ const Layout = ({ children }) => {
 
             {/* Main Content Area */}
             <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
+                <UserDashNavBar></UserDashNavBar>
                 {children}
             </div>
 
