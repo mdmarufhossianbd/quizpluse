@@ -21,7 +21,7 @@ const QuizPlayground = ({ quiz }) => {
     };
     return (
         <div className="min-h-screen flex items-center bg-gradient-to-r from-[#371168] via-[#731E95] to-[#371168] p-4 text-white">
-            <div className="max-w-3xl w-full mx-auto shadow-lg p-4 mb-8 space-y-4">
+            <div className="max-w-3xl w-full mx-auto shadow-lg p-2 md:p-4 mb-8 space-y-4">
                 {/* Quiz Header */}
                 <h1 className="text-white text-3xl text-center font-bold">{quiz.quizName}</h1>
                 <div className="flex flex-col lg:flex-row justify-between">

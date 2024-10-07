@@ -86,7 +86,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
     }
 
     return (
-        <div className="rounded-lg shadow-md p-6 md:p-8 lg:p-10 max-w-2xl mx-auto my-8 bg-white">
+        <div className="rounded-lg shadow-md p-4 md:p-8 lg:p-10 max-w-2xl mx-auto my-8 bg-white">
             <h2 className="text-lg bg-[#5C0096] text-white p-1 rounded-xl px-2 mb-4 inline-block shadow">
                 Question {currentQuestionIndex + 1} of {quiz.questions.length}
             </h2>
