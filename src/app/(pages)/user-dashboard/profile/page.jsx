@@ -48,7 +48,7 @@ const ProfilePage = () => {
                     </div>
 
                     {/* User Info */}
-                    <div className='mt-20 mb-6'>
+                    <div className='mt-14 mb-6'>
                         <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">{currentUser?.name}</h2>
                         <p className="text-gray-500 text-sm md:text-base">Email : {currentUser?.email}</p>
                         <p className="text-gray-500 text-sm md:text-base mb-4">username: @{currentUser?.username}</p>
