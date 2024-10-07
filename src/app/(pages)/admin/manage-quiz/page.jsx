@@ -1,8 +1,9 @@
+import ManageQuizzes from "@/components/admin/manageQuizes";
 
 const ManageQuiz = () => {
     return (
         <div>
-            manage quiz for admin
+            <ManageQuizzes/>
         </div>
     );
 };

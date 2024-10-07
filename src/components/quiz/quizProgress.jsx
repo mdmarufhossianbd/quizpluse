@@ -1,5 +1,3 @@
-import React from 'react';
-
 const QuizProgress = ({ current, total }) => {
     const progressPercentage = (current / total) * 100;
 
@@ -11,6 +9,7 @@ const QuizProgress = ({ current, total }) => {
                     style={{ width: `${progressPercentage}%` }}
                 />
             </div>
+            <p className="text-sm text-gray-600">{`Progress: ${current} of ${total}`}</p>
         </div>
     );
 };
