@@ -27,7 +27,9 @@ const ManageQuizzes = () => {
   const fetchQuizzes = async (type) => {
     setLoading(true);
     try {
-      const response = await axios.get(`/api/v1/quiz?type=${type}&page=${page}&limit=10`);
+      const response = await axios.get(
+        `/api/v1/quiz?type=${type}&page=${page}&limit=10`
+      );
 
       if (response.data.success) {
         setQuizzes(response.data.result);
@@ -125,7 +127,6 @@ const ManageQuizzes = () => {
           ))}
         </TableBody>
       </Table>
-
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );

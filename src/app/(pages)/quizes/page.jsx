@@ -1,3 +1,4 @@
+import QuizzesSlider from "@/components/quizzesSlider/quizzesSlider";
 import QuizCard from "@/components/shared/quizCard";
 import { getAllQuizes } from "@/utils/fetchQuizes";
 
@@ -9,6 +10,7 @@ const Quizes = async () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {quizes?.map(item => <QuizCard key={item?._id} item={item} />)}
             </div>
+            <QuizzesSlider quizes={quizes} />
         </div>
     );
 };
