@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import Loading from '../shared/loading';
 import QuizNavigation from './quizNavigation';
 import QuizResult from './quizResult';
 
@@ -11,7 +12,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [correctCount, setCorrectCount] = useState(0);
     const [incorrectCount, setIncorrectCount] = useState(0);
-
+    const [loading, setLoading] = useState(false)
     // Handle selecting an answer
     const handleAnswerSelect = (optionIndex) => {
         const newAnswers = [...userAnswers];
@@ -56,6 +57,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
 
     // Submit result to the database
     const submitResult = async() => {
+        setLoading(true)
         calculateResult()
         const quizResult = {
             quizId: quiz?._id,
@@ -70,6 +72,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         .then(res => {
             console.log(res.data);
             setTimeLeft(0)
+            setLoading(false)
         })
     };
 
@@ -88,10 +91,13 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             />
         );
     }
+    if(loading){
+        return <Loading />
+    }
 
     return (
-        <div className="rounded-lg bg-white max-w-2xl mx-auto p-5 mb-10">
-            <h2 className="text-lg bg-[#5C0096] text-white p-1 rounded-xl px-2 mb-4 inline-block shadow text-center w-full">
+        <div className="rounded-md bg-white max-w-2xl mx-auto p-4 md:mb-8 mb-5">
+            <h2 className="text-lg bg-[#5C0096] text-white py-1 rounded-full px-2 mb-4 inline-block shadow text-center w-full">
                 Question {currentQuestionIndex + 1} of {quiz.questions.length}
             </h2>
             <div className="mb-6">
@@ -103,7 +109,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
                         <li key={index}>
                             <button
                                 onClick={() => handleAnswerSelect(index)}
-                                className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 border ${userAnswers[currentQuestionIndex] === index
+                                className={`w-full h-full text-left px-4 py-3 rounded-lg transition-all duration-200 border ${userAnswers[currentQuestionIndex] === index
                                     ? 'bg-[#5c0096cc] text-white'
                                     : 'bg-white border-[#5C0096] text-black hover:text-white hover:bg-[#5c0096cc]'
                                     }`}

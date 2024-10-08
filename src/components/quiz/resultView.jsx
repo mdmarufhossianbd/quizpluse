@@ -5,7 +5,7 @@ const ResultView = ({ userAnswers, quiz }) => {
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-4">
                 <button className="px-7 py-2 rounded-full bg-[#381269] hover:shadow-xl shadow-[#381269] hover:scale-105 duration-300 text-white" onClick={onOpen}>See Result</button>
             </div>
             <Modal
@@ -28,7 +28,7 @@ const ResultView = ({ userAnswers, quiz }) => {
                                         <p className="flex flex-col"><span className="font-semibold">Question {idx + 1}: </span>
                                             {q?.question}
                                         </p>
-                                        <p className="flex flex-col"><span className="font-semibold">Your Answer : </span>
+                                        <p className="flex gap-2"><span className="font-semibold">Your Answer : </span>
                                         {userAnswers[idx] !== null ? q.options[userAnswers[idx]] : "Not Answered"}
                                         </p>
                                     </div>
