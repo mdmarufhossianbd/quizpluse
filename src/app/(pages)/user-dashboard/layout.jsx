@@ -1,11 +1,15 @@
 "use client";
 
 import Sidebar from '@/components/shared/sidebar';
+import UpgreadCard from '@/components/shared/upgreadCard';
+import UserDashNavBar from '@/components/shared/userDashNavBar';
 import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+
 
 const Layout = ({ children }) => {
     const { data } = useSession();
@@ -72,10 +76,12 @@ const Layout = ({ children }) => {
             url: '/user-dashboard/profile',
             icon: <IconUserFilled />
         },
+
     ]
 
     return (
         <div className="min-h-screen flex ">
+
             {/* Mobile Menu Toggle Button */}
             <button className="lg:hidden fixed top-3 right-3 z-50 h-10 w-10 border-2 border-[#5C0096] rounded-full" onClick={toggleSidebar}>
                 <div className="">
@@ -100,13 +106,26 @@ const Layout = ({ children }) => {
             {/* Sidebar Component */}
             <div ref={sidebarRef}>
                 <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
+
             </div>
 
 
             {/* Main Content Area */}
-            <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
+            <div className="flex-1 p-6 pt-4 lg:pt-6 md:ml-4 transition-all duration-300">
+                <div className='lg:hidden mb-2'>
+                    <Link href="/">
+                        <Image
+                            src="/assets/logo.png"
+                            alt="QuizPulse Logo"
+                            width={120}
+                            height={40} // Adjust the height to make it fit nicely
+                            className="object-contain"
+                        />
+                    </Link>
+                </div>
                 {children}
             </div>
+
         </div>
     );
 };

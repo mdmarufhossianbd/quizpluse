@@ -6,12 +6,21 @@ export async function GET(request) {
     const db = await connectDB();
     const quizCollection = db.collection('quizes')
     try {
-        const result = await quizCollection.find().toArray()
+        const {searchParams} = new URL(request.url);
+        const page = parseInt(searchParams.get('page')) || 1;
+        const limit = parseInt(searchParams.get('limit')) || 10;
+        const skip = (page -1 ) * limit;
+        const sort = {_id : -1}
+        const result = await quizCollection.find().sort(sort).skip(skip).limit(limit).toArray()
+        const totalQuiz = await quizCollection.countDocuments()
         return NextResponse.json({
             message : 'Successfully loaded all quiz',
             status : 200,
             success : true,
-            result
+            result,
+            currentPage : page,
+            totalPage : Math.ceil(totalQuiz / limit),
+            totalQuiz
         })
     } catch (error) {
         return NextResponse.json({

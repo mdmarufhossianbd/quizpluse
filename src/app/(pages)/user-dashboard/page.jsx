@@ -10,7 +10,7 @@ const UserDashboard = () => {
     <div>
       <div>
         <div>
-          <h1 className="text-4xl font-bold mb-6 text-[#5C0096]">Dashboard</h1>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {/* Stat Cards */}
             <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
