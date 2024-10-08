@@ -106,7 +106,7 @@ const ManageQuizzes = () => {
                 )}
               </TableCell>
               <TableCell className="flex justify-start gap-2">
-                <Tooltip content="Preview">
+                <Tooltip content="View">
                   <span className="text-lg cursor-pointer active:opacity-50">                    
                     <PreviewModal id={item._id} />  
                   </span>
