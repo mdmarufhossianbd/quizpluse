@@ -5,10 +5,10 @@ import ResultView from './resultView';
 const QuizResult = ({ correctCount, incorrectCount, userAnswers, quiz }) => {
 
     return (
-        <div className="bg-white text-black p-3 md:p-6 max-w-2xl mx-auto my-8 rounded-lg">
+        <div className="bg-white text-black md:p-6 p-4 max-w-2xl mx-auto my-8 rounded-lg">
             <h2 className="text-2xl font-semibold mb-6 text-center">Quiz Completed!</h2>
             <div className='bg-[#7500be0c] shadow-lg p-4 rounded-lg mb-6'>
-                <p className='text-xl font-bold mb-2'>Result: </p>
+                <p className='text-xl font-bold mb-2 text-center'>Earn Point : {correctCount}</p>
                 <hr className='mb-3' />
                 <p className="text-md md:text-lg font-medium mb-4 flex items-center"><ImCheckboxChecked className='mr-2 text-green-600' />
                     Correct Answers: {correctCount}</p>
