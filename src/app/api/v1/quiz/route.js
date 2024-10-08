@@ -73,8 +73,8 @@ export async function DELETE(request) {
     const db = await connectDB()
     const quizCollection = db.collection('quizes')
     try {
-        const data = await request.json()
-        const query = {_id : new ObjectId(data._id)}
+        const data = await request.json();
+        const query = {_id : new ObjectId(data.id)}
         const result = await quizCollection.deleteOne(query);
         return NextResponse.json({
             message : 'Requested quiz deleted done',
