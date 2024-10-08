@@ -13,26 +13,26 @@ export default function AdminLayout({ children }) {
 
   const navLinks = [
     {
-        name : 'Dashboard',
-        url : '/admin',
-        icon : <IconLayoutDashboardFilled />
+      name: 'Dashboard',
+      url: '/admin',
+      icon: <IconLayoutDashboardFilled />
     },
     {
-        name : 'Manage Quiz',
-        url : '/admin/manage-quiz',
-        icon : <IconSettingsFilled />
+      name: 'Manage Quiz',
+      url: '/admin/manage-quiz',
+      icon: <IconSettingsFilled />
     },
     {
-        name : 'Manage User',
-        url : '/admin/users',
-        icon : <IconUsers stroke={2} />
+      name: 'Manage User',
+      url: '/admin/users',
+      icon: <IconUsers stroke={2} />
     },
     {
-        name : 'Profile',
-        url : '/admin/profile',
-        icon : <IconUserFilled />
+      name: 'Profile',
+      url: '/admin/profile',
+      icon: <IconUserFilled />
     },
-]
+  ]
 
   return (
     <div className="min-h-screen flex ">
@@ -42,7 +42,7 @@ export default function AdminLayout({ children }) {
         onClick={toggleSidebar}
       ></button>
       <Sidebar navLinks={navLinks} />
-      <div className="flex-1 p-6 md:ml-4 transition-all duration-300">
+      <div className="flex-1 md:ml-4 transition-all duration-300">
         {children}
       </div>
     </div>
