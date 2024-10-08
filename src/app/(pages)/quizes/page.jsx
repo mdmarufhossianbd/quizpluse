@@ -1,3 +1,4 @@
+import QuizzesSlider from "@/components/quizzesSlider/quizzesSlider";
 import QuizCard from "@/components/shared/quizCard";
 import { getAllQuizes } from "@/utils/fetchQuizes";
 

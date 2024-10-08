@@ -25,7 +25,6 @@ const ManageQuizzes = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [deleted, setDelete] = useState(false)
 
-
   useEffect(() => {
     const fetchQuizzes = async (type) => {
       setLoading(true);
@@ -124,7 +123,6 @@ const ManageQuizzes = () => {
           ))}
         </TableBody>
       </Table>
-
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
