@@ -1,6 +1,5 @@
-import React from 'react';
 
-const QuizNavigation = ({ handlePrev, handleNext, userAnswers, currentQuestionIndex, totalQuestions }) => {
+const QuizNavigation = ({ handlePrev, handleNext, userAnswers, currentQuestionIndex, totalQuestions, submitResult }) => {
     return (
         <>
             <div className="flex justify-between mt-6">
@@ -14,13 +13,20 @@ const QuizNavigation = ({ handlePrev, handleNext, userAnswers, currentQuestionIn
                 </button>
 
                 {/* Next/Submit Button */}
-                <button
-                    className="px-4 py-2 rounded-lg text-white font-medium bg-[#7500be] hover:bg-[#500081] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleNext}
-                    disabled={userAnswers[currentQuestionIndex] === null}
-                >
-                    {currentQuestionIndex === totalQuestions - 1 ? 'Submit' : 'Next'}
-                </button>
+                {
+                    currentQuestionIndex === totalQuestions - 1 ? 
+                        <button disabled={userAnswers[currentQuestionIndex] === null} className="px-4 py-2 rounded-lg text-white font-medium bg-[#7500be] hover:bg-[#500081] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" onClick={submitResult}>
+                            Submit
+                        </button> : 
+                        <button
+                        className="px-4 py-2 rounded-lg text-white font-medium bg-[#7500be] hover:bg-[#500081] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={handleNext}
+                    >
+                        {currentQuestionIndex === totalQuestions - 1 ? 'Submit' : 'Next'}
+                    </button>
+                }
+
+
             </div>
         </>
     );

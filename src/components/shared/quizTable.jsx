@@ -7,7 +7,8 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { IconEdit, IconEyeShare, IconTrash } from "@tabler/icons-react";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
+import PreviewModal from "../admin/manageQuiz/previewModal";
 
 const QuizTable = ({ quizzes }) => {
   return (
@@ -49,11 +50,9 @@ const QuizTable = ({ quizzes }) => {
               )}
             </TableCell>
             <TableCell className="flex justify-start gap-2">
-              <Tooltip content="Details">
+              <Tooltip content="View">
                 <span className="text-lg cursor-pointer active:opacity-50">
-                  <button>
-                    <IconEyeShare stroke={2} />
-                  </button>
+                  <PreviewModal id={item?._id} />
                 </span>
               </Tooltip>
               <Tooltip content="Edit">
