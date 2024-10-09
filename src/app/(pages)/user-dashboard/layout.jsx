@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
+import { GiArmorUpgrade } from "react-icons/gi";
 
 
 const Layout = ({ children }) => {
@@ -72,10 +73,16 @@ const Layout = ({ children }) => {
             icon: <IconTimelineEventFilled />
         },
         {
+            name: 'Upgrade',
+            url: '/user-dashboard/user-plans',
+            icon: <GiArmorUpgrade />
+        },
+        {
             name: 'Profile',
             url: '/user-dashboard/profile',
             icon: <IconUserFilled />
         },
+       
 
     ]
 
