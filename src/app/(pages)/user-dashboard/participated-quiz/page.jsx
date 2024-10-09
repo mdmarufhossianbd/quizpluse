@@ -1,42 +1,55 @@
 "use client";
-import Pagination from "@/components/shared/pagination";
 import ParticipationQuizzes from "@/components/userDashboard/participatedQuizzes/participationQuizzes";
-
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-
+import axios from "axios";
+import Pagination from "@/components/shared/pagination";
+import SimpleLoading from "@/components/shared/simpleLoading";
 
 const ParticipatedQuizzes = () => {
-  const [quizzes, setQuizzes] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data } = useSession();
+  const [quizzes, setQuizzes] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalParticipatedQuiz,setTotalParticipatedQuiz] = useState(0);
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchQuize = async () => {
+      setLoading(true);
+      if (data?.user?.email) {
         try {
-            const response = await axios.get(
-              `/api/v1/quiz/result?email=${email}&page=${page}&limit=${limit}`
-            );
-            setQuizzes(response.data); // Set the fetched data
-          }  catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
+          const response = await axios.get(
+            `/api/v1/quiz/result?email=${data?.user?.email}&page=${page}&limit=10`
+          );
+          console.log(response.data);
+          setQuizzes(response?.data?.result);
+          setTotalPages(response?.data?.totalPage);
+          setTotalParticipatedQuiz(response?.data?.totalParticipatedQuiz)
+          setLoading(false);
+
+        } catch (error) {
+          console.error("Error fetching quiz data", error);
+        } finally {
+          setLoading(false);
+        }
       }
     };
     fetchQuize();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  }, [data?.user?.email, page]);
 
   return (
-    <div>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-      {quizzes.map((quiz) => (
-        <ParticipationQuizzes key={quiz?._id} item={quiz} />
-      ))}
-    </div>
-    <Pagination page={page} setPage={setPage} totalPages={totalPages} />
+    <div className="w-full">
+      {loading && <SimpleLoading />}
+
+      <h1 className="text-3xl font-bold mb-8 lg:mb-7 text-center">My Participation ({totalParticipatedQuiz} Quizzes)</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {quizzes.map((quiz) => (
+          <ParticipationQuizzes key={quiz._id} quiz={quiz} />
+        ))}
+      </div>
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 };
