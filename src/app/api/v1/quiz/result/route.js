@@ -23,7 +23,6 @@ export async function POST(request) {
                 quizName : data?.quizName,
                 quizImage : data?.quizImage,
                 userEmail : data?.userEmail,
-                userName : data?.userName
             }
         }
         const result = await resultCollection.updateOne(query, oparation);
