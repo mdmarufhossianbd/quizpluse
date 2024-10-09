@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import ChangePassword from '../userDashboard/profile/changePassword';
 
 const UserProfile = () => {
     const { data, status } = useSession();
@@ -28,6 +29,8 @@ const UserProfile = () => {
     }
 
     const handleEdit = () => { };
+
+
     return (
         <div className='rounded-xl' style={{
             backgroundImage: 'url("/assets/quizpulse.png")',
@@ -82,9 +85,10 @@ const UserProfile = () => {
 
                     {/* Edit Buttons */}
                     <div className='flex flex-col md:flex-row gap-3 mt-6 items-center justify-center'>
-                        <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto">
+                        {/* <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto">
                             <IconPencil stroke={2} /> Change Password
-                        </button>
+                        </button> */}
+                        <ChangePassword></ChangePassword>
                         <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto">
                             <IconPencil stroke={2} /> Update Profile
                         </button>
