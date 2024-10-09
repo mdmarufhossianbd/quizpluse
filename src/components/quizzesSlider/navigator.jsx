@@ -5,10 +5,10 @@ import { useSwiper } from 'swiper/react';
 const Navigator = () => {
     const swiper = useSwiper();
     return (
-        <div className="flex justify-between w-full gap-5 absolute top-1/2 z-20">
-        <button className='bg-[#0f040433] hover:bg-[#FF3811] rounded-full text-white p-5 -ml-8' onClick={() => swiper.slidePrev()}><FaArrowLeft /></button>
-        <button className='bg-[#04040433] hover:bg-[#FF3811] rounded-full text-white p-5' onClick={() => swiper.slideNext()}><FaArrowRight /></button>
-    </div>
+        <div className="absolute w-full flex justify-between top-1/3 z-10">
+            <button className='bg-[#5c0096bd] hover:bg-[#5c0096] rounded-full text-white p-5' onClick={() => swiper.slidePrev()}><FaArrowLeft /></button>
+            <button className='bg-[#5c0096bd] hover:bg-[#5c0096] rounded-full text-white p-5' onClick={() => swiper.slideNext()}><FaArrowRight /></button>
+        </div>
     );
 };
 
