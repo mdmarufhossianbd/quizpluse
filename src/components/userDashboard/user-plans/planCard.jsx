@@ -21,12 +21,12 @@ const PlanCard = ({plan}) => {
   </div>
   <hr class="line" />
   {/* list */}
-  <ul class="card__list my-5 gap-10">
+  <ul class="card__list my-5 gap-10  h-[450px] md:h-[500px] overflow-auto">
     <ListPlan features={plan.features}></ListPlan>
     
   </ul>
   <div className='mx-5 bg-red-600 flex justify-center'>
-  <button class="button text-3xl bg-[#6d28ff] rounded-md w-[90%] hover:bg-white hover:text-[#6d28ff]">Subscribe Now</button>
+  <button class="button text-3xl bg-[#6d28ff] text-white rounded-md w-[90%] hover:bg-white hover:text-[#6d28ff]">Subscribe Now</button>
   </div>
 </div>
 
