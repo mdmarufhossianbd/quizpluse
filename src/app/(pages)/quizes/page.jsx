@@ -10,6 +10,7 @@ const Quizes = async () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {quizes?.map(item => <QuizCard key={item?._id} item={item} />)}
             </div>
+            <h2>Recent Quiz</h2>
             <QuizzesSlider quizes={quizes} />
         </div>
     );

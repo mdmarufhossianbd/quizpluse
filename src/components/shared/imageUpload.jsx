@@ -7,8 +7,8 @@ import { toast } from 'sonner';
 import uploading from '../../../public/assets/picture_uploadig.gif';
 import { Input } from "../ui/input";
 
-const ImageUpload = ({ setFormData }) => {
-    const [imageUrl, setImageUrl] = useState();
+const ImageUpload = ({ setFormData, quizBanner }) => {
+    const [imageUrl, setImageUrl] = useState(quizBanner);
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false);
     const cloudinaryCloudName = process.env.NEXT_PUBLIC_CLOUDINARY_COLUD_NAME;
