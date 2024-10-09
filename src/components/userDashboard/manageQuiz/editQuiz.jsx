@@ -19,7 +19,7 @@ const EditQuiz = ({ quiz }) => {
         quizCategory: '',
         totalQuestions: '',
         questions: [],
-        totalDuration: '',
+        quizDuration: '',
         quizImage: '',
         quizCreatorEmail: "",
         quizCreatorName: ""
@@ -35,7 +35,7 @@ const EditQuiz = ({ quiz }) => {
                 quizCategory: quiz?.quizCategory || '',
                 totalQuestions: quiz?.totalQuestions || '',
                 questions: quiz?.questions || [],
-                totalDuration: quiz?.totalDuration || '',
+                quizDuration: quiz?.quizDuration || '',
                 quizImage: quiz?.quizImage || '',
                 quizCreatorEmail: data?.user?.email || "",
                 quizCreatorName: data?.user?.name || ""
@@ -56,10 +56,15 @@ const EditQuiz = ({ quiz }) => {
         }
     };
 
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+
+        const updatedValue = name === "quizDuration" ? parseInt(value, 10) : value;
+
+        setFormData({ ...formData, [name]: updatedValue });
     };
+
 
     const handleQuestionChange = (index, e) => {
         const { name, value } = e.target;
@@ -82,7 +87,7 @@ const EditQuiz = ({ quiz }) => {
                 (q) => q.question && q.options.every((opt) => opt) && q.correctOption
             )
             : step === 3
-                ? formData.totalDuration
+                ? formData.quizDuration
                 : true;
 
 
@@ -257,7 +262,7 @@ const EditQuiz = ({ quiz }) => {
                             </label>
                             <input
                                 type="number"
-                                name="totalDuration"
+                                name="quizDuration"
                                 defaultValue={quiz?.quizDuration}
                                 onChange={handleInputChange}
                                 className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
