@@ -1,16 +1,16 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, } from "@/components/ui/select";
 
 
-const QuizCategory = ({ setFormData }) => {
+const QuizCategory = ({ setFormData, quiz }) => {
 
-    const handleSelectCategory =(value) => {
+    const handleSelectCategory = (value) => {
         setFormData((prev) => ({ ...prev, quizCategory: value }))
     }
-   
+
     return (
         <div>
             <h4 className="block text-gray-700 text-sm font-bold mb-2">Select Quiz Category</h4>
-            <Select onValueChange={(value) => handleSelectCategory(value)}>
+            <Select defaultValue={quiz?.quizCategory} onValueChange={(value) => handleSelectCategory(value)}>
                 <SelectTrigger className="">
                     <SelectValue placeholder="Select Category" />
                 </SelectTrigger>

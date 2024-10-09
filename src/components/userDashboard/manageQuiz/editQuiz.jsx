@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import QuizCategory from '../addQuiz/quizCategory';
+import PreviewQuiz from './previewQuiz';
+import SimpleLoading from '@/components/shared/simpleLoading';
 
 const EditQuiz = ({ quiz }) => {
-    console.log(quiz)
     const { data, status } = useSession()
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false)
@@ -27,22 +28,21 @@ const EditQuiz = ({ quiz }) => {
 
     const totalSteps = 3;
 
-    // Update questions based on totalQuestions
     useEffect(() => {
-        const { totalQuestions } = formData;
-        if (totalQuestions > 0) {
-            const updatedQuestions = Array.from({ length: totalQuestions }, (_, index) => ({
-                question: '',
-                options: ['', '', '', ''], // 4 options for MCQ
-                correctOption: '',
-            }));
-            setFormData((prev) => ({ ...prev, questions: updatedQuestions }));
-            setFormData((prev) => ({ ...prev, quizCreatorEmail: data?.user?.email }));
-            setFormData((prev) => ({ ...prev, quizCreatorName: data?.user?.name }));
-        } else {
-            setFormData((prev) => ({ ...prev, questions: [] }));
+        if (quiz) {
+            setFormData({
+                quizName: quiz?.quizName || '',
+                quizCategory: quiz?.quizCategory || '',
+                totalQuestions: quiz?.totalQuestions || '',
+                questions: quiz?.questions || [],
+                totalDuration: quiz?.totalDuration || '',
+                quizImage: quiz?.quizImage || '',
+                quizCreatorEmail: data?.user?.email || "",
+                quizCreatorName: data?.user?.name || ""
+            });
         }
-    }, [formData.totalQuestions, data?.user?.name, data?.user?.email]);
+    }, [quiz, data?.user?.email, data?.user?.name]);
+
 
     const nextStep = () => {
         if (step < totalSteps) {
@@ -88,20 +88,7 @@ const EditQuiz = ({ quiz }) => {
 
     const renderQuizPreview = () => (
         <div>
-            <h3 className="font-bold text-lg mb-2">Quiz Name: {formData.quizName}</h3>
-            <h4 className="font-medium mb-2">Total Questions: {formData.totalQuestions}</h4>
-            <h4 className="font-medium mb-2">Total Duration: {formData.totalDuration} minutes</h4>
-            {formData.questions.map((q, index) => (
-                <div key={index} className="mb-4">
-                    <h4 className="font-semibold">Question {index + 1}: {q.question}</h4>
-                    <ul className="list-disc ml-6">
-                        {q.options.map((opt, optIdx) => (
-                            <li key={optIdx}>{opt}</li>
-                        ))}
-                    </ul>
-                    <p><strong>Correct Option:</strong> {q.correctOption}</p>
-                </div>
-            ))}
+            <PreviewQuiz formData={formData} />
         </div>
     );
 
@@ -141,7 +128,7 @@ const EditQuiz = ({ quiz }) => {
                 status === 'loading' && <SimpleLoading />
             }
             <Toaster position='top-right' richColors />
-            <h1 className="text-3xl font-bold mb-4 text-center">Create a Quiz</h1>
+            <h1 className="text-3xl font-bold mb-4 text-center">Update Quiz : {quiz?.quizName}</h1>
 
             {/* Progress Indicator */}
             <div className="w-full bg-[#5c009642] rounded-full h-2.5 mb-6">
@@ -163,26 +150,28 @@ const EditQuiz = ({ quiz }) => {
                             <input
                                 type="text"
                                 name="quizName"
-                                value={formData.quizName}
+                                // value={formData.quizName}
+                                defaultValue={quiz?.quizName}
                                 onChange={handleInputChange}
                                 className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none"
                                 required
                             />
                         </div>
                         {/* quiz category */}
-                        <QuizCategory setFormData={setFormData} />
+                        <QuizCategory setFormData={setFormData} quiz={quiz} />
                         <div className="my-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
-                                Total Questions:
+                                Total Questions: <span className='text-[12px] font-normal text-[#777777]'>{"(If you want to add or remove any questions, delete the quiz and then re-add it.)"}</span>
                             </label>
                             <input
                                 type="number"
                                 name="totalQuestions"
-                                value={formData.totalQuestions}
+                                defaultValue={quiz?.totalQuestions}
                                 onChange={handleInputChange}
                                 className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
                                 min="1"
+                                disabled={true}
                             />
                         </div>
                         <button
@@ -199,8 +188,8 @@ const EditQuiz = ({ quiz }) => {
                 {/* Step 2: Add Questions */}
                 {step === 2 && (
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4">Step 2: Add Questions</h2>
-                        {formData.questions.map((q, index) => (
+                        <h2 className="text-2xl font-semibold mb-4">Step 2: Update Questions</h2>
+                        {quiz?.questions?.map((q, index) => (
                             <div key={index} className="mb-6">
                                 <label className="block text-gray-700 text-sm font-bold mb-2">
                                     Question {index + 1}:
@@ -208,18 +197,18 @@ const EditQuiz = ({ quiz }) => {
                                 <input
                                     type="text"
                                     name="question"
-                                    value={q.question}
+                                    defaultValue={q?.question}
                                     onChange={(e) => handleQuestionChange(index, e)}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required
                                 />
                                 <div className="space-y-2 mt-2">
-                                    {q.options.map((option, optIdx) => (
+                                    {q?.options.map((option, optIdx) => (
                                         <input
                                             key={optIdx}
                                             type="text"
                                             name={`option${optIdx}`}
-                                            value={option}
+                                            defaultValue={option}
                                             onChange={(e) => handleOptionChange(index, optIdx, e)}
                                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             placeholder={`Option ${optIdx + 1}`}
@@ -229,7 +218,7 @@ const EditQuiz = ({ quiz }) => {
                                     <input
                                         type="text"
                                         name="correctOption"
-                                        value={q.correctOption}
+                                        defaultValue={q?.correctOption}
                                         onChange={(e) => handleQuestionChange(index, e)}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="Correct Option"
@@ -261,7 +250,7 @@ const EditQuiz = ({ quiz }) => {
                 {/* Step 3: Quiz Duration */}
                 {step === 3 && (
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4">Step 3: Quiz Duration</h2>
+                        <h2 className="text-2xl font-semibold mb-4">Step 3: Quiz Duration and Banner Image</h2>
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2">
                                 Total Duration (in minutes):
@@ -269,7 +258,7 @@ const EditQuiz = ({ quiz }) => {
                             <input
                                 type="number"
                                 name="totalDuration"
-                                value={formData.totalDuration}
+                                defaultValue={quiz?.quizDuration}
                                 onChange={handleInputChange}
                                 className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 required
@@ -324,7 +313,6 @@ const EditQuiz = ({ quiz }) => {
                     </div>
                 )}
             </form>
-
 
         </div>
     );
