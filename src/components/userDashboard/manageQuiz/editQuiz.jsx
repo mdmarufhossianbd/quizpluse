@@ -284,8 +284,8 @@ const EditQuiz = ({ quiz }) => {
                                 </button>
                             </div>
                             {
-                                loading ? <button disabled className="flex items-center gap-2 px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081] disabled:cursor-not-allowed"><ImSpinner9 className='animate-spin' />Creating Quiz ...</button> :
-                                    <button type="submit" className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]">Submit Quiz</button>
+                                loading ? <button disabled className="flex items-center gap-2 px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081] disabled:cursor-not-allowed"><ImSpinner9 className='animate-spin' />Updating Quiz ...</button> :
+                                    <button type="submit" className="px-4 py-2 rounded-md bg-[#5C0096] text-white hover:bg-[#500081]">Update Quiz</button>
                             }
                         </div>
                     </div>

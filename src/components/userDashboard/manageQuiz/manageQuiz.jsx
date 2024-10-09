@@ -12,7 +12,8 @@ const ManageQuiz = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [deleted, setDelete] = useState(false);
 
     useEffect(() => {
         const getQuizData = async () => {
@@ -31,12 +32,12 @@ const ManageQuiz = () => {
             setLoading(false)
         };
         getQuizData();
-    }, [data?.user?.email, page]);
+    }, [data?.user?.email, page, deleted]);
 
     return (
         <div>
             {loading && <SimpleLoading />}
-            <QuizTable quizzes={quizzes} />
+            <QuizTable quizzes={quizzes} setDelete={setDelete} />
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </div>
     );

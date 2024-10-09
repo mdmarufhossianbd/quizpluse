@@ -9,21 +9,21 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { IconTrash } from "@tabler/icons-react";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Pagination from "../shared/pagination";
 import SimpleLoading from "../shared/simpleLoading";
+import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
 import PreviewModal from "./manageQuiz/previewModal";
 
 const ManageQuizzes = () => {
-  const { data } = useSession();
+  // const { data } = useSession();
   const [quizzes, setQuizzes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
+  const [deleted, setDelete] = useState(false)
 
   useEffect(() => {
     const fetchQuizzes = async (type) => {
@@ -43,7 +43,7 @@ const ManageQuizzes = () => {
       }
     };
     fetchQuizzes(activeTab);
-  }, [page, activeTab]);
+  }, [page, activeTab, deleted]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -114,7 +114,7 @@ const ManageQuizzes = () => {
                 <Tooltip color="danger" content="Delete Quiz">
                   <span className="text-lg text-danger cursor-pointer active:opacity-50">
                     <button>
-                      <IconTrash stroke={2} />
+                      <DeleteQuiz id={item?._id} quizName={item?.quizName} setDelete={setDelete} />
                     </button>
                   </span>
                 </Tooltip>
@@ -123,7 +123,6 @@ const ManageQuizzes = () => {
           ))}
         </TableBody>
       </Table>
-
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
