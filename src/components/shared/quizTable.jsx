@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/table";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import PreviewModal from "../admin/manageQuiz/previewModal";
+import Link from "next/link";
 
 const QuizTable = ({ quizzes }) => {
   return (
@@ -58,7 +59,10 @@ const QuizTable = ({ quizzes }) => {
               <Tooltip content="Edit">
                 <span className="text-lg cursor-pointer active:opacity-50">
                   <button>
-                    <IconEdit stroke={2} />
+                    <Link href={`/user-dashboard/manage-quiz/edit-quiz/${item?._id}`}>
+                      <IconEdit stroke={2} />
+
+                    </Link>
                   </button>
                 </span>
               </Tooltip>
