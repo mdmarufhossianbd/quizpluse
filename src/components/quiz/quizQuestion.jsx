@@ -65,6 +65,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             userEmail: data?.user?.email,
             earnedPoint: correctCount,
             totalPoint: quiz?.totalQuestions,
+            quizImage : data?.quizImage
         };        
         await axios.post('/api/v1/quiz/result', quizResult)
         .then(res => {
