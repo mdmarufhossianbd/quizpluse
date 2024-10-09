@@ -46,14 +46,14 @@ export async function GET(request) {
         const db = await connectDB();
         const resultCollection = db.collection('results');
         const {searchParams} = new URL(request.url);
-        const userEmail = searchParams.get('email') || '';
+        const email = searchParams.get('email') || '';
+        console.log(email);
         const page = parseInt(searchParams.get('page')) || 1;
         const limit = parseInt(searchParams.get('limit')) || 10;
         const skip = (page -1) * limit
-        const query = {userEmail :userEmail};
         const sort = {_id : -1};
-        const result = await resultCollection.find(query).sort(sort).skip(skip).limit(limit).toArray();
-        const totalParticipatedQuiz = await resultCollection.countDocuments(query)
+        const result = await resultCollection.find({userEmail : email}).sort(sort).skip(skip).limit(limit).toArray();
+        const totalParticipatedQuiz = await resultCollection.countDocuments({userEmail : email})
         return NextResponse.json({
             message : 'Successfully found results',
             status : 200,
