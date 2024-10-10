@@ -13,7 +13,7 @@ const UserProfile = () => {
     const { data, status } = useSession();
     const [currentUser, setCurrentUser] = useState(null);
     const userEmail = data?.user?.email;
-
+    console.log(userEmail);
     useEffect(() => {
         const getUserInfo = async () => {
             await axios.post(`/api/v1/user/user-details`, { email: userEmail })
