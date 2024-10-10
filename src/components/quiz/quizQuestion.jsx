@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Loading from '../shared/loading';
 import QuizNavigation from './quizNavigation';
 import QuizResult from './quizResult';
@@ -10,7 +10,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState(Array(quiz.questions.length).fill(null));
     const [quizCompleted, setQuizCompleted] = useState(false);
-    const [correctCount, setCorrectCount] = useState(0);
+    const [correctCount, setCorrectCount] = useState();
     const [incorrectCount, setIncorrectCount] = useState(0);
     const [loading, setLoading] = useState(false)
     // Handle selecting an answer
@@ -22,19 +22,19 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
 
     // Calculate correct and incorrect answers
     const calculateResult = () => {
-        let correct = 0;
-        let incorrect = 0;
-        quiz.questions.forEach((question, index) => {
-            if (userAnswers[index] !== null) {
-                if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
-                    correct++;
-                } else {
-                    incorrect++;
-                }
-            }
-        });
-        setCorrectCount(correct);
-        setIncorrectCount(incorrect);
+        // let correct = 0;
+        // let incorrect = 0;
+        // quiz.questions.forEach((question, index) => {
+        //     if (userAnswers[index] !== null) {
+        //         if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
+        //             correct++;
+        //         } else {
+        //             incorrect++;
+        //         }
+        //     }
+        // });
+        // setCorrectCount(correct);
+        // setIncorrectCount(incorrect);
     };
 
     // Handle navigation to next question or submitting the quiz
@@ -42,7 +42,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         if (currentQuestionIndex < quiz.questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
-            calculateResult(); // Calculate the result when quiz is completed
+            // calculateResult(); // Calculate the result when quiz is completed
             setQuizCompleted(true);
             setTimeLeft(0); // Stop the timer
         }
@@ -54,19 +54,34 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         }
     };
-
+    
     // Submit result to the database
     const submitResult = async() => {
         setLoading(true)
-        calculateResult()
+        
+        let correct = 0;
+            let incorrect = 0;
+            quiz.questions.forEach((question, index) => {
+                if (userAnswers[index] !== null) {
+                    if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                    }
+                }
+            });
+            setCorrectCount(correct);
+            setIncorrectCount(incorrect);
+
         const quizResult = {
             quizId: quiz?._id,
             quizName: quiz?.quizName,
             userEmail: data?.user?.email,
-            earnedPoint: correctCount,
+            earnedPoint: correct,
             totalPoint: parseInt(quiz?.totalQuestions),
             quizImage : quiz?.quizImage
-        };        
+        };
+        console.log('quizResult =>', quizResult);  
         await axios.post('/api/v1/quiz/result', quizResult)
         .then(res => {
             if(res.data.success)
@@ -75,10 +90,8 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         })
     };
 
-    useEffect(() => {
-        
-    }, [quizCompleted, correctCount]);
-
+    
+    
     // Display result when quiz is completed or time runs out
     if (quizCompleted || timeLimit === 0) {
         return (

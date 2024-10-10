@@ -18,8 +18,8 @@ export async function POST(request) {
                 success : false
             })
         }
-        const totalParticipatedQuiz = await resultCollection.countDocuments(query);
-        const totalCreatedQuizzes = await quizCollection.countDocuments(query);
+        const totalParticipatedQuiz = await resultCollection.countDocuments({userEmail : userEmail});
+        const totalCreatedQuizzes = await quizCollection.countDocuments({quizCreatorEmail : userEmail});
         const totalPoints = await resultCollection.aggregate([
             {
                 $match : {userEmail : userEmail}
