@@ -6,8 +6,33 @@ import Image from "next/image";
 
 import CustomBtn from "@/components/shared/customBtn";
 import Chart from "@/components/ui/chart.jsx";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const ProgressHistory = () => {
+  const {data} = useSession()
+  const userEmail = data?.user?.email
+  const [quizResult, setQuizResult] = useState([])
+  const [reward, setReward] = useState(0)
+  const [totalCompletedQuiz, setTotalCompletedQuiz] = useState(0)
+  
+
+  useEffect(() => {
+    const getResultDetails = async() => {
+      await axios.get(`/api/v1/quiz/user-progress?email=${userEmail}`)
+      .then(res => {
+        console.log(res.data);
+        if(res.data?.success){
+          setReward(res?.data?.reward)
+          setTotalCompletedQuiz(res?.data?.totalCompletedQuiz)
+          setQuizResult(res?.data?.quizResult)
+        }
+      })
+    }
+    getResultDetails()
+  },[userEmail])
+
   const overallAccuracy = ProgressData[0]?.overview?.overallAccuracy;
   const averageScore = ProgressData[0]?.overview?.averageScore;
   const totalQuizzesCompleted =
@@ -36,10 +61,10 @@ const ProgressHistory = () => {
             </div>
             <div className="flex items-center gap-2 justify-evenly m-4 p-2">
               <h1 className="w-32  relative text-[#7556FF]">
-                total Quizzes Completed
+                Total Completed Quiz
               </h1>
-              <Progress value={totalQuizzesCompleted} />
-              <p>{`${totalQuizzesCompleted}%`}</p>
+              <Progress value={totalCompletedQuiz} />
+              <p>{totalCompletedQuiz}</p>
             </div>
           </Card>
         </div>
@@ -48,12 +73,12 @@ const ProgressHistory = () => {
           <h1 className=" md:text-3xl text-2xl">Rewards</h1>
           <Card className="my-4 py-2 relative grid justify-center -top-2 h-[330px] bg-gradient-to-r from-indigo-500">
             <Image src={gift} height={250} width={200} alt="gift" />
-            <CustomBtn title="Reward"></CustomBtn>
+            <CustomBtn title={reward}></CustomBtn>
           </Card>
         </div>
       </section>
       <section>
-        <Chart></Chart>
+        <Chart quizResult={quizResult}></Chart>
       </section>
     </div>
   );
