@@ -1,7 +1,7 @@
 "use client"
 
 import SimpleLoading from '@/components/shared/simpleLoading';
-import { IconPencil, IconPointFilled } from '@tabler/icons-react';
+import { IconPointFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
@@ -86,7 +86,7 @@ const UserProfile = () => {
 
                     {/* Edit Buttons */}
                     <div className='flex flex-col md:flex-row gap-3 mt-6 items-center justify-center'>
-                        <ChangePassword></ChangePassword>
+                        <ChangePassword email={userEmail}></ChangePassword>
                         <UpdateProfile currentUser={currentUser}></UpdateProfile>
                         {/* <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto">
                             <IconPencil stroke={2} /> Update Profile

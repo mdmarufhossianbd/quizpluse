@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -11,18 +9,22 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IconPencil } from "@tabler/icons-react";
+import axios from "axios";
+import { useState } from "react";
+import { toast, Toaster } from "sonner";
 
-const ChangePassword = () => {
+const ChangePassword = (email) => {
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-
+    const [loading, setLoading] = useState(false)
     // Function to validate and handle password change
-    const handlePasswordChange = (e) => {
+    const handlePasswordChange = async(e) => {
         e.preventDefault();
 
         // Clear previous errors
@@ -50,9 +52,26 @@ const ChangePassword = () => {
         }
 
         // password change logic here or API call
-        console.log(currentPassword, newPassword, confirmPassword);
-
-
+        const userEmail = email.email
+        const passwords = {
+            currentPassword, newPassword, userEmail
+        }
+        try {
+            setLoading(true)
+            await axios.put('/api/v1/user/change-password', passwords)
+            .then(res => {
+                if(res.data.success){
+                    toast.success(res.data.message)
+                    setLoading(false)
+                }else{
+                    toast.error('check your current password')
+                    setLoading(false)
+                }
+            })
+        } catch (error) {
+            toast.error(error.message)
+            setLoading(false)
+        }
 
         // Clear form after successful password change
         setCurrentPassword("");
@@ -63,6 +82,7 @@ const ChangePassword = () => {
 
     return (
         <div>
+            <Toaster position="top-right" richColors />
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button
