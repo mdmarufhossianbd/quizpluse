@@ -43,16 +43,6 @@ const UpdateProfile = ({ currentUser }) => {
         setError("");
     };
 
-    // Function to handle profile photo change (URL or File Upload)
-    const handleProfilePhotoChange = (e) => {
-        // If you want to upload image via URL
-        setProfilePhoto(e.target.value);
-
-        // Or if using file input for image upload, handle file selection
-        // const file = e.target.files[0];
-        // Upload the file to a server (e.g., Cloudinary) and get the URL
-        // setProfilePhoto(uploadedImageUrl);
-    };
 
     return (
         <div>
@@ -65,21 +55,22 @@ const UpdateProfile = ({ currentUser }) => {
                         <IconPencil stroke={2} /> Update Profile
                     </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="w-4/5 md:w-3/5 rounded-xl">
+                <AlertDialogContent className="w-4/5 md:w-3/5 rounded-xl max-h-screen overflow-y-scroll" >
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Update your Profile</AlertDialogTitle>
+                        <AlertDialogTitle className="text-center mb-2">Update your Profile</AlertDialogTitle>
+                        <hr className="border-[#5c00969f]" />
                         <AlertDialogDescription>
                             <form onSubmit={handleProfileUpdate}>
                                 <div className="">
                                     {/* Name Field */}
-                                    <div className="flex flex-row mb-2 items-center gap-2">
-                                        <Label htmlFor="name" className="w-1/3 text-black">
+                                    <div className="flex flex-col md:flex-row items-center gap-2 my-4 ">
+                                        <Label htmlFor="name" className="w-full md:w-1/3 text-black text-start">
                                             Full Name
                                         </Label>
                                         <Input
                                             id="name"
                                             type="text"
-                                            className="w-2/3"
+                                            className="w-full md:w-2/3"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             required
@@ -89,10 +80,10 @@ const UpdateProfile = ({ currentUser }) => {
                                     {/* Profile Photo Field (URL input) */}
 
                                     <div className="flex flex-col md:flex-row gap-2">
-                                        <Label htmlFor="photo" className="w-1/3 text-black">
+                                        <Label htmlFor="photo" className="w-full md:w-1/3 text-black text-start mt-2">
                                             Update Photo
                                         </Label>
-                                        <div className="w-2/3">
+                                        <div className="w-full md:w-2/3">
                                             <ImageUpload boxHeight="200px" id="photo" setFormData={setProfilePhoto} />
                                         </div>
                                     </div>
@@ -102,7 +93,7 @@ const UpdateProfile = ({ currentUser }) => {
                                         <div className="">
                                             <img
                                                 src={profilePhoto}
-                                                alt="Profile Preview"
+                                                alt=""
                                                 className="h-24 w-24 rounded-full object-cover"
                                             />
                                         </div>
