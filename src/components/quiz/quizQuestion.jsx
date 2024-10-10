@@ -64,13 +64,12 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             quizName: quiz?.quizName,
             userEmail: data?.user?.email,
             earnedPoint: correctCount,
-            totalPoint: quiz?.totalQuestions,
-        };
-        console.log(quizResult);
-        
+            totalPoint: parseInt(quiz?.totalQuestions),
+            quizImage : quiz?.quizImage
+        };        
         await axios.post('/api/v1/quiz/result', quizResult)
         .then(res => {
-            console.log(res.data);
+            if(res.data.success)
             setTimeLeft(0)
             setLoading(false)
         })
@@ -91,6 +90,8 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             />
         );
     }
+
+    // loader for showing result
     if(loading){
         return <Loading />
     }

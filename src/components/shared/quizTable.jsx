@@ -7,10 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { IconEdit } from "@tabler/icons-react";
 import PreviewModal from "../admin/manageQuiz/previewModal";
+import Link from "next/link";
+import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
 
-const QuizTable = ({ quizzes }) => {
+const QuizTable = ({ quizzes, setDelete }) => {
   return (
     <Table>
       <TableHeader>
@@ -58,15 +60,16 @@ const QuizTable = ({ quizzes }) => {
               <Tooltip content="Edit">
                 <span className="text-lg cursor-pointer active:opacity-50">
                   <button>
-                    <IconEdit stroke={2} />
+                    <Link href={`/user-dashboard/manage-quiz/edit-quiz/${item?._id}`}>
+                      <IconEdit stroke={2} />
+
+                    </Link>
                   </button>
                 </span>
               </Tooltip>
               <Tooltip color="danger" content="Delete Quiz">
                 <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <button>
-                    <IconTrash stroke={2} />
-                  </button>
+                  <DeleteQuiz id={item?._id} setDelete={setDelete} quizName={item?.quizName} />
                 </span>
               </Tooltip>
             </TableCell>

@@ -7,8 +7,8 @@ import { toast } from 'sonner';
 import uploading from '../../../public/assets/picture_uploadig.gif';
 import { Input } from "../ui/input";
 
-const ImageUpload = ({ setFormData }) => {
-    const [imageUrl, setImageUrl] = useState();
+const ImageUpload = ({ setFormData, quizBanner }) => {
+    const [imageUrl, setImageUrl] = useState(quizBanner);
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false);
     const cloudinaryCloudName = process.env.NEXT_PUBLIC_CLOUDINARY_COLUD_NAME;
@@ -47,7 +47,7 @@ const ImageUpload = ({ setFormData }) => {
                         </button>
                     </div> :
                     <div className='h-[350px] w-full rounded-md bg-[#f5f5f5] flex items-center cursor-pointer'>
-                        <p className="text-center w-full font-semibold">Add Quiz Banner</p>
+                        <p className="text-center w-full font-semibold">Update Quiz Banner</p>
                     </div>
             }
             <Input accept="image/*" type="file" onChange={handleimageUpload} id="imageUrl" className="absolute top-1/2 opacity-0" />

@@ -73,8 +73,8 @@ export async function DELETE(request) {
     const db = await connectDB()
     const quizCollection = db.collection('quizes')
     try {
-        const data = await request.json()
-        const query = {_id : new ObjectId(data._id)}
+        const data = await request.json();
+        const query = {_id : new ObjectId(data.id)}
         const result = await quizCollection.deleteOne(query);
         return NextResponse.json({
             message : 'Requested quiz deleted done',
@@ -94,7 +94,8 @@ export async function PUT(request) {
     const quizCollection = db.collection('quizes')
     try {
         const data = await request.json();
-        const query = {_id : new ObjectId(data._id)};
+        console.log(data);
+        const query = {_id : new ObjectId(data.id)};
         const oparation = {
             $set : {
                 quizName: data.quizName,
@@ -103,7 +104,7 @@ export async function PUT(request) {
                 quizImage: data.quizImage,
                 quizCreatorEmail: data.quizCreatorEmail,
                 quizCreatorName: data.quizCreatorName,
-                quizDuration : parseInt(data.totalDuration),
+                quizDuration : parseInt(data.quizDuration),
                 totalQuestions: parseInt(data.totalQuestions),
                 questions : data.questions.map((q) => ({
                     question : q?.question,
