@@ -8,7 +8,7 @@ export async function POST(request) {
     const quizCollection = db.collection('quizes');
     try {
         const data = await request.json();
-        const userEmail = data.email
+        const userEmail = data.email;
         const query = {email : userEmail}
         const result = await userCollection.findOne(query)
         if(!result){
@@ -31,6 +31,17 @@ export async function POST(request) {
                 }
             }
         ]).toArray();
+        if(totalPoints.length === 0){
+            return NextResponse.json({
+                message : 'user data',
+                success : true,
+                status : 200,
+                result,
+                totalParticipatedQuiz,
+                totalCreatedQuizzes,
+                totalEarnedPoints : 0
+            })
+        }
         return NextResponse.json({
             message : 'user data',
             success : true,

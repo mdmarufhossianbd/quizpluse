@@ -8,9 +8,10 @@ export async function PUT(request) {
     const userCollection = db.collection('users')
     try {
         const data = await request.json()
-        const password = data.password
+        console.log(data);
+        const password = data.currentPassword
         const hashNewPassWord = bcrypt.hashSync(data.newPassword, 14)
-        const query = {email : data.email}
+        const query = {email : data.userEmail}
         const existingUser = await userCollection.findOne(query);
         if(!existingUser){
             return NextResponse.json({
