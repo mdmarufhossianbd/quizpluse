@@ -274,7 +274,7 @@ const CreateQuiz = () => {
                                 required
                             />
                         </div>
-                        <ImageUpload setFormData={setFormData} />
+                        <ImageUpload boxHeight="350px" setFormData={setFormData} />
 
                         <div className='flex justify-between my-5'>
                             <div>

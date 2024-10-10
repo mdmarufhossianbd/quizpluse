@@ -67,7 +67,7 @@ const ChangePassword = () => {
                 <AlertDialogTrigger asChild>
                     <Button
                         variant="outline"
-                        className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white hover:text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto"
+                        className="bg-[#5C0096] hover:bg-[#500081] px-4 text-white hover:text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto"
                     >
                         <IconPencil stroke={2} /> Change Password
                     </Button>
