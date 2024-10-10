@@ -74,7 +74,8 @@ const ChangePassword = () => {
                 </AlertDialogTrigger>
                 <AlertDialogContent className="w-4/5 md:w-3/5 rounded-xl">
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Change your Password</AlertDialogTitle>
+                        <AlertDialogTitle className="text-center mb-2">Change your Password</AlertDialogTitle>
+                        <hr className="border-[#5c00969f]" />
                         <AlertDialogDescription>
                             <form onSubmit={handlePasswordChange}>
                                 <div className="grid gap-4 py-4">

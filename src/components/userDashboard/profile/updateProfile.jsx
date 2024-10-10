@@ -42,7 +42,7 @@ const UpdateProfile = ({ currentUser }) => {
         // Clear error after successful update
         setError("");
     };
-
+    console.log(currentUser)
 
     return (
         <div>
@@ -84,7 +84,7 @@ const UpdateProfile = ({ currentUser }) => {
                                             Update Photo
                                         </Label>
                                         <div className="w-full md:w-2/3">
-                                            <ImageUpload boxHeight="200px" id="photo" setFormData={setProfilePhoto} />
+                                            <ImageUpload boxHeight="200px" id="photo" bannerTitle="Update Profile Image" setFormData={setProfilePhoto} />
                                         </div>
                                     </div>
 

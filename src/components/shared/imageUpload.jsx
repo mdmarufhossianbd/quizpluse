@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import uploading from '../../../public/assets/picture_uploadig.gif';
 import { Input } from "../ui/input";
 
-const ImageUpload = ({ setFormData, boxHeight, quizBanner }) => {
+const ImageUpload = ({ setFormData, boxHeight, quizBanner, bannerTitle }) => {
     const [imageUrl, setImageUrl] = useState(quizBanner);
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ const ImageUpload = ({ setFormData, boxHeight, quizBanner }) => {
                         </button>
                     </div> :
                     <div className={`h-[${boxHeight}] w-full rounded-md bg-[#f5f5f5] flex items-center cursor-pointer`}>
-                        <p className="text-center w-full font-semibold">Update Quiz Banner</p>
+                        <p className="text-center w-full font-semibold">{bannerTitle}</p>
                     </div>
             }
             <Input accept="image/*" type="file" onChange={handleimageUpload} id="imageUrl" className="absolute top-1/2 opacity-0" />
