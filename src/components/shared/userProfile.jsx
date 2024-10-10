@@ -13,13 +13,19 @@ const UserProfile = () => {
     const { data, status } = useSession();
     const [currentUser, setCurrentUser] = useState(null);
     const userEmail = data?.user?.email;
-    console.log(userEmail);
+    const [totalCreatedQuizzes, setTotalCreatedQuizzes] = useState(0)
+    const [totalParticipatedQuiz, setTotalParticipatedQuiz] = useState(0)
+    const [totalEarnedPoints, setTotalEarnedPoints] = useState(0)
+
     useEffect(() => {
         const getUserInfo = async () => {
             await axios.post(`/api/v1/user/user-details`, { email: userEmail })
                 .then(res => {
                     console.log(res?.data);
                     setCurrentUser(res?.data?.result)
+                    setTotalCreatedQuizzes(res?.data?.totalCreatedQuizzes)
+                    setTotalParticipatedQuiz(res.data?.totalParticipatedQuiz)
+                    setTotalEarnedPoints(res.data?.totalEarnedPoints)
                 })
         }
         getUserInfo()
@@ -71,16 +77,16 @@ const UserProfile = () => {
                     {/* Stats Section */}
                     <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-gray-600 shadow p-4 rounded-xl">
                         <div className="text-center">
-                            <span className="block text-lg font-semibold text-[#5C0096]">{currentUser?.createdQuizes.length}</span>
+                            <span className="block text-lg font-semibold text-[#5C0096]">{totalCreatedQuizzes}</span>
                             <span className="text-xs md:text-sm">Created Quizzes</span>
                         </div>
                         <div className="text-center">
-                            <span className="block text-lg font-semibold text-[#5C0096]">{currentUser?.participatedQuizes.length}</span>
+                            <span className="block text-lg font-semibold text-[#5C0096]">{totalParticipatedQuiz}</span>
                             <span className="text-xs md:text-sm">Participated Quizzes</span>
                         </div>
                         <div className="text-center">
-                            <span className="block text-lg font-semibold text-[#5C0096]">{currentUser?.results.length}</span>
-                            <span className="text-xs md:text-sm">Wins</span>
+                            <span className="block text-lg font-semibold text-[#5C0096]">{totalEarnedPoints}</span>
+                            <span className="text-xs md:text-sm">Earn Points</span>
                         </div>
                     </div>
 
@@ -88,9 +94,6 @@ const UserProfile = () => {
                     <div className='flex flex-col md:flex-row gap-3 mt-6 items-center justify-center'>
                         <ChangePassword email={userEmail}></ChangePassword>
                         <UpdateProfile currentUser={currentUser}></UpdateProfile>
-                        {/* <button onClick={handleEdit} className="bg-[#5C0096] hover:bg-[#500081] px-4 py-2 text-white flex items-center justify-center gap-2 rounded-full transition-colors w-full md:w-auto">
-                            <IconPencil stroke={2} /> Update Profile
-                        </button> */}
                     </div>
                 </div>
             </div>
