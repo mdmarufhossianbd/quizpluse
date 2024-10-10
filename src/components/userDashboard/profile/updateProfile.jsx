@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { IconPencil } from "@tabler/icons-react";
 import ImageUpload from "@/components/shared/imageUpload";
+import { useSession } from "next-auth/react";
 
 const UpdateProfile = ({ currentUser }) => {
     // State for profile fields
@@ -42,7 +43,6 @@ const UpdateProfile = ({ currentUser }) => {
         // Clear error after successful update
         setError("");
     };
-    console.log(currentUser)
 
     return (
         <div>
@@ -79,25 +79,29 @@ const UpdateProfile = ({ currentUser }) => {
 
                                     {/* Profile Photo Field (URL input) */}
 
-                                    <div className="flex flex-col md:flex-row gap-2">
+                                    <div className="flex flex-col gap-2">
                                         <Label htmlFor="photo" className="w-full md:w-1/3 text-black text-start mt-2">
                                             Update Photo
                                         </Label>
-                                        <div className="w-full md:w-2/3">
-                                            <ImageUpload boxHeight="200px" id="photo" bannerTitle="Update Profile Image" setFormData={setProfilePhoto} />
+                                        <div className="flex flex-col md:flex-row items-center gap-2">
+                                            <div className="w-full md:w-1/2">
+                                                {/* Optional: Profile Photo preview */}
+                                                <div className="flex justify-center">
+                                                    <img
+                                                        src={currentUser?.result?.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu2RIsrYrlbEcNP7xnxLQ2gYiylcUqzsrVSwKR1wrvLV4x06yFGVbnYB7rnbBE2gRxxjU&usqp=CAU'}
+                                                        alt="Profile Photo"
+                                                        className="h-24 w-24 rounded-full object-cover"
+                                                    />
+                                                </div>
+
+                                            </div>
+                                            <div className="w-full md:w-1/2">
+                                                <ImageUpload boxHeight="200px" id="photo" bannerTitle="Update Profile Photo" setFormData={setProfilePhoto} />
+                                            </div>
                                         </div>
                                     </div>
 
-                                    {/* Optional: Profile Photo preview */}
-                                    {profilePhoto && (
-                                        <div className="">
-                                            <img
-                                                src={profilePhoto}
-                                                alt=""
-                                                className="h-24 w-24 rounded-full object-cover"
-                                            />
-                                        </div>
-                                    )}
+
                                 </div>
 
                                 {/* Error Message */}
