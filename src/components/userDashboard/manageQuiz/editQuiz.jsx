@@ -1,20 +1,22 @@
 "use client";
 
 import ImageUpload from '@/components/shared/imageUpload';
+import SimpleLoading from '@/components/shared/simpleLoading';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import QuizCategory from '../addQuiz/quizCategory';
 import PreviewQuiz from './previewQuiz';
-import SimpleLoading from '@/components/shared/simpleLoading';
 
 const EditQuiz = ({ quiz }) => {
     const { data, status } = useSession()
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
+        id : '',
         quizName: '',
         quizCategory: '',
         totalQuestions: '',
@@ -25,12 +27,14 @@ const EditQuiz = ({ quiz }) => {
         quizCreatorName: ""
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const router = useRouter()
 
     const totalSteps = 3;
 
     useEffect(() => {
         if (quiz) {
             setFormData({
+                id : quiz?._id,
                 quizName: quiz?.quizName || '',
                 quizCategory: quiz?.quizCategory || '',
                 totalQuestions: quiz?.totalQuestions || '',
@@ -59,10 +63,7 @@ const EditQuiz = ({ quiz }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-
-        const updatedValue = name === "quizDuration" ? parseInt(value, 10) : value;
-
-        setFormData({ ...formData, [name]: updatedValue });
+        setFormData({ ...formData, [name]: value });
     };
 
 
@@ -100,23 +101,22 @@ const EditQuiz = ({ quiz }) => {
     const handleSubmitForm = async (e) => {
         setLoading(true)
         e.preventDefault();
-        console.log(formData);
-        // try {
-        //     await axios.post('/api/v1/quiz', formData)
-        //         .then(res => {
-        //             if (res.data.result.acknowledged) {
-        //                 toast.success(res.data.message)
-        //                 setLoading(false)
-        //             } else {
-        //                 toast.error(res.data.message)
-        //                 setLoading(false)
-        //             }
-        //         })
-        // } catch (error) {
-        //     console.log(error);
-        //     setLoading(false)
-        // }
-
+        try {
+            await axios.put('/api/v1/quiz', formData)
+                .then(res => {
+                    if (res.data.result.acknowledged) {
+                        toast.success(res.data.message)
+                        setLoading(false)
+                        router.push('/user-dashboard/manage-quiz')
+                    } else {
+                        toast.error(res.data.message)
+                        setLoading(false)
+                    }
+                })
+        } catch (error) {
+            toast.error(error.message)
+            setLoading(false)
+        }
     }
 
     const openModal = () => {
@@ -155,7 +155,6 @@ const EditQuiz = ({ quiz }) => {
                             <input
                                 type="text"
                                 name="quizName"
-                                // value={formData.quizName}
                                 defaultValue={quiz?.quizName}
                                 onChange={handleInputChange}
                                 className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none"
@@ -269,7 +268,7 @@ const EditQuiz = ({ quiz }) => {
                                 required
                             />
                         </div>
-                        <ImageUpload setFormData={setFormData} />
+                        <ImageUpload setFormData={setFormData} quizBanner={quiz?.quizImage} />
 
                         <div className='flex justify-between my-5'>
                             <div>
@@ -318,7 +317,6 @@ const EditQuiz = ({ quiz }) => {
                     </div>
                 )}
             </form>
-
         </div>
     );
 };

@@ -16,11 +16,11 @@ const ProgressHistory = () => {
   const avrageScoreValue = parseFloat(averageScore);
   return (
     <div>
-      <section className="flex">
+      <section className="flex lg:flex-row flex-col">
         {/* progess */}
-        <div className="w-[50%]">
+        <div className="lg:w-[50%] w-full">
           <h1 className=" md:text-3xl text-2xl">Overall Progess</h1>
-          <Card className=" grid m-2 p-2 ">
+          <Card className="grid m-2 p-2 ">
             {/* <Captions title="Overall progess"></Captions> */}
             <div className="flex items-center gap-2 justify-evenly m-4 p-2">
               <h1 className="w-32  relative text-[#7556FF]">
@@ -43,16 +43,16 @@ const ProgressHistory = () => {
             </div>
           </Card>
         </div>
-        <div className="grid w-[50%] items-start">
+        <div className="grid lg:w-[50%] w-full items-start">
           {/* <Captions title="Rewards"></Captions> */}
           <h1 className=" md:text-3xl text-2xl">Rewards</h1>
           <Card className="my-4 py-2 relative grid justify-center -top-2 h-[330px] bg-gradient-to-r from-indigo-500">
-            <Image src={gift} height={250} width={200} alt="gift"/>
+            <Image src={gift} height={250} width={200} alt="gift" />
             <CustomBtn title="Reward"></CustomBtn>
           </Card>
         </div>
       </section>
-      <section> 
+      <section>
         <Chart></Chart>
       </section>
     </div>
