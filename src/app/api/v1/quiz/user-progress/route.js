@@ -21,6 +21,16 @@ export async function GET(request) {
         }
     ]).toArray();
     const totalCompletedQuiz = await resultCollection.countDocuments(query)
+    if(totalPoints.length === 0){
+        return NextResponse.json({
+            message : 'Successfully get details',
+            status : 200,
+            success : true,
+            quizResult,
+            reward : 0,
+            totalCompletedQuiz,
+        })
+    }
     return NextResponse.json({
         message : 'Successfully get details',
         status : 200,
