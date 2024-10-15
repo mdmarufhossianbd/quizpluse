@@ -17,6 +17,8 @@
 /out/
 *.next
 
+#text
+*.txt
 # production
 /build
 
