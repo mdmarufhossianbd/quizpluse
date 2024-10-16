@@ -33,6 +33,10 @@ const Header = () => {
       title: "Contact",
       path: "/contact",
     },
+    {
+      title: 'Top scrorars',
+      path: "ranking"
+    }
   ];
 
   return (
