@@ -66,7 +66,7 @@ const UpgradePlans = () => {
   ]
   return (
     <>
-      <div className='grid md:grid-cols-3'>
+      <div className='grid md:grid-cols-3 gap-2'>
         {
           plans.map((plan, index) => {
             return (<PlanCard plan={plan} key={index} />);
