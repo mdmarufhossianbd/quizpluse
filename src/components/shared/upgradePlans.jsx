@@ -6,9 +6,9 @@ const UpgradePlans = () => {
       name: 'basic',
       price: 0,
       title: 'Basic',
-      expiryDate: 0,
-      duration: 'free',
-      description: '',
+      expiryDate: Infinity,
+      duration: 'Unlimited',
+      description: 'Access to a limited selection of quizzes with standard features. Ideal for casual users looking to improve their knowledge at a comfortable pace.',
       features: [
         'Access to limited quizzes(e.g., 10 quizzes per month)',
         'Basic analytics for quiz performance(e.g., score and completion time)',
@@ -28,7 +28,7 @@ const UpgradePlans = () => {
       title: 'Starter',
       expiryDate: 30,
       duration: 'monthly',
-      description: '',
+      description: 'Unlock more quizzes and advanced features, including timed quizzes and progress tracking. Perfect for dedicated learners seeking deeper engagement.',
       features: [
         'Access to a larger number of quizzes (e.g., 50 quizzes per month)',
         'Advanced analytics (e.g., detailed quiz breakdown)',
@@ -49,7 +49,7 @@ const UpgradePlans = () => {
       title: 'Pro',
       expiryDate: 365,
       duration: 'yearly',
-      description: '',
+      description: 'Enjoy unlimited access to all quizzes, premium features, and detailed analytics. Tailored for professionals or competitive learners aiming to master their skills.',
       features: [
         'Unlimited access to all quizzes',
         'Full advanced analytics with performance insights',
@@ -66,7 +66,7 @@ const UpgradePlans = () => {
   ]
   return (
     <>
-      <div className='grid md:grid-cols-3 gap-2'>
+      <div className='grid md:grid-cols-2 xl:grid-cols-3 gap-2'>
         {
           plans.map((plan, index) => {
             return (<PlanCard plan={plan} key={index} />);
