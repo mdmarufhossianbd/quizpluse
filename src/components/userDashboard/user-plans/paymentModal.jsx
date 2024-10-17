@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { IconXboxXFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { toast, Toaster } from 'sonner';
 
@@ -16,10 +17,10 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     const [error, setError] = useState(null);
     const { data } = useSession();
     const [clientSecret, setClientSecret] = useState();
-    const [transactionId, setTransactionId] = useState();
+    const router = useRouter()
     const price = plan.price;
     const email = data?.user?.email;
-
+    
     useEffect(() => {
         axios.post('/api/v1/payment/make-payment', { price })
             .then(res => {
@@ -69,9 +70,8 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
                     setLoading(false);
                     setError(error.message);                    
                 } else {
-                    console.log('payment Intent =>', paymentIntent);
-                    if (paymentIntent.status === 'succeeded') {
-                        setTransactionId(paymentIntent.id)                        
+                    // save details in db
+                    if (paymentIntent.status === 'succeeded') {                  
                         const paymentInfo = {
                             ransactionId: paymentIntent.id,
                             price,
@@ -87,17 +87,11 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
                                 toast.success('Payment Success')
                                 setLoading(false);
                                 onClose(); // Close the modal after payment
-                                // navigate to thank you page
+                                router.push('/user-dashboard/thank-you')
                             }
                         })
-                        /* todos :
-                        1. save ransaction in db done
-                        2. set user subscription type
-                        3. navigate to thank you page and download invoice   
-                        */
                     }
                 }
-                
             }
         } catch (err) {
             setError(err.message);
