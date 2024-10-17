@@ -18,8 +18,10 @@ const ThankYou = () => {
 
 
 
-    const handleInvoiceDownload = () => {
-        router.push(`/invoice/${paymentDetails?.transactionId}`);
+    const handleGenerateDownload = () => {
+        if (paymentDetails) {
+            router.push(`/user-dashboard/invoice?paymentDetails=${encodeURIComponent(JSON.stringify(paymentDetails))}`);
+        }
     };
 
 
@@ -48,7 +50,7 @@ const ThankYou = () => {
                 <p className="text-gray-600">Payment Status: {paymentDetails.status}</p>
 
                 <button
-                    onClick={handleInvoiceDownload}
+                    onClick={handleGenerateDownload}
                     className="mt-6 w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-500"
                 >
                     Generate Invoice
