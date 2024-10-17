@@ -21,7 +21,7 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     const email = data?.user?.email;
 
     useEffect(() => {
-        axios.post('/api/v1/make-payment', { price })
+        axios.post('/api/v1/payment/make-payment', { price })
             .then(res => {
                 if (res.data.success) {
                     setClientSecret(res.data.clientSecret)
@@ -71,22 +71,38 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
                 } else {
                     console.log('payment Intent =>', paymentIntent);
                     if (paymentIntent.status === 'succeeded') {
-                        setTransactionId(paymentIntent.id)
+                        setTransactionId(paymentIntent.id)                        
+                        const paymentInfo = {
+                            ransactionId: paymentIntent.id,
+                            price,
+                            packageName: plan.name,
+                            packageTitle: plan.title,
+                            name : data?.user?.name,
+                            email : data?.user?.email
+                        }
+                        axios.post('/api/v1/payment/store-payment-info', paymentInfo)
+                        .then(res => {
+                            console.log(res.data);
+                            if(res.data.success){
+                                toast.success('Payment Success')
+                                setLoading(false);
+                                onClose(); // Close the modal after payment
+                                // navigate to thank you page
+                            }
+                        })
                         /* todos :
-                        1. save ransaction in db
+                        1. save ransaction in db done
                         2. set user subscription type
                         3. navigate to thank you page and download invoice   
                         */
                     }
                 }
-                setLoading(false);
-                onClose(); // Close the modal after payment
+                
             }
         } catch (err) {
             setError(err.message);
             setLoading(false);
         }
-
     };
 
     if (!isOpen) return null;

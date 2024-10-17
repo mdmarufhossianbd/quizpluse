@@ -5,7 +5,7 @@ const stripe = new Stripe(stripeSecrectKey);
 
 export async function POST(request) {
     try {
-        const data = await request.json();
+        const data = await request.json();        
         const amount = parseInt(data.price * 100);
         const paymentIntent = await stripe.paymentIntents.create({
             amount : amount,
