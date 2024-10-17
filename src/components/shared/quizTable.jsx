@@ -14,6 +14,7 @@ import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
 import ToggleFeature from "./toggleFeature";
 
 const QuizTable = ({ quizzes, setDelete }) => {
+  console.log(quizzes)
   return (
     <Table>
       <TableHeader>
