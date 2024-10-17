@@ -37,7 +37,7 @@ export async function GET(request) {
     const paymentCollection = db.collection('payments')
     try {
         const data = await request.json();
-        const query = {email : data.email};
+        const query = {transactionId : data.transactionId};
         const result = await paymentCollection.findOne(query)
         return NextResponse.json({
             message : 'Payment successfully',

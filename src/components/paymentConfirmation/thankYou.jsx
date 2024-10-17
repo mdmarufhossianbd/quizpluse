@@ -7,11 +7,6 @@ const ThankYou = ({ paymentDetails }) => {
     const router = useRouter();
 
 
-    // useEffect(() => {
-    //     if (!router.isReady)
-    //         return; // Ensuring that the router is ready before usage
-    // }, [router]);
-
     const handleInvoiceDownload = () => {
         router.push(`/invoice/${"paymentDetails.transactionId"}`);
     };

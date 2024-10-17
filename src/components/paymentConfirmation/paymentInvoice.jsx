@@ -87,7 +87,7 @@
 
 import React, { useRef } from "react";
 import { Button } from "@nextui-org/react";
-import { Pdf } from "react-to-pdf";
+import ReactToPdf from 'react-to-pdf';
 
 // Import react-to-pdf
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -174,13 +174,13 @@ const PaymentInvoice = ({ paymentDetails }) => {
 
             {/* Generate PDF Button */}
             <div className="text-center mt-8">
-                <Pdf targetRef={pdfRef} filename="invoice.pdf">
+                <ReactToPdf targetRef={pdfRef} filename="invoice.pdf">
                     {({ toPdf }) => (
                         <Button onPress={toPdf} shadow color="primary" auto>
                             Download Invoice PDF
                         </Button>
                     )}
-                </Pdf>
+                </ReactToPdf>
             </div>
         </div>
     );
