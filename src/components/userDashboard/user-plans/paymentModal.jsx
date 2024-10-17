@@ -20,7 +20,7 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     const router = useRouter()
     const price = plan.price;
     const email = data?.user?.email;
-    
+
     useEffect(() => {
         axios.post('/api/v1/payment/make-payment', { price })
             .then(res => {
@@ -47,7 +47,7 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
         }
         try {
             // create payment method
-            const { error,  } = await stripe.createPaymentMethod({
+            const { error, } = await stripe.createPaymentMethod({
                 type: 'card',
                 card: cardElement,
             });
@@ -68,28 +68,28 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
                 })
                 if (error) {
                     setLoading(false);
-                    setError(error.message);                    
+                    setError(error.message);
                 } else {
                     // save details in db
-                    if (paymentIntent.status === 'succeeded') {                  
+                    if (paymentIntent.status === 'succeeded') {
                         const paymentInfo = {
-                            ransactionId: paymentIntent.id,
+                            transactionId: paymentIntent.id,
                             price,
                             packageName: plan.name,
                             packageTitle: plan.title,
-                            name : data?.user?.name,
-                            email : data?.user?.email
+                            name: data?.user?.name,
+                            email: data?.user?.email
                         }
                         axios.post('/api/v1/payment/store-payment-info', paymentInfo)
-                        .then(res => {
-                            console.log(res.data);
-                            if(res.data.success){
-                                toast.success('Payment Success')
-                                setLoading(false);
-                                onClose(); // Close the modal after payment
-                                router.push('/user-dashboard/thank-you')
-                            }
-                        })
+                            .then(res => {
+                                console.log(res.data);
+                                if (res.data.success) {
+                                    toast.success('Payment Success')
+                                    setLoading(false);
+                                    onClose(); // Close the modal after payment
+                                    router.push('/user-dashboard/thank-you')
+                                }
+                            })
                     }
                 }
             }
@@ -104,6 +104,7 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     return (
         <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-80 z-50">
             <Toaster position='top-center' richColors />
+
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
                 <button onClick={onClose} className="absolute top-0 right-0 md:right-5 mt-4 text-white  p-1 px-2">
                     <IconXboxXFilled className='text-red-600' />
