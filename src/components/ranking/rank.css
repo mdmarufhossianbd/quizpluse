@@ -1,0 +1,57 @@
+/* From Uiverse.io by Pradeepsaranbishnoi */ 
+.wallet {
+    --bg-color: #06030b;
+    --bg-color-light: #f0e7ff;
+    --text-color-hover: #fff;
+    --box-shadow-color: rgba(55, 21, 111, 0.48);
+  }
+  
+  .card {
+    width: 280px;
+    height: 340px;
+    background: #c6bbf9;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 14px 26px rgba(208, 12, 12, 0.04);
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px) scale(1.005) translateZ(0);
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+      0 24px 46px var(--box-shadow-color);
+      background: #8077f4;
+  }
+  
+  .card:hover .overlay {
+    transform: scale(4) translateZ(0);
+    background: #E7E7E7 ;
+    transition-duration: 2s;
+  }
+  
+  .card .content {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0);
+    transition: 0.5s;
+  }
+
+  .card:hover .content {
+    transform: scale(1);
+    bottom: 25px;
+    background: #E7E7E7;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  
