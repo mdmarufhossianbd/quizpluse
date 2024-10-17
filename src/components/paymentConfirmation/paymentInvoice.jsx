@@ -1,12 +1,10 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react";
-import { Button } from "@nextui-org/react";
-import ReactToPdf from 'react-to-pdf';
 import { useSearchParams } from 'next/navigation';
 import { useReactToPrint } from "react-to-print";
 import generatePDF from 'react-to-pdf';
-
+import { FiDownload, FiPrinter } from 'react-icons/fi'; // Importing icons
 
 const PaymentInvoice = () => {
     const contentRef = useRef(null);
@@ -22,7 +20,6 @@ const PaymentInvoice = () => {
         }
     }, [searchParams]);
 
-
     if (!paymentDetails) {
         return (
             <div className="min-h-screen flex justify-center items-center">
@@ -31,14 +28,13 @@ const PaymentInvoice = () => {
         );
     }
 
-
     return (
         <div>
             {/* Invoice section */}
-            <div className="max-w-4xl mx-auto p-10 bg-white shadow-2xl rounded-lg my-12 border border-gray-200" ref={contentRef}>
+            <div className="max-w-4xl mx-auto p-10 bg-white shadow-xl rounded-lg my-12 border border-gray-200" ref={contentRef}>
                 {/* Invoice Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-extrabold text-purple-700 tracking-wide underline mb-4">Invoice</h1>
+                    <h1 className="text-4xl font-extrabold text-[#5C0096] tracking-wide underline mb-4">Invoice</h1>
                     <p className="text-sm text-green-700 font-semibold">Transaction ID: {paymentDetails.transactionId}</p>
                 </div>
 
@@ -92,7 +88,6 @@ const PaymentInvoice = () => {
                     <div className="flex justify-between text-gray-700 mt-1">
                         <p className="font-medium">Expiry Date:</p>
                         <p>{paymentDetails.cardDetails.exp_month}/{paymentDetails.cardDetails.exp_year}</p>
-
                     </div>
                 </div>
 
@@ -106,22 +101,28 @@ const PaymentInvoice = () => {
                         <span className="text-purple-600 font-semibold"> support@quizepulse.com</span>.
                     </p>
                 </div>
-
-
             </div>
-            <div>
+
+            <div className="flex justify-center space-x-4 mt-8">
                 {/* Generate PDF Button */}
-                <div>
-                    <button onClick={() => generatePDF(contentRef, { filename: `invoice_${paymentDetails?.transactionId}.pdf` })}>Download PDF</button>
+                <button
+                    className="bg-[#5C0096] hover:bg-[#4a0078] text-white py-2 px-6 rounded-lg font-semibold shadow-lg flex items-center space-x-2 transition duration-300 ease-in-out"
+                    onClick={() => generatePDF(contentRef, { filename: `invoice_${paymentDetails?.transactionId}.pdf` })}
+                >
+                    <FiDownload className="text-xl" /> {/* Download icon */}
+                    <span>Download PDF</span>
+                </button>
 
-                </div>
                 {/* Print Invoice Button */}
-                <div className="text-center mt-8">
-                    <button onClick={reactToPrintFn}>Print</button>
-                </div>
+                <button
+                    className="bg-white hover:bg-[#5C0096] text-[#5C0096] hover:text-white border-2 border-[#5C0096] py-2 px-6 rounded-lg font-semibold shadow-lg flex items-center space-x-2 transition duration-300 ease-in-out"
+                    onClick={reactToPrintFn}
+                >
+                    <FiPrinter className="text-xl" /> {/* Print icon */}
+                    <span>Print</span>
+                </button>
             </div>
-
-        </div >
+        </div>
     );
 };
 
