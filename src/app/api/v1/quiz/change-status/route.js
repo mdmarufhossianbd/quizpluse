@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function PUT(request) {
     const db = await connectDB();
-    const quizCollection = db.collection('quizes')
+    const quizCollection = db.collection('quizes');
     try {
         const data = await request.json()
         const query = {_id : new ObjectId(data._id)}

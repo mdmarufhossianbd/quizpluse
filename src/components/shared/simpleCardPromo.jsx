@@ -9,7 +9,7 @@ const SimpleCardPromo = () => {
         <h1 className='font-semibold text-xl text-white py-2'>Upgrade to Premium</h1>
         <p className='font-medium text-gray-200'>Go pro to unlock more features</p>
       </div>
-      <Link href={'/'}>
+      <Link href={'/user-dashboard/plans'}>
         <button className='bg-white px-5 py-2 w-full rounded-md bottom-0 text-[#7556FF] font-bold mb-1'>Upgrade</button>
       </Link>
     </div>

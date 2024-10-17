@@ -4,9 +4,12 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
     const db = await connectDB();
     const userCollection = db.collection('users');
+    const resultCollection = db.collection('results');
+    const quizCollection = db.collection('quizes');
     try {
         const data = await request.json();
-        const query = {email : data.email}
+        const userEmail = data.email;
+        const query = {email : userEmail}
         const result = await userCollection.findOne(query)
         if(!result){
             return NextResponse.json({
@@ -15,11 +18,38 @@ export async function POST(request) {
                 success : false
             })
         }
+        const totalParticipatedQuiz = await resultCollection.countDocuments({userEmail : userEmail});
+        const totalCreatedQuizzes = await quizCollection.countDocuments({quizCreatorEmail : userEmail});
+        const totalPoints = await resultCollection.aggregate([
+            {
+                $match : {userEmail : userEmail}
+            },
+            {
+                $group : {
+                    _id : "$userEmail",
+                    totalEarnedPoints : {$sum : "$earnedPoint"}
+                }
+            }
+        ]).toArray();
+        if(totalPoints.length === 0){
+            return NextResponse.json({
+                message : 'user data',
+                success : true,
+                status : 200,
+                result,
+                totalParticipatedQuiz,
+                totalCreatedQuizzes,
+                totalEarnedPoints : 0
+            })
+        }
         return NextResponse.json({
             message : 'user data',
             success : true,
             status : 200,
-            result
+            result,
+            totalParticipatedQuiz,
+            totalCreatedQuizzes,
+            totalEarnedPoints : totalPoints[0].totalEarnedPoints
         })
     } catch (error) {
         return NextResponse.json({
