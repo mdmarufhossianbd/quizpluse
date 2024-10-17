@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from "@/components/shared/sidebar";
-import { IconLayoutDashboardFilled, IconSettingsFilled, IconUserFilled, IconUsers } from "@tabler/icons-react";
+import { IconCoin, IconLayoutDashboardFilled, IconSettingsFilled, IconUserFilled, IconUsers } from "@tabler/icons-react";
 import { useState } from "react";
 
 export default function AdminLayout({ children }) {
@@ -26,6 +26,11 @@ export default function AdminLayout({ children }) {
       name: 'Manage User',
       url: '/admin/users',
       icon: <IconUsers stroke={2} />
+    },
+    {
+      name: 'Transactions',
+      url: '/admin/transactions',
+      icon: <IconCoin stroke={2} />
     },
     {
       name: 'Profile',

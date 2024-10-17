@@ -1,4 +1,4 @@
-import TransactionTable from "@/components/transactions/transactionTable";
+import Transaction from "@/components/transactions/transactionTable";
 
 const Transactions = () => {
     return (
@@ -6,7 +6,7 @@ const Transactions = () => {
             <div className="my-5">
                 <h2 className="text-3xl font-semibold text-center">Transaction Report</h2>
             </div>
-            <TransactionTable />
+            <Transaction />
         </div>
     );
 };

@@ -1,37 +1,34 @@
 'use client'
-
+import Pagination from "@/components/shared/pagination";
+import TransactionTable from "@/components/shared/transactionTable";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
-import Pagination from "../shared/pagination";
-import TransactionTable from "../shared/transactionTable";
 
-const Transaction = () => {
-    const { data } = useSession();
-    const email = data?.user?.email;
+const Transactions = () => {
+    const [transactions, setTransactions] = useState([]);
     const [page, setPage] = useState(1);
-    const [transactions, setTransactions] = useState([])
-    const [totalTransactions, setTotalTransactions] = useState()
-    const [totalPages, setTotalPages] = useState(1)
+    const [totalPages, setTotalPages] = useState(1);
+    const [totalTransactions, setTotalTransactions] = useState();
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        const getTransactions = async () => {
+        const allTransactions = async () => {
             setLoading(true)
-            await axios.get(`/api/v1/payment/payment-info?email=${email}&page=${page}`)
+            await axios.get(`/api/v1/payment/payment-info?page=${page}`)
                 .then(res => {
-                    if (res.data?.success) {
+                    if (res.data.success) {
                         setTransactions(res.data?.result)
-                        setPage(res.data?.currentPage);
+                        setPage(res.data?.currentPage)
                         setTotalPages(res.data?.totalPages)
                         setTotalTransactions(res.data?.totalPayments)
                         setLoading(false)
                     }
+                    setLoading(false)
                 })
         }
-        getTransactions()
-    }, [email, page])
+        allTransactions()
+    }, [page])
 
     return (
         <>
@@ -48,4 +45,4 @@ const Transaction = () => {
     );
 };
 
-export default Transaction;
+export default Transactions;
