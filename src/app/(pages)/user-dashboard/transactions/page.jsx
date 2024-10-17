@@ -3,7 +3,9 @@ import TransactionTable from "@/components/transactions/transactionTable";
 const Transactions = () => {
     return (
         <div>
-            This is payment page
+            <div className="my-5">
+                <h2 className="text-3xl font-semibold text-center">Transaction Report</h2>
+            </div>
             <TransactionTable />
         </div>
     );
