@@ -33,11 +33,11 @@ const PlanCard = ({ plan }) => {
               Basic
             </h2> : plan.name === 'starter' ? <div>
               <h2 className="text-5xl my-3 font-semibold text-gray-900">
-                {plan.price} <span className='text-lg'>/monthly</span>
+                {plan.price}$<span className='text-lg'>/Monthly</span>
               </h2>
             </div> : <div>
               <h2 className="text-5xl my-3 font-semibold text-gray-900">
-                {plan.price} <span className='text-lg'>/one time</span>
+                {plan.price}$<span className='text-lg'>/Life time</span>
               </h2>
             </div>
           }
