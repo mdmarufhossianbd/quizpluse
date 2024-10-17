@@ -1,6 +1,6 @@
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { IconXboxXFilled } from '@tabler/icons-react';
+import { IconLoader2, IconXboxXFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -47,7 +47,7 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
         }
         try {
             // create payment method
-            const { error,  } = await stripe.createPaymentMethod({
+            const { error, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
                 card: cardElement,
             });
@@ -55,8 +55,9 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
             if (error) {
                 setError(error.message);
                 setLoading(false);
-            } else {
+            } else {                
                 // confirm payment
+                const card = paymentMethod.card
                 const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
                     payment_method: {
                         card: cardElement,
@@ -70,23 +71,25 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
                     setLoading(false);
                     setError(error.message);                    
                 } else {
-                    // save details in db
-                    if (paymentIntent.status === 'succeeded') {                  
+                    // save details in db                   
+                    if (paymentIntent.status === 'succeeded') {   
                         const paymentInfo = {
-                            ransactionId: paymentIntent.id,
+                            paymentTime : Date.now(),
+                            transactionId: paymentIntent.id,
                             price,
+                            cardDetails: card,
                             packageName: plan.name,
                             packageTitle: plan.title,
                             name : data?.user?.name,
-                            email : data?.user?.email
+                            email : data?.user?.email,
+                            status: 'succeeded'
                         }
                         axios.post('/api/v1/payment/store-payment-info', paymentInfo)
-                        .then(res => {
-                            console.log(res.data);
+                        .then(res => {                            
                             if(res.data.success){
                                 toast.success('Payment Success')
                                 setLoading(false);
-                                onClose(); // Close the modal after payment
+                                onClose(); 
                                 router.push('/user-dashboard/thank-you')
                             }
                         })
@@ -117,10 +120,10 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
 
                     <button
                         type="submit"
-                        className="mt-6 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition-all duration-300"
+                        className={`mt-6 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition-all duration-300 ${loading && 'cursor-not-allowed'}`}
                         disabled={loading}
                     >
-                        {loading ? 'Processing...' : 'Pay Now'}
+                        {loading ? <p className='w-full flex items-center justify-center gap-2'><IconLoader2 stroke={2} className='animate-spin' />Processing...</p> : 'Pay Now'}
                     </button>
                 </form>
             </div>

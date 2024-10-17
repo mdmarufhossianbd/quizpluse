@@ -1,7 +1,7 @@
 "use client";
 
 import Sidebar from '@/components/shared/sidebar';
-import { IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
+import { IconCoin, IconLayoutDashboardFilled, IconRosetteDiscountCheckFilled, IconSettingsFilled, IconSquareRoundedPlusFilled, IconTimelineEventFilled, IconUserFilled } from '@tabler/icons-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -71,7 +71,12 @@ const Layout = ({ children }) => {
             icon: <IconTimelineEventFilled />
         },
         {
-            name: 'Upgrade',
+            name: 'Transactions',
+            url: '/user-dashboard/transactions',
+            icon: <IconCoin stroke={2} />
+        },
+        {
+            name: 'Plans',
             url: '/user-dashboard/plans',
             icon: <GiArmorUpgrade />
         },
