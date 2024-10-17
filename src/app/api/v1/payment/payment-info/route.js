@@ -11,7 +11,7 @@ export async function GET(request) {
         const email = searchParams.get('email') || '';
         const skip = (page - 1) * limit
         const sort = {_id : -1}
-        const query = {email : email}
+        const query = email ? {email : email} : {}
         const result = await paymentCollection.find(query).skip(skip).sort(sort).limit(limit).toArray();
         const totalPayments = await paymentCollection.countDocuments(query);
         return NextResponse.json({
