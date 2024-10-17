@@ -11,8 +11,10 @@ import { IconEdit } from "@tabler/icons-react";
 import PreviewModal from "../admin/manageQuiz/previewModal";
 import Link from "next/link";
 import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
+import ToggleFeature from "./toggleFeature";
 
 const QuizTable = ({ quizzes, setDelete }) => {
+  console.log(quizzes)
   return (
     <Table>
       <TableHeader>
@@ -33,7 +35,10 @@ const QuizTable = ({ quizzes, setDelete }) => {
             <TableCell>{item.quizCategory}</TableCell>
             <TableCell>{item.totalQuestions}</TableCell>
             <TableCell>{item.quizDuration}</TableCell>
-            <TableCell>{item.featured}</TableCell>
+            <TableCell>
+
+              <ToggleFeature quizId={item._id} isFeatured={item.featured} />
+            </TableCell>
             <TableCell>
               {item.quizStatus === "publish" && (
                 <Chip color="success" variant="dot" className="border-none">
