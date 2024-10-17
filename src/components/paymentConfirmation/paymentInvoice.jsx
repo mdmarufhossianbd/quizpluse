@@ -5,6 +5,8 @@ import { useSearchParams } from 'next/navigation';
 import { useReactToPrint } from "react-to-print";
 import generatePDF from 'react-to-pdf';
 import { FiDownload, FiPrinter } from 'react-icons/fi'; // Importing icons
+import Image from "next/image";
+import logo from "../../app/logo.png";
 
 const PaymentInvoice = () => {
     const contentRef = useRef(null);
@@ -34,7 +36,11 @@ const PaymentInvoice = () => {
             <div className="max-w-4xl mx-auto p-10 bg-white shadow-xl rounded-lg my-12 border border-gray-200" ref={contentRef}>
                 {/* Invoice Header */}
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-extrabold text-[#5C0096] tracking-wide underline mb-4">Invoice</h1>
+                    <div className="flex justify-center">
+                        <Image src={logo} alt="Brand Logo" className="h-20 w-auto mb-4" />
+
+                    </div>
+                    <h1 className="text-xl font-extrabold text-[#5C0096] tracking-wide underline mb-4">Payment Invoice</h1>
                     <p className="text-sm text-green-700 font-semibold">Transaction ID: {paymentDetails.transactionId}</p>
                 </div>
 
