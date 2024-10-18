@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ThankYou = () => {
     const router = useRouter();
@@ -53,7 +53,7 @@ const ThankYou = () => {
                     onClick={handleGenerateDownload}
                     className="mt-6 w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-500"
                 >
-                    Generate Invoice
+                    Download Invoice
                 </button>
             </div>
         </div>
