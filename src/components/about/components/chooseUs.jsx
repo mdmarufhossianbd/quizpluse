@@ -12,7 +12,7 @@ const ChooseUs = () => {
         <ChooseText></ChooseText>
         <PhotoGallary></PhotoGallary>
       </section>
-      <section>
+      <section className='mt-6'>
         <Captions title="Check our Facilitys" subtitle="quiz will test your knowledge of the various amenities and features offered by our organization. You'll be asked questions about our location, services, and other important details."></Captions>
         <Facilitys></Facilitys>
       </section>
