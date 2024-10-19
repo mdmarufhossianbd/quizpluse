@@ -1,6 +1,6 @@
 import { CardElement, Elements, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { IconXboxXFilled } from '@tabler/icons-react';
+import { IconLoader2, IconXboxXFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -17,20 +17,23 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     const [error, setError] = useState(null);
     const { data } = useSession();
     const [clientSecret, setClientSecret] = useState();
-    const router = useRouter()
+    const router = useRouter();
     const price = plan.price;
     const email = data?.user?.email;
-    
+
     useEffect(() => {
         axios.post('/api/v1/payment/make-payment', { price })
             .then(res => {
                 if (res.data.success) {
-                    setClientSecret(res.data.clientSecret)
+                    setClientSecret(res.data.clientSecret);
                 } else {
-                    toast.error('Something went wrong. Please try again later')
+                    toast.error('Something went wrong. Please try again later');
                 }
             })
-    }, [email, price])
+            .catch(() => {
+                toast.error('Failed to initialize payment. Please try again.');
+            });
+    }, [email, price]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,54 +46,68 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
 
         const cardElement = elements.getElement(CardElement);
         if (!cardElement) {
-            return
+            setError('Card element is not loaded');
+            setLoading(false);
+            return;
         }
+
         try {
-            // create payment method
-            const { error,  } = await stripe.createPaymentMethod({
+            // Create payment method
+            const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
                 type: 'card',
                 card: cardElement,
             });
 
-            if (error) {
-                setError(error.message);
+            if (paymentMethodError) {
+                setError(paymentMethodError.message);
                 setLoading(false);
-            } else {
-                // confirm payment
-                const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: data?.user?.name || 'anonymous',
-                            email: data?.user?.email || 'anonymous'
-                        }
-                    }
-                })
-                if (error) {
+                return;
+            }
+
+            const card = paymentMethod.card;
+
+            // Confirm card payment
+            const { paymentIntent, error: paymentIntentError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: data?.user?.name || 'Anonymous',
+                        email: data?.user?.email || 'Anonymous',
+                    },
+                },
+            });
+
+            if (paymentIntentError) {
+                setError(paymentIntentError.message);
+                setLoading(false);
+                return;
+            }
+
+            //After payment sucess
+            if (paymentIntent.status === 'succeeded') {
+                const paymentInfo = {
+                    paymentTime: Date.now(),
+                    transactionId: paymentIntent.id,
+                    price,
+                    cardDetails: card,
+                    packageName: plan.name,
+                    packageTitle: plan.title,
+                    name: data?.user?.name,
+                    email: data?.user?.email,
+                    status: 'succeeded',
+                };
+
+                // Save payment info in DB
+                const response = await axios.post('/api/v1/payment/store-payment-info', paymentInfo);
+
+                if (response.data.success) {
+                    toast.success('Payment Success');
                     setLoading(false);
-                    setError(error.message);                    
+                    onClose();
+                    router.push(`/user-dashboard/thank-you?paymentDetails=${encodeURIComponent(JSON.stringify(paymentInfo))}`);
+
                 } else {
-                    // save details in db
-                    if (paymentIntent.status === 'succeeded') {                  
-                        const paymentInfo = {
-                            ransactionId: paymentIntent.id,
-                            price,
-                            packageName: plan.name,
-                            packageTitle: plan.title,
-                            name : data?.user?.name,
-                            email : data?.user?.email
-                        }
-                        axios.post('/api/v1/payment/store-payment-info', paymentInfo)
-                        .then(res => {
-                            console.log(res.data);
-                            if(res.data.success){
-                                toast.success('Payment Success')
-                                setLoading(false);
-                                onClose(); // Close the modal after payment
-                                router.push('/user-dashboard/thank-you')
-                            }
-                        })
-                    }
+                    throw new Error('Failed to store payment info.');
                 }
             }
         } catch (err) {
@@ -102,10 +119,11 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0  flex items-center justify-center bg-black bg-opacity-80 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
             <Toaster position='top-center' richColors />
+
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full relative">
-                <button onClick={onClose} className="absolute top-0 right-0 md:right-5 mt-4 text-white  p-1 px-2">
+                <button onClick={onClose} className="absolute top-0 right-0 md:right-5 mt-4 text-white p-1 px-2">
                     <IconXboxXFilled className='text-red-600' />
                 </button>
                 <h2 className="text-2xl font-semibold mb-4">Upgrade to {plan.title} Plan</h2>
@@ -117,10 +135,10 @@ const PaymentModal = ({ isOpen, onClose, plan }) => {
 
                     <button
                         type="submit"
-                        className="mt-6 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition-all duration-300"
+                        className={`mt-6 w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition-all duration-300 ${loading && 'cursor-not-allowed'}`}
                         disabled={loading}
                     >
-                        {loading ? 'Processing...' : 'Pay Now'}
+                        {loading ? <p className='w-full flex items-center justify-center gap-2'><IconLoader2 stroke={2} className='animate-spin' />Processing...</p> : 'Pay Now'}
                     </button>
                 </form>
             </div>
