@@ -10,7 +10,8 @@ export async function POST(request) {
         const query = {email : data.email};
         const oparation = {
             $set: {
-                level: data.packageName
+                level: data.packageName,
+                planStartAt: new Date()
             }
         }
         const updateUserLevel = await userCollection.updateOne(query, oparation)
