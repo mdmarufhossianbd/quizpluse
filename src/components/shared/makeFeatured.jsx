@@ -1,25 +1,28 @@
 "use client"
 
 import axios from 'axios';
-import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'sonner';
 
-const ToggleFeature = ({ quizId, isFeatured }) => {
+const MakeFeatured = ({ quizId, isFeatured, setFeatured, email }) => {
     const [loading, setLoading] = useState(false);
 
     // console.log(isFeatured)
     const handleToggleFeatured = async () => {
         setLoading(true);
-        // console.log("btn clicked")
+        const featuredInfo = {
+            quizId,
+            email
+        }
         try {
-            const response = await axios.post(`/api/quiz/${quizId}/toggle-featured`, {
-                featured: !isFeatured,
-            });
+            const response = await axios.put('/api/v1/quiz/make-featured', featuredInfo);
             if (response.data.success) {
-                toast.success(`Featured request sent to Admin. Quiz is now ${!isFeatured ? "Featured" : "UnFeatured"}`);
+                toast.success(response.data.message);
+                setFeatured(true)
             } else {
-                toast.error("Failed to send Featured request");
+                toast.error(response.data.message);
             }
         }
         catch (error) {
@@ -53,4 +56,4 @@ const ToggleFeature = ({ quizId, isFeatured }) => {
     );
 };
 
-export default ToggleFeature;
+export default MakeFeatured

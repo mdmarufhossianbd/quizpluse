@@ -14,30 +14,30 @@ const ManageQuiz = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
     const [deleted, setDelete] = useState(false);
+    const [featured, setFeatured] = useState(false);
+    const email = data?.user?.email;
 
     useEffect(() => {
         const getQuizData = async () => {
             setLoading(true)
-            if (data?.user?.email) {
-                try {
-                    const response = await axios.get(`/api/v1/quiz/user-wise-quiz?email=${data?.user?.email}&page=${page}&limit=10`);
-                    setQuizzes(response?.data?.result);
-                    setTotalPages(response?.data?.totalPages);
-                    setLoading(false)
-                } catch (error) {
-                    console.error("Error fetching quiz data", error);
-                    setLoading(false)
-                }
+            try {
+                const response = await axios.get(`/api/v1/quiz/user-wise-quiz?email=${email}&page=${page}&limit=10`);
+                setQuizzes(response?.data?.result);
+                setTotalPages(response?.data?.totalPages);
+                setLoading(false)
+            } catch (error) {
+                console.error("Error fetching quiz data", error);
+                setLoading(false)
             }
             setLoading(false)
         };
         getQuizData();
-    }, [data?.user?.email, page, deleted]);
+    }, [email, page, deleted, featured]);
 
     return (
         <div>
             {loading && <SimpleLoading />}
-            <QuizTable quizzes={quizzes} setDelete={setDelete} />
+            <QuizTable quizzes={quizzes} setDelete={setDelete} setFeatured={setFeatured} email={email} />
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </div>
     );

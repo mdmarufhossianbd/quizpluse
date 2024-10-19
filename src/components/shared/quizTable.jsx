@@ -1,20 +1,13 @@
 import { Chip, Tooltip } from "@nextui-org/react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@nextui-org/table";
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table";
 import { IconEdit } from "@tabler/icons-react";
-import PreviewModal from "../admin/manageQuiz/previewModal";
 import Link from "next/link";
+import PreviewModal from "../admin/manageQuiz/previewModal";
 import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
-import ToggleFeature from "./toggleFeature";
+import MakeFeatured from "./makeFeatured";
 
-const QuizTable = ({ quizzes, setDelete }) => {
-  console.log(quizzes)
+const QuizTable = ({ quizzes, setDelete, email, setFeatured }) => {
+  
   return (
     <Table>
       <TableHeader>
@@ -36,8 +29,7 @@ const QuizTable = ({ quizzes, setDelete }) => {
             <TableCell>{item.totalQuestions}</TableCell>
             <TableCell>{item.quizDuration}</TableCell>
             <TableCell>
-
-              <ToggleFeature quizId={item._id} isFeatured={item.featured} />
+              <MakeFeatured quizId={item._id} isFeatured={item.featured} email={email} setFeatured={setFeatured} />
             </TableCell>
             <TableCell>
               {item.quizStatus === "publish" && (
@@ -67,7 +59,6 @@ const QuizTable = ({ quizzes, setDelete }) => {
                   <button>
                     <Link href={`/user-dashboard/manage-quiz/edit-quiz/${item?._id}`}>
                       <IconEdit stroke={2} />
-
                     </Link>
                   </button>
                 </span>
