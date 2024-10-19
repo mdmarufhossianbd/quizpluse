@@ -1,12 +1,27 @@
 'use client'
+import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import InfoRank from "./infoRank";
 import "./rank.css";
 
 const Ranking = () => {
-  
+  const [users, setUser] = useState([]);
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    axios.get(`/api/v1/user`)
+      .then((respons) => {
+        setUser(respons.data.result)
+        console.log(respons.data.result)
+        setLoading(false)
+      })
+  }, [])
+  if (loading) {
+    return "loading";
+  }
+
   return (
-    <div className=" container mx-auto max-w-7xl pt-6 grid  lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center ">
+    <div className=" container mx-auto max-w-7xl pt-6 grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center ">
       {/* 1st card */}
       {
         users.map((user, idx) => {
@@ -38,59 +53,59 @@ const Ranking = () => {
 
 export default Ranking;
 
-const users = [
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 2,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 250,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 5,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 150,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 2,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 250,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 5,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 150,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 2,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 250,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-  {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    top_ranking: 5,
-    average_quiz_mark: 87.5,
-    total_quiz_number: 150,
-    total_reward: 1200,
-    user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-  },
-];
+// const users = [
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 2,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 250,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 5,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 150,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 2,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 250,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 5,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 150,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 2,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 250,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+//   {
+//     name: "John Doe",
+//     email: "johndoe@example.com",
+//     top_ranking: 5,
+//     average_quiz_mark: 87.5,
+//     total_quiz_number: 150,
+//     total_reward: 1200,
+//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
+//   },
+// ];

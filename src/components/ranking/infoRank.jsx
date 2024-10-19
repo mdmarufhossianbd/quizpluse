@@ -2,7 +2,7 @@ import React from 'react';
 import './info.css';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../ui/tooltip';
 
-const InfoRank = ({user}) => {
+const InfoRank = () => {
   return (
     <>
     {/* rank */}
@@ -10,7 +10,7 @@ const InfoRank = ({user}) => {
       <Tooltip>
         {/* The element that triggers the tooltip */}
         <TooltipTrigger asChild>
-          <button className="bg-[#c6bbf9] hover:bg-[#8077f4] mb-1 text-black p-3 rounded-full">{user.top_ranking}</button>
+          <button className="bg-[#c6bbf9] hover:bg-[#8077f4] mb-1 text-black p-3 rounded-full">5</button>
         </TooltipTrigger>
         
         {/* Tooltip content */}
@@ -24,7 +24,7 @@ const InfoRank = ({user}) => {
       <Tooltip>
         {/* The element that triggers the tooltip */}
         <TooltipTrigger asChild>
-          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">{user.total_quiz_number}</button>
+          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">100</button>
         </TooltipTrigger>
         
         {/* Tooltip content */}
@@ -38,7 +38,7 @@ const InfoRank = ({user}) => {
       <Tooltip>
         {/* The element that triggers the tooltip */}
         <TooltipTrigger asChild>
-          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">{user.average_quiz_mark}</button>
+          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">100</button>
         </TooltipTrigger>
         
         {/* Tooltip content */}

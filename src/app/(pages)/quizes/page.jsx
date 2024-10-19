@@ -10,7 +10,10 @@ const Quizes = async () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {quizes?.map(item => <QuizCard key={item?._id} item={item} />)}
             </div>
-            <h2>Recent Quiz</h2>
+            <div className="my-10 max-w-4xl mx-auto">
+                <h2 className="text-2xl md:text-4xl font-semibold md:font-bold text-center mb-4">Recent Quizzes</h2>
+                <p className="text-center">The <b>Recent Quizzes</b> section highlights the latest quizzes added to the platform, giving users easy access to fresh and exciting content. Stay up-to-date with the newest challenges, explore various topics, and dive into quizzes that spark your interest. Whether you&apos;re looking for a quick brain teaser or an in-depth challenge, the Recent Quizzes section ensures there&apos;s always something new to try.</p>
+            </div>
             <QuizzesSlider quizes={quizes} />
         </div>
     );
