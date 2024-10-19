@@ -2,13 +2,15 @@ import Banner from "@/components/homePage/banner";
 import FeaturedQuizes from "@/components/homePage/featuredQuizes";
 import PartnerSection from "@/components/homePage/partnerSection";
 import PopularQuize from "@/components/homePage/popularQuize";
+import PaymentAd from "@/components/shared/paymentAd";
 export default function Home() {
-  return ( 
+  return (
     <main>
       <Banner />
-      <FeaturedQuizes/>
+      <FeaturedQuizes />
+      <PaymentAd />
       <PopularQuize />
-      <PartnerSection/>
+      <PartnerSection />
     </main>
   );
 }
