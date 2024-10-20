@@ -16,7 +16,7 @@ const EditQuiz = ({ quiz }) => {
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
-        id : '',
+        id: '',
         quizName: '',
         quizCategory: '',
         totalQuestions: '',
@@ -34,7 +34,7 @@ const EditQuiz = ({ quiz }) => {
     useEffect(() => {
         if (quiz) {
             setFormData({
-                id : quiz?._id,
+                id: quiz?._id,
                 quizName: quiz?.quizName || '',
                 quizCategory: quiz?.quizCategory || '',
                 totalQuestions: quiz?.totalQuestions || '',
@@ -85,7 +85,7 @@ const EditQuiz = ({ quiz }) => {
         ? formData.quizName && formData.totalQuestions
         : step === 2
             ? formData.questions.every(
-                (q) => q.question && q.options.every((opt) => opt) && q.correctOption
+                (q) => q.question && q.options.every((opt) => opt) && q.correctAnswer
             )
             : step === 3
                 ? formData.quizDuration
@@ -221,8 +221,8 @@ const EditQuiz = ({ quiz }) => {
                                     ))}
                                     <input
                                         type="text"
-                                        name="correctOption"
-                                        defaultValue={q?.correctOption}
+                                        name="correctAnswer"
+                                        defaultValue={q?.correctAnswer}
                                         onChange={(e) => handleQuestionChange(index, e)}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         placeholder="Correct Option"
@@ -268,7 +268,7 @@ const EditQuiz = ({ quiz }) => {
                                 required
                             />
                         </div>
-                        <ImageUpload setFormData={setFormData} quizBanner={quiz?.quizImage} />
+                        <ImageUpload boxHeight="350px" bannerTitle="Add Quiz Banner" setFormData={setFormData} quizBanner={quiz?.quizImage} />
 
                         <div className='flex justify-between my-5'>
                             <div>
