@@ -1,59 +1,88 @@
-"use client"
-import React, { useState } from "react";
+"use client";
 
-const Newsletter = () => {
-    const [email, setEmail] = useState("");
+import { Lottie } from 'lottie-react';
+import React, { useState } from 'react';
+import envalopeImg from '../../../public/assets/envalope.json'; // Correct path to your JSON
+
+const NewsLetter = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here (e.g., API call to store email)
-        alert(`Subscribed with email: ${email}`);
-        setEmail(""); // Reset the form
+        // Form submission logic
+        alert(`Subscribed with name: ${name}, email: ${email}`);
+        setName('');
+        setEmail('');
+        setIsChecked(false);
     };
 
+    console.log(envalopeImg)
+
     return (
-        <section className="bg-gradient-to-r from-blue-900 via-purple-800 to-gray-900 py-14 text-white">
-            <div className="container mx-auto text-center">
-                {/* Headline */}
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                    Stay Ahead with QuizPulse Updates
-                </h2>
-                <p className="text-lg lg:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                    Join our newsletter to receive the latest quizzes, insights, and exclusive deals
-                    delivered straight to your inbox. Don’t miss out on enhancing your learning journey!
-                </p>
-
-                {/* Newsletter Form */}
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full max-w-xl mx-auto"
-                >
-                    {/* Email Input */}
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full sm:w-auto flex-1 px-5 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent shadow-md transition duration-300"
+        <section className="bg-gray-100 py-12">
+            <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
+                {/* Lottie Animation Section */}
+                <div className="md:w-1/2 mb-8 md:mb-0">
+                    <Lottie
+                        animationData={envalopeImg}
+                        loop={true}
+                        style={{ height: 200, width: 200 }}
                     />
+                </div>
 
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold shadow-lg transition-transform duration-300 transform hover:scale-105"
-                    >
-                        Subscribe
-                    </button>
-                </form>
-
-                {/* Privacy Notice */}
-                <p className="text-sm text-gray-400 mt-4">
-                    We care about your privacy. No spam, unsubscribe anytime.
-                </p>
+                {/* Form Section */}
+                <div className="md:w-1/2">
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to our newsletter</h2>
+                    <p className="text-lg mb-6">
+                        Receive our latest news and get a special gift.
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-4">
+                            <input
+                                type="text"
+                                placeholder="your name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                type="email"
+                                placeholder="your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                                required
+                            />
+                        </div>
+                        <div className="mb-4 flex items-center">
+                            <input
+                                type="checkbox"
+                                id="agree"
+                                checked={isChecked}
+                                onChange={() => setIsChecked(!isChecked)}
+                                className="mr-2"
+                                required
+                            />
+                            <label htmlFor="agree" className="text-gray-600">
+                                I agree to receive marketing material
+                            </label>
+                        </div>
+                        <button
+                            type="submit"
+                            className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-md transition duration-300"
+                        >
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
     );
 };
 
-export default Newsletter;
+export default NewsLetter;
