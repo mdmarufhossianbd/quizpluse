@@ -7,7 +7,7 @@ const HowItWorks = () => {
       icon: <FaRocket size={40} />,
       title: "Fast Performance",
       description:
-        "Optimized for a smaller build size, faster dev compilation and dozens of other improvements.",
+        "This website is Optimized for a all devices by Next Js. You can enjoy the website smoothly",
     },
     {
       icon: <FaMobileAlt size={40} />,
@@ -25,7 +25,7 @@ const HowItWorks = () => {
       icon: <FaClipboard size={40} />,
       title: "Easy to Use",
       description:
-        "Create your own custom template or section by copying, pasting, and assembling.",
+        "Create your own custom quizzes, participate quizzes, Boost yourself very easily.",
     },
   ];
 
