@@ -19,10 +19,10 @@ const MakeFeatured = ({ quizId, isFeatured, setFeatured, email }) => {
         try {
             const response = await axios.put('/api/v1/quiz/make-featured', featuredInfo);
             if (response.data.success) {
-                toast.success(response.data.message);
+                toast.success(response?.data?.message);
                 setFeatured(true)
             } else {
-                toast.error(response.data.message);
+                toast.error(response?.data?.message);
             }
         }
         catch (error) {
