@@ -34,7 +34,7 @@ const CreateQuiz = () => {
             const updatedQuestions = Array.from({ length: totalQuestions }, (_, index) => ({
                 question: '',
                 options: ['', '', '', ''], // 4 options for MCQ
-                correctOption: '',
+                correctAnswer: '',
             }));
             setFormData((prev) => ({ ...prev, questions: updatedQuestions }));
             setFormData((prev) => ({ ...prev, quizCreatorEmail: data?.user?.email }));
@@ -42,7 +42,7 @@ const CreateQuiz = () => {
         } else {
             setFormData((prev) => ({ ...prev, questions: [] }));
         }
-    }, [formData.totalQuestions, data?.user?.name, data?.user?.email]);
+    }, [formData?.totalQuestions, data?.user?.name, data?.user?.email]);
 
     const nextStep = () => {
         if (step < totalSteps) {
@@ -79,7 +79,7 @@ const CreateQuiz = () => {
         ? formData.quizName && formData.totalQuestions
         : step === 2
             ? formData.questions.every(
-                (q) => q.question && q.options.every((opt) => opt) && q.correctOption
+                (q) => q.question && q.options.every((opt) => opt) && q.correctAnswer
             )
             : step === 3
                 ? formData.totalDuration
@@ -99,7 +99,7 @@ const CreateQuiz = () => {
                             <li key={optIdx}>{opt}</li>
                         ))}
                     </ul>
-                    <p><strong>Correct Option:</strong> {q.correctOption}</p>
+                    <p><strong>Correct Answer:</strong> {q.correctAnswer}</p>
                 </div>
             ))}
         </div>
@@ -227,11 +227,11 @@ const CreateQuiz = () => {
                                     ))}
                                     <input
                                         type="text"
-                                        name="correctOption"
-                                        value={q.correctOption}
+                                        name="correctAnswer"
+                                        value={q.correctAnswer}
                                         onChange={(e) => handleQuestionChange(index, e)}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="Correct Option"
+                                        placeholder="Correct Answer"
                                         required
                                     />
                                 </div>
