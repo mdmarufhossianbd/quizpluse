@@ -31,7 +31,7 @@ const HowItWorks = () => {
 
   return (
     <div>
-      <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-semibold py-6">
+      <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-semibold py-10">
         How it Works
       </h1>
       <div className="p-10">

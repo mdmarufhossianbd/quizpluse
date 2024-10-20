@@ -17,23 +17,21 @@ const FaQ = () => {
         className="bg-purple-50 p-6 rounded-xl"
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger className='text-xl font-semibold'>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+          <AccordionTrigger className='text-xl font-semibold'>Is it free?</AccordionTrigger>
+          <AccordionContent className='text-lg'>
+            Yes! But the free version of the quiz app offers limited quizzes and includes ads, providing only basic features. In contrast, the paid version allows unlimited access to quizzes, removes ads, and includes additional features like offline mode and special challenges.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger className='text-xl font-semibold'>Is it styled?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It comes with default styles that matches the other
-            components&apos; aesthetic.
+          <AccordionTrigger className='text-xl font-semibold'>What is the main theme?</AccordionTrigger>
+          <AccordionContent className='text-lg'>
+          Main theme of a Quiz Pulse is to provide an engaging platform for learning and testing knowledge through interactive quizzes. It focuses on entertainment, education, and self-assessment, allowing users to challenge themselves or compete with others while gaining knowledge on various topics.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <AccordionTrigger className='text-xl font-semibold'>Is it animated?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+          <AccordionTrigger className='text-xl font-semibold'>Is it profitable?</AccordionTrigger>
+          <AccordionContent className='text-lg'>
+          Yes, the quiz app can be profitable. Revenue can come from several sources, such as in-app ads, offering a paid version with additional features, or in-app purchases for extra content or lives. Engaging content and a good user experience help retain users, which boosts profitability through continued usage, upgrades, or ad views.
           </AccordionContent>
         </AccordionItem>
       </Accordion>
