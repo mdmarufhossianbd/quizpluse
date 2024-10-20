@@ -17,6 +17,11 @@ const NewsLetter = () => {
         setName('');
         setEmail('');
         setIsChecked(false);
+        const subscribeInfo = {
+            name: name,
+            email: email
+        }
+        console.log(subscribeInfo)
     };
 
 
@@ -24,23 +29,23 @@ const NewsLetter = () => {
         <section className="bg-gray-100 py-12">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
                 {/* Lottie Animation Section */}
-                <div className="md:w-1/2 mb-8 md:mb-0">
+                <div className="flex justify-center w-full md:w-1/2 mb-8 md:mb-0">
                     {/* <Lottie
                         animationData={envalopeImg}
                         loop={true}
                         style={{ height: 200, width: 200 }}
                     /> */}
                     <Image
-                        className="rounded group-hover:opacity-50 group-hover:scale-105 duration-200 w-full"
+                        className="rounded group-hover:opacity-50 group-hover:scale-105 duration-200 w-2/3"
                         src={envalopeImg}
                         alt="envalope image"
-                        width={300}
-                        height={300}
+                        width={250}
+                        height={250}
                     />
                 </div>
 
                 {/* Form Section */}
-                <div className="md:w-1/2">
+                <div className="w-full md:w-1/2">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to our newsletter</h2>
                     <p className="text-lg mb-6">
                         Receive our latest news and get a special gift.
@@ -76,15 +81,19 @@ const NewsLetter = () => {
                                 required
                             />
                             <label htmlFor="agree" className="text-gray-600">
-                                I agree to receive marketing material
+                                I appreciate the opportunity to stay informed about your offerings and updates
                             </label>
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-md transition duration-300"
+                            className="w-full bg-[#5C0096] hover:bg-[#500081] text-white font-bold py-3 rounded-md transition duration-300"
                         >
                             Subscribe
                         </button>
+                        {/* Privacy Notice */}
+                        <p className="text-center text-sm text-gray-400 mt-4">
+                            We care about your privacy. No spam, unsubscribe anytime.
+                        </p>
                     </form>
                 </div>
             </div>
