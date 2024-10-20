@@ -5,6 +5,7 @@ import PopularQuize from "@/components/homePage/popularQuize";
 import NewsLetter from "@/components/shared/newsLetter";
 import PaymentAd from "@/components/shared/paymentAd";
 
+import Testimonial from "@/components/homePage/testimonial";
 export default function Home() {
 
   return (
@@ -15,6 +16,8 @@ export default function Home() {
       <PopularQuize />
       <PartnerSection />
       <NewsLetter />
+      <PartnerSection/>
+      <Testimonial></Testimonial>
     </main>
   );
 }
