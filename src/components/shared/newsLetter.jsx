@@ -2,7 +2,8 @@
 
 import { Lottie } from 'lottie-react';
 import React, { useState } from 'react';
-import envalopeImg from '../../../public/assets/envalope.json'; // Correct path to your JSON
+import envalopeImg from '../../../public/assets/envalope.gif';
+import Image from 'next/image';
 
 const NewsLetter = () => {
     const [name, setName] = useState('');
@@ -18,17 +19,23 @@ const NewsLetter = () => {
         setIsChecked(false);
     };
 
-    console.log(envalopeImg)
 
     return (
         <section className="bg-gray-100 py-12">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
                 {/* Lottie Animation Section */}
                 <div className="md:w-1/2 mb-8 md:mb-0">
-                    <Lottie
+                    {/* <Lottie
                         animationData={envalopeImg}
                         loop={true}
                         style={{ height: 200, width: 200 }}
+                    /> */}
+                    <Image
+                        className="rounded group-hover:opacity-50 group-hover:scale-105 duration-200 w-full"
+                        src={envalopeImg}
+                        alt="envalope image"
+                        width={300}
+                        height={300}
                     />
                 </div>
 
