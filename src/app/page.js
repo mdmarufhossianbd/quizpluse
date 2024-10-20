@@ -1,4 +1,5 @@
 import Banner from "@/components/homePage/banner";
+import FaQ from "@/components/homePage/faq";
 import FeaturedQuizes from "@/components/homePage/featuredQuizes";
 import PartnerSection from "@/components/homePage/partnerSection";
 import PopularQuize from "@/components/homePage/popularQuize";
@@ -10,6 +11,7 @@ export default function Home() {
       <FeaturedQuizes />
       <PaymentAd />
       <PopularQuize />
+      <FaQ/>
       <PartnerSection />
     </main>
   );
