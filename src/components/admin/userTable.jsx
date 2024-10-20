@@ -19,7 +19,7 @@ const UserTable = () => {
       setLoading(true)
       await axios.get(`/api/v1/user?email=${searchEmail}&page=${page}&limit=10`)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         if(res.data.success){
           setUsers(res.data.result);
           setPage(res.data.currentPage);

@@ -23,7 +23,7 @@ const ParticipatedQuizzes = () => {
           const response = await axios.get(
             `/api/v1/quiz/result?email=${data?.user?.email}&page=${page}&limit=10`
           );
-          console.log(response.data);
+          // console.log(response.data);
           setQuizzes(response?.data?.result);
           setTotalPages(response?.data?.totalPage);
           setTotalParticipatedQuiz(response?.data?.totalParticipatedQuiz)

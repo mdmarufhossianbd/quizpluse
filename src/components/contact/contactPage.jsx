@@ -1,8 +1,6 @@
 "use client";
-import React from "react";
 import Input from "@/components/contact/input";
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
 import { AiFillMessage } from "react-icons/ai";
 
 
@@ -15,7 +13,7 @@ const ContactPage = () => {
       email: formData.get("email"),
       message: formData.get("message"),
     };
-    console.log("Form Data:", formValues);
+    // console.log("Form Data:", formValues);
 
     e.target.reset();
   };
