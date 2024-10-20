@@ -26,6 +26,7 @@ const QuizCard = ({ item }) => {
             <Button className="hidden group-hover:flex absolute left-[40%] top-[40%]">
                 <Link href={`/quizes/${item?._id}`}>Start Now</Link>
             </Button>
+            {item.featured === "Yes" && <p >Featured</p>}
         </div>
     );
 };
