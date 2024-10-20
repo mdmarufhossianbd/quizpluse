@@ -268,7 +268,7 @@ const EditQuiz = ({ quiz }) => {
                                 required
                             />
                         </div>
-                        <ImageUpload setFormData={setFormData} quizBanner={quiz?.quizImage} />
+                        <ImageUpload boxHeight="350px" bannerTitle="Add Quiz Banner" setFormData={setFormData} quizBanner={quiz?.quizImage} />
 
                         <div className='flex justify-between my-5'>
                             <div>
