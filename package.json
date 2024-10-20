@@ -39,6 +39,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.9.0",
     "lightgallery": "^2.7.2",
+    "lottie-react": "^2.4.0",
     "lucide-react": "^0.441.0",
     "mongodb": "^6.9.0",
     "next": "14.2.11",
