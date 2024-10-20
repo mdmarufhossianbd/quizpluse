@@ -39,7 +39,7 @@ const HowItWorks = () => {
           {cards.map((card, index) => (
             <div
               key={index}
-              className="bg-[#7534f7] p-10 shadow-lg text-start rounded-lg transition duration-200 ease-in-out hover:bg-black hover:scale-105"
+              className="bg-[#7534f7] p-10 shadow-lg text-start rounded-lg transition duration-200 ease-in-out hover:bg-gray-800 hover:scale-105"
               style={{ minHeight: "300px" }}
             >
               <div className="text-white mb-4">{card.icon}</div>
