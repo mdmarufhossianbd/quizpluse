@@ -2,8 +2,11 @@ import Banner from "@/components/homePage/banner";
 import FeaturedQuizes from "@/components/homePage/featuredQuizes";
 import PartnerSection from "@/components/homePage/partnerSection";
 import PopularQuize from "@/components/homePage/popularQuize";
+import NewsLetter from "@/components/shared/newsLetter";
 import PaymentAd from "@/components/shared/paymentAd";
+
 export default function Home() {
+
   return (
     <main>
       <Banner />
@@ -11,6 +14,7 @@ export default function Home() {
       <PaymentAd />
       <PopularQuize />
       <PartnerSection />
+      <NewsLetter />
     </main>
   );
 }
