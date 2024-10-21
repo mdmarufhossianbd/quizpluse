@@ -16,11 +16,10 @@ export default function Home() {
       <FeaturedQuizes />
       <PaymentAd />
       <PopularQuize />
-      <HowItWorks/>
-      <FaQ/>
+      <HowItWorks />
+      <FaQ />
       <PartnerSection />
       <NewsLetter />
-      <PartnerSection/>
       <Testimonial></Testimonial>
     </main>
   );
