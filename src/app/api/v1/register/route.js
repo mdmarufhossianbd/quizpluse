@@ -23,10 +23,10 @@ export async function POST(requset) {
         const level = 'basic';
         const image = 'https://avatar.iran.liara.run/public/boy?username=Ash';
         const passwordEncrypt = bcrypt.hashSync(password, 14)
-        const createdQuizes = [];
-        const results = [];
-        const participatedQuizes = []
-        const userInfo = {createAt, username, name, email, password : passwordEncrypt, role, level, image, createdQuizes, results, participatedQuizes}
+        const createdQuizes = 0;
+        const rewards = 0;
+        const participatedQuizes = 0
+        const userInfo = {createAt, username, name, email, password : passwordEncrypt, role, level, image, createdQuizes, rewards, participatedQuizes}
         const result = await userCollection.insertOne(userInfo)
         return NextResponse.json({
             message : 'Successfully create your account',
