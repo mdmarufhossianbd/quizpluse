@@ -36,13 +36,13 @@ const Banner = () => {
           slot="container-start"
           className="parallax-bg"
           style={{
-            backgroundImage: "url('/assets/banner.jpg')"
+            backgroundImage: "url('/assets/bannertest3.png')"
           }}
 
           data-swiper-parallax="-23%"
         ></div>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-5xl font-bold text-white"
               data-swiper-parallax="-300"
@@ -67,7 +67,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center  h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-4xl font-bold text-white"
               data-swiper-parallax="-300"
@@ -92,7 +92,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center  h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-4xl font-bold text-white"
               data-swiper-parallax="-300"
