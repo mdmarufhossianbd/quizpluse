@@ -29,15 +29,16 @@ const QuizCard = ({ item }) => {
             </Button>
 
             {item?.featured === "Yes" && (
-                <p className="absolute top-5 -left-7 bg-purple-600 text-white text-sm px-8 py-1 transform -rotate-45 shadow-lg">
+                <p className="absolute top-5 -left-7 bg-[#5C0096] text-white text-sm px-8 py-1 transform -rotate-45 shadow-lg">
                     Featured
                 </p>
             )}
-            {item?.totalParticipated < 5 && (
-                <p className="absolute top-4 -right-8 bg-purple-600 text-white text-sm px-10 py-1 transform rotate-45 shadow-lg">
+            {item?.totalParticipated > 5 && (
+                <p className="absolute top-5 -right-8 bg-[#005eeb] text-white text-sm px-10 py-1 transform rotate-45 shadow-lg">
                     Popular
                 </p>
             )}
+
         </div>
     );
 };
