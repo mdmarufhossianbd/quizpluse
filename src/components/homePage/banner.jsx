@@ -36,8 +36,9 @@ const Banner = () => {
           slot="container-start"
           className="parallax-bg"
           style={{
-            backgroundImage: "url(https://i.ibb.co.com/NS79yVJ/Banner2.jpg)",
+            backgroundImage: "url('/assets/banner.jpg')"
           }}
+
           data-swiper-parallax="-23%"
         ></div>
         <SwiperSlide>
