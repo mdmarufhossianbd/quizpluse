@@ -24,20 +24,24 @@ const ManageQuizzes = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
-  const [deleted, setDelete] = useState(false)
+  const [deleted, setDelete] = useState(false);
+  const [statusUpdated, setStatusUpdated] = useState(false);
+  
 
-  const handelStatus=async(status,id)=>{
-    console.log(status)
-    try{
+  const handelStatus = async (status, id) => {
+    try {
       const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-      const _id=id
-      const res = await axios.put(`${baseURL}/api/v1/quiz/change-status`,{_id:_id,quizStatus:status})
+      const _id = id;
+      const res = await axios.put(`${baseURL}/api/v1/quiz/change-status`, { _id: _id, quizStatus: status });
+      // result.modifiedCount
       console.log(res.data);
+
+      // Trigger re-fetch of quizzes
+      setStatusUpdated(prev => !prev); 
+    } catch (error) {
+      console.error("Error updating quiz status:", error);
     }
-    catch(error){
-      console.log(error);
-    }
-  }
+  };
 
   useEffect(() => {
     const fetchQuizzes = async (type) => {
@@ -57,7 +61,7 @@ const ManageQuizzes = () => {
       }
     };
     fetchQuizzes(activeTab);
-  }, [page, activeTab, deleted]);
+  }, [page, activeTab, deleted,statusUpdated]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
