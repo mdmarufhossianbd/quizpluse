@@ -8,10 +8,11 @@ import "swiper/css/pagination";
 // import required modules
 import { Autoplay, Pagination, Parallax } from "swiper/modules";
 import "./banner.css";
+import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="mt-10">
+    <div className="">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -55,12 +56,12 @@ const Banner = () => {
                 Get the chance to test your knowledge and improve your skills by
                 taking this quiz.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/register"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -80,12 +81,12 @@ const Banner = () => {
                 The quiz tournaments will give you a chance to have fun, learn,
                 and grow at the same time.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/login"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Join Now
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
@@ -104,13 +105,13 @@ const Banner = () => {
               <p className="mb-4">
                 You will have the chance to compete in QuizPulse and become a
                 champion if you challenge yourself.
-              </p>{" "}
-              <a
-                href="#"
+              </p>
+              <Link
+                href="/quizes"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Compete Now
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
