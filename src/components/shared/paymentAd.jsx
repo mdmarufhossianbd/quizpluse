@@ -40,7 +40,7 @@ const PaymentAd = () => {
                 {/* Navigation Button */}
                 <div className="mt-10">
                     <Link href="/user-dashboard/plans">
-                        <button className="inline-flex items-center bg-white hover:bg-[#5C0096] text-[#5C0096] hover:text-white border-3 border-[#5C0096] font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <button className="inline-flex items-center bg-white hover:bg-[#5C0096] text-[#5C0096] hover:text-white border-3 border-[#5C0096] hover:border-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
                             <IconCreditCard className="mr-2" />
                             Explore Membership Plans
                             {/* <IconArrowForwardUp className="ml-2" /> */}

@@ -30,7 +30,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-semibold py-10">
         How it Works
       </h1>
