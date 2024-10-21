@@ -67,9 +67,9 @@ export const handler = NextAuth({
                 const password = '';
                 const role = 'general-user';
                 const level = 'basic';
-                const createdQuizes = [];
-                const results = [];
-                const participatedQuizes = [];
+                const createdQuizes = 0; 
+                const rewards = 0;
+                const participatedQuizes = 0;
                 const userInfo = {
                     createAt,
                     name,
@@ -79,7 +79,7 @@ export const handler = NextAuth({
                     role,
                     level,
                     createdQuizes,
-                    results,
+                    rewards,
                     participatedQuizes,
                     image
                 }

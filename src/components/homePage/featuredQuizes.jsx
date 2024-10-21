@@ -3,7 +3,7 @@ import QuizCard from "../shared/quizCard";
 
 const FeaturedQuizes = async () => {
   const quizes = await getAllQuizes();
-
+  // console.log(quizes)
 
   return (
     <div className="lg:max-w-7xl xl:max-w-full mx-auto lg:px-16 px-5">

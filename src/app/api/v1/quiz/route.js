@@ -94,7 +94,7 @@ export async function PUT(request) {
     const quizCollection = db.collection('quizes')
     try {
         const data = await request.json();
-        console.log(data);
+        // console.log(data);
         const query = { _id: new ObjectId(data.id) };
         const oparation = {
             $set: {

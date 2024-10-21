@@ -1,6 +1,4 @@
-import React from 'react'
 import Marquee from '../ui/marquee'
-import Captions from '../shared/captions'
 
 const Testimonial = () => {
   return (
@@ -12,7 +10,7 @@ const Testimonial = () => {
       <Marquee pauseOnHover repeat={4} className="[--duration:200s]"> 
           {testimonialData.map((testimonial,index) => (
             <div key={testimonial.id} className={`grid justify-center text-center p-10 rounded-sm ${index%2===0 ?"bg-gradient-to-r from-[#595AED] to-[#9E65E9] text-white":"shadow-lg"} w-96`}>
-              <p className="italic">"{testimonial.testimonial}"</p>
+              <p className="italic">&quot;{testimonial.testimonial}&quot;</p>
               <p className="text-lg opacity-50 mt-2">{testimonial.name}</p>
             </div>
           ))}
@@ -20,7 +18,7 @@ const Testimonial = () => {
         <Marquee pauseOnHover repeat={4} className="[--duration:200s]" reverse>
           {testimonialData.map((testimonial,index) => (
             <div key={testimonial.id} className={`grid justify-center text-center p-10 rounded-sm ${index%2===0 ?"bg-gradient-to-r from-[#595AED] to-[#9E65E9] text-white":"shadow-lg"} w-96`}>
-              <p className="italic">"{testimonial.testimonial}"</p>
+              <p className="italic">&quot;{testimonial.testimonial}&quot;</p>
               <p className="text-lg opacity-50 mt-2">{testimonial.name}</p>
             </div>
           ))}

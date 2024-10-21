@@ -1,9 +1,8 @@
 "use client";
 
-import { Lottie } from 'lottie-react';
-import React, { useState } from 'react';
-import envalopeImg from '../../../public/assets/envalope.gif';
 import Image from 'next/image';
+import { useState } from 'react';
+import envalopeImg from '../../../public/assets/envalope.gif';
 
 const NewsLetter = () => {
     const [name, setName] = useState('');
