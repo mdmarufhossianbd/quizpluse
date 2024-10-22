@@ -133,7 +133,7 @@ const UserDashboard = () => {
               <h3 className="text-xl font-semibold">{quiz.quizName}</h3>
               <p className="mt-2">{quiz.totalQuestions} Questions</p>
               <p className="mt-1">Attempts: {quiz.totalParticipated}</p>
-              <p className="mt-1">Difficulty: {quiz.quizCategory === "Programming" ? "Hard" : quiz.quizCategory === "Sports" ? "Medium" : "Easy"}</p>
+              <p className="mt-1">Category: {quiz.quizCategory}</p>
             </div>
           ))}
         </div>
