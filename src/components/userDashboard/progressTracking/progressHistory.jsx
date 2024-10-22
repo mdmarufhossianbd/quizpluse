@@ -11,27 +11,27 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 const ProgressHistory = () => {
-  const {data} = useSession()
+  const { data } = useSession()
   const userEmail = data?.user?.email
   const [quizResult, setQuizResult] = useState([])
   const [reward, setReward] = useState(0)
   const [totalCompletedQuiz, setTotalCompletedQuiz] = useState(0)
-  
+
 
   useEffect(() => {
-    const getResultDetails = async() => {
+    const getResultDetails = async () => {
       await axios.get(`/api/v1/quiz/user-progress?email=${userEmail}`)
-      .then(res => {
-        console.log(res.data);
-        if(res.data?.success){
-          setReward(res?.data?.reward)
-          setTotalCompletedQuiz(res?.data?.totalCompletedQuiz)
-          setQuizResult(res?.data?.quizResult)
-        }
-      })
+        .then(res => {
+          console.log(res.data);
+          if (res.data?.success) {
+            setReward(res?.data?.reward)
+            setTotalCompletedQuiz(res?.data?.totalCompletedQuiz)
+            setQuizResult(res?.data?.quizResult)
+          }
+        })
     }
     getResultDetails()
-  },[userEmail])
+  }, [userEmail])
 
   const overallAccuracy = ProgressData[0]?.overview?.overallAccuracy;
   const averageScore = ProgressData[0]?.overview?.averageScore;
@@ -78,6 +78,8 @@ const ProgressHistory = () => {
         </div>
       </section>
       <section>
+        <h2 className="text-3xl my-4">Score Bar Chart</h2>
+
         <Chart quizResult={quizResult}></Chart>
       </section>
     </div>

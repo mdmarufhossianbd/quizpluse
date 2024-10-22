@@ -1,9 +1,33 @@
 "use client";
+import Chart from "@/components/ui/chart.jsx";
+import axios from "axios";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { FiClipboard, FiStar, FiActivity } from "react-icons/fi";
 
 const UserDashboard = () => {
   const { data, status } = useSession();
+  const userEmail = data?.user?.email
+
+  const [quizResult, setQuizResult] = useState([])
+
+
+
+  useEffect(() => {
+    const getResultDetails = async () => {
+      await axios.get(`/api/v1/quiz/user-progress?email=${userEmail}`)
+        .then(res => {
+          console.log(res.data);
+          if (res.data?.success) {
+            // setReward(res?.data?.reward)
+            // setTotalCompletedQuiz(res?.data?.totalCompletedQuiz)
+            setQuizResult(res?.data?.quizResult)
+          }
+        })
+    }
+    getResultDetails()
+  }, [userEmail])
+
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -44,10 +68,11 @@ const UserDashboard = () => {
 
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div className="grid grid-cols-1 gap-6 mb-12">
         {/* Quiz Participation Line Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Quiz Participation Over Time</h2>
+          <Chart quizResult={quizResult}></Chart>
 
         </div>
       </div>
