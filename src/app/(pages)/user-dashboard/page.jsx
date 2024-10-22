@@ -52,6 +52,17 @@ const UserDashboard = () => {
         </div>
       </div>
 
+      {/* Recent Activities Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 className="text-3xl font-bold text-[#5C0096] mb-4">Recent Activities</h2>
+        <ul className="list-disc ml-6 text-lg text-gray-700 space-y-3">
+          <li>Attempted "JavaScript Basics" quiz.</li>
+          <li>Created a new quiz "React Fundamentals".</li>
+          <li>Updated settings for "HTML & CSS" quiz.</li>
+        </ul>
+      </div>
+
+
     </div>
   );
 };
