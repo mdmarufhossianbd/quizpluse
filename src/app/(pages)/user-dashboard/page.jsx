@@ -37,7 +37,7 @@ const UserDashboard = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       {/* Dashboard Header */}
       <div className="mb-10">
-        <h1 className="text-4xl font-bold text-[#5C0096]">User Dashboard</h1>
+        <h1 className="text-3xl font-bold text-[#5C0096]">User Dashboard</h1>
         <p className="text-lg text-gray-600">Welcome back, {data?.user?.name}!</p>
       </div>
 
@@ -79,7 +79,7 @@ const UserDashboard = () => {
 
       {/* Recent Activities Section */}
       <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-3xl font-bold text-[#5C0096] mb-4">Recent Activities</h2>
+        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recent Activities</h2>
         <ul className="list-disc ml-6 text-lg text-gray-700 space-y-3">
           <li>Attempted "JavaScript Basics" quiz.</li>
           <li>Created a new quiz "React Fundamentals".</li>
@@ -89,7 +89,7 @@ const UserDashboard = () => {
 
       {/* Featured Quizzes Section */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
+        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-[#5C0096] text-white p-4 rounded-lg">
             <h3 className="text-xl font-semibold">JavaScript Advanced</h3>
