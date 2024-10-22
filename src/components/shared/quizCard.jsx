@@ -23,7 +23,11 @@ const QuizCard = ({ item }) => {
 
     return (
         <div className="text-start group p-5 bg-[#D6A0F8]/10 rounded-lg flex flex-col justify-center gap-2 relative after:absolute after:h-full after:bg-[#dcabf84b] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0">
-            <Toaster richColors position='top-right' />
+            <Toaster richColors position='top-right' toastOptions={{
+                style: {
+                    marginTop: '60px', // Adjust the margin to fit under your header
+                },
+            }} />
 
             <Image
                 className="rounded group-hover:opacity-50 group-hover:scale-105 transition-transform duration-200 w-full"
