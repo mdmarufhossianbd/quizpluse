@@ -1,5 +1,7 @@
 "use client";
+import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Chart from "@/components/ui/chart.jsx";
+import { getAllQuizes } from "@/utils/fetchQuizes";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -7,30 +9,47 @@ import { FiClipboard, FiStar, FiActivity } from "react-icons/fi";
 
 const UserDashboard = () => {
   const { data, status } = useSession();
-  const userEmail = data?.user?.email
+  const userEmail = data?.user?.email;
+  const [quizes, setQuizes] = useState([]);
+  const [quizResult, setQuizResult] = useState([]);
 
-  const [quizResult, setQuizResult] = useState([])
+  // Fetch all quizzes on component mount
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        const quizesData = await getAllQuizes();
+        setQuizes(quizesData);
+      } catch (error) {
+        console.error("Error fetching quizzes:", error);
+      }
+    };
+    fetchQuizzes();
+  }, []);
 
-
-
+  // Fetch user-specific quiz progress
   useEffect(() => {
     const getResultDetails = async () => {
-      await axios.get(`/api/v1/quiz/user-progress?email=${userEmail}`)
-        .then(res => {
-          console.log(res.data);
-          if (res.data?.success) {
-            // setReward(res?.data?.reward)
-            // setTotalCompletedQuiz(res?.data?.totalCompletedQuiz)
-            setQuizResult(res?.data?.quizResult)
-          }
-        })
+      try {
+        const res = await axios.get(`/api/v1/quiz/user-progress?email=${userEmail}`);
+        if (res.data?.success) {
+          setQuizResult(res?.data?.quizResult);
+        }
+      } catch (error) {
+        console.error("Error fetching quiz results:", error);
+      }
+    };
+    if (userEmail) {
+      getResultDetails();
     }
-    getResultDetails()
-  }, [userEmail])
+  }, [userEmail]);
 
+  const featuredQuiz = quizes.filter(quiz => quiz?.featured === "Yes");
+
+  console.log(quizes)
+  console.log(featuredQuiz)
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <DataLoader />;
   }
 
   return (
@@ -66,14 +85,12 @@ const UserDashboard = () => {
         </div>
       </div>
 
-
       {/* Charts Section */}
       <div className="grid grid-cols-1 gap-6 mb-12">
         {/* Quiz Participation Line Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Quiz Participation Over Time</h2>
           <Chart quizResult={quizResult}></Chart>
-
         </div>
       </div>
 
@@ -108,7 +125,6 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };
