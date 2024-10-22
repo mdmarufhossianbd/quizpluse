@@ -43,10 +43,10 @@ const UserDashboard = () => {
     }
   }, [userEmail]);
 
-  const featuredQuiz = quizes.filter(quiz => quiz?.featured === "Yes");
+  const topFeaturedQuizzes = quizes.filter(quiz => quiz?.featured === "Yes").sort((a, b) => b.totalParticipated - a.totalParticipated).slice(0, 3);
 
   console.log(quizes)
-  console.log(featuredQuiz)
+  // console.log(featuredQuiz)
 
   if (status === "loading") {
     return <DataLoader />;
@@ -105,7 +105,7 @@ const UserDashboard = () => {
       </div>
 
       {/* Featured Quizzes Section */}
-      <div className="bg-white p-6 rounded-lg shadow-lg">
+      {/* <div className="bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-[#5C0096] text-white p-4 rounded-lg">
@@ -123,6 +123,19 @@ const UserDashboard = () => {
             <p className="mt-2">8 Questions</p>
             <p className="mt-1">Difficulty: Easy</p>
           </div>
+        </div>
+      </div> */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {topFeaturedQuizzes.map((quiz) => (
+            <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
+              <h3 className="text-xl font-semibold">{quiz.quizName}</h3>
+              <p className="mt-2">{quiz.totalQuestions} Questions</p>
+              <p className="mt-1">Attempts: {quiz.totalParticipated}</p>
+              <p className="mt-1">Difficulty: {quiz.quizCategory === "Programming" ? "Hard" : quiz.quizCategory === "Sports" ? "Medium" : "Easy"}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
