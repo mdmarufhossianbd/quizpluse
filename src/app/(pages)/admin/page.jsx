@@ -77,19 +77,12 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Need to show a chart section below */}
-      <div>
-        <h2 className="text-3xl font-bold mb-4 text-[#5C0096]">System Overview</h2>
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <ul className="list-disc ml-6 space-y-2">
-            <li>
-              <FiServer className="text-[#5C0096] inline-block mr-2" />
-              Server Status: <span className="text-green-600">Operational</span>
-            </li>
-            <li>Last System Backup: Oct 11, 2024</li>
-            <li>Pending Admin Tasks: 3</li>
-            {/* Add more system-related data */}
-          </ul>
+
+      {/* Charts/Analytics (placeholder) */}
+      <div className="mt-10">
+        <h2 className="text-3xl font-bold mb-4 text-[#5C0096]">Analytics Overview</h2>
+        <div className="bg-white p-6 rounded-lg shadow-lg h-64 flex justify-center items-center">
+          <p className="text-xl text-gray-500">Chart or graph will be displayed here</p>
         </div>
       </div>
     </div>
