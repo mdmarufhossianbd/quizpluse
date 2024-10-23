@@ -1,5 +1,4 @@
 import Ranking from '@/components/ranking/ranking'
-import React from 'react'
 
 const page = () => {
   return (

@@ -5,7 +5,7 @@ export async function middleware(req) {
   const secret = process.env.NEXT_PUBLIC_AUTH_SECRET;
   const token = await getToken({ req, secret });
   const { pathname } = req.nextUrl;
-  console.log('pathname =>', pathname);
+  
   if (!token) {
     if (pathname.startsWith('/admin') || pathname.startsWith('/user-dashboard') || pathname === '/quizes/:path*') {
       return NextResponse.redirect(new URL('/login', req.url));
