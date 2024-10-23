@@ -1,5 +1,4 @@
 "use client";
-
 import { Chip, Tab, Tabs, Tooltip } from "@nextui-org/react";
 import {
   Table,
@@ -10,7 +9,9 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import axios from "axios";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "radix-ui";
 import { useEffect, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 import Pagination from "../shared/pagination";
 import SimpleLoading from "../shared/simpleLoading";
 import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
@@ -23,7 +24,24 @@ const ManageQuizzes = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
-  const [deleted, setDelete] = useState(false)
+  const [deleted, setDelete] = useState(false);
+  const [statusUpdated, setStatusUpdated] = useState(false);
+  
+
+  const handelStatus = async (status, id) => {
+    try {
+      const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+      const _id = id;
+      const res = await axios.put(`${baseURL}/api/v1/quiz/change-status`, { _id: _id, quizStatus: status });
+      // result.modifiedCount
+      console.log(res.data);
+
+      // Trigger re-fetch of quizzes
+      setStatusUpdated(prev => !prev); 
+    } catch (error) {
+      console.error("Error updating quiz status:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchQuizzes = async (type) => {
@@ -43,7 +61,7 @@ const ManageQuizzes = () => {
       }
     };
     fetchQuizzes(activeTab);
-  }, [page, activeTab, deleted]);
+  }, [page, activeTab, deleted,statusUpdated]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -94,11 +112,45 @@ const ManageQuizzes = () => {
                     Published
                   </Chip>
                 )}
-                {item.quizStatus === "pending" && (
+                 {item.quizStatus === "pending" && (
+                < div className="flex">
                   <Chip color="primary" variant="dot" className="border-none">
                     Pending
                   </Chip>
-                )}
+                  <div style={{ position: "relative" }}>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <button className="btn text-sm p-2 ">
+                          <FaChevronDown></FaChevronDown>
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          zIndex: 10,
+                          backgroundColor: "white",
+                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                          padding: "0.5rem",
+                          borderRadius: "0.375rem",
+                        }}
+                      >
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('publish',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                            Publish
+                          </button>
+                        </DropdownMenuLabel>
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('rejected',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                            Reject
+                          </button>
+                        </DropdownMenuLabel>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </ div>
+              )}
                 {item.quizStatus === "rejected" && (
                   <Chip color="danger" variant="dot" className="border-none">
                     Rejected
