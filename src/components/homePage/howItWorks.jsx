@@ -1,31 +1,35 @@
 import React from "react";
-import { FaClipboard, FaHeadset, FaMobileAlt, FaRocket } from "react-icons/fa";
+import { TbScoreboard } from "react-icons/tb";
+import { FiClock } from "react-icons/fi";
+import { LuClipboardCheck } from "react-icons/lu";
+import { FaRegQuestionCircle } from "react-icons/fa";
+
 
 const HowItWorks = () => {
   const cards = [
     {
-      icon: <FaRocket size={40} />,
-      title: "Fast Performance",
+      icon: <FaRegQuestionCircle  size={40} />,
+      title: "Question Display",
       description:
-        "This website is Optimized for a all devices by Next Js. You can enjoy the website smoothly",
+        "Feature: Display questions one by one or all at once.Store the questions in an array of objects where each object contains a question, multiple options, and the correct answer.",
     },
     {
-      icon: <FaMobileAlt size={40} />,
-      title: "Perfect Responsive",
+      icon: <FiClock size={40} />,
+      title: "Timer",
       description:
-        "Our template is full perfect for all devices. You can visit our template on any device easily.",
+        "Feature: Set a timer for each question or for the entire quiz.Display a countdown timer for each question, and automatically move to the next question or submit the answer once the time is up.",
     },
     {
-      icon: <FaHeadset size={40} />,
-      title: "Fast & Friendly Support",
+      icon: <TbScoreboard size={40} />,
+      title: "Score Calculation",
       description:
-        "We provide 24/7 support for all clients. You can purchase without hesitation.",
+        "Feature: Track the user’s score based on correct answers. For each correct answer, award points (e.g., 1 point per correct answer). Sum up the points at the end of the quiz to display the total score.",
     },
     {
-      icon: <FaClipboard size={40} />,
-      title: "Easy to Use",
+      icon: <LuClipboardCheck size={40} />,
+      title: "Result Display",
       description:
-        "Create your own custom quizzes, participate quizzes, Boost yourself very easily.",
+        "Feature: Show the final score and feedback when the quiz is completed.After quiz completion, display the total score along with the number of correct, incorrect, and unanswered questions.",
     },
   ];
 
