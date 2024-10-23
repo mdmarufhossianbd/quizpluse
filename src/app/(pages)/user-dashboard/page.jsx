@@ -4,6 +4,7 @@ import Chart from "@/components/ui/chart.jsx";
 import { getAllQuizes } from "@/utils/fetchQuizes";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiClipboard, FiStar, FiActivity } from "react-icons/fi";
 
@@ -129,12 +130,14 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {topFeaturedQuizzes.map((quiz) => (
-            <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
-              <h3 className="text-xl font-semibold">{quiz.quizName}</h3>
-              <p className="mt-2">{quiz.totalQuestions} Questions</p>
-              <p className="mt-1">Attempts: {quiz.totalParticipated}</p>
-              <p className="mt-1">Category: {quiz.quizCategory}</p>
-            </div>
+            <Link href={`/quizes/${quiz?._id}`}>
+              <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
+                <h3 className="text-xl font-semibold">{quiz?.quizName}</h3>
+                <p className="mt-2">{quiz?.totalQuestions} Questions</p>
+                <p className="mt-1">Attempts: {quiz?.totalParticipated}</p>
+                <p className="mt-1">Category: {quiz?.quizCategory}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
