@@ -1,6 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
-import { FiClipboard, FiUsers, FiUserCheck, FiUserPlus, FiUser } from "react-icons/fi";
+import { FiClipboard, FiUser, FiUserCheck, FiUserPlus, FiUsers } from "react-icons/fi";
 
 const AdminDashboard = () => {
   const { data, status } = useSession();
@@ -74,9 +74,9 @@ const AdminDashboard = () => {
         <h2 className="text-3xl font-bold mb-4 text-[#5C0096]">Recent Quizzes</h2>
         <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <ul className="list-disc ml-6 space-y-2">
-            <li>Quiz 'JavaScript Basics' was created on Oct 12, 2024.</li>
-            <li>New quiz 'React Fundamentals' published on Oct 10, 2024.</li>
-            <li>Quiz 'HTML & CSS' updated on Oct 9, 2024.</li>
+            <li>Quiz &apos;JavaScript Basics&apos; was created on Oct 12, 2024.</li>
+            <li>New quiz &apos;React Fundamentals&apos; published on Oct 10, 2024.</li>
+            <li>Quiz &apos;HTML & CSS&apos; updated on Oct 9, 2024.</li>
           </ul>
         </div>
       </div>

@@ -7,7 +7,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { FiClipboard, FiStar, FiActivity } from "react-icons/fi";
+import { FiActivity, FiClipboard, FiStar } from "react-icons/fi";
 
 const UserDashboard = () => {
   const { data, status } = useSession();
@@ -104,7 +104,7 @@ const UserDashboard = () => {
             <RecentlyCompletedQuiz quizResult={quizResult} />
           </div>
         ) : (
-          <p className="text-gray-600 text-center">You haven't completed any quizzes yet.</p>
+          <p className="text-gray-600 text-center">You haven&apos;t completed any quizzes yet.</p>
         )}
       </div>
 
@@ -114,7 +114,7 @@ const UserDashboard = () => {
         <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {topFeaturedQuizzes.map((quiz) => (
-            <Link href={`/quizes/${quiz?._id}`}>
+            <Link href={`/quizes/${quiz?._id}`} key={quiz?._id}>
               <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
                 <h3 className="text-xl font-semibold">{quiz?.quizName}</h3>
                 <p className="mt-2">{quiz?.totalQuestions} Questions</p>

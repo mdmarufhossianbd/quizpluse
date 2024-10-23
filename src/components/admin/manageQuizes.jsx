@@ -9,13 +9,13 @@ import {
   TableRow,
 } from "@nextui-org/table";
 import axios from "axios";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "radix-ui";
 import { useEffect, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 import Pagination from "../shared/pagination";
 import SimpleLoading from "../shared/simpleLoading";
 import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
 import PreviewModal from "./manageQuiz/previewModal";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "radix-ui";
-import { FaChevronDown } from "react-icons/fa";
 
 const ManageQuizzes = () => {
   // const { data } = useSession();

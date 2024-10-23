@@ -2,24 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Toaster } from "sonner";
 import { Button } from "../ui/button";
-import { useSession } from "next-auth/react";
-import { Toaster, toast } from "sonner";
 
 const QuizCard = ({ item }) => {
-    const { data } = useSession();
-    // console.log(data?.user);
-
-    const handleStartQuiz = () => {
-        console.log(data?.user)
-        if (data?.user) {
-            window.location.href = `/quizes/${item?._id}`;
-        }
-        else {
-            toast.error("Please login to Participate in the Quiz")
-
-        }
-    }
 
     return (
         <div className="text-start group p-5 bg-[#D6A0F8]/10 rounded-lg flex flex-col justify-center gap-2 relative after:absolute after:h-full after:bg-[#dcabf84b] z-20 shadow-lg after:-z-20 after:w-full after:inset-0 after:rounded-lg transition-all duration-300 hover:transition-all hover:duration-300 after:transition-all after:duration-500 after:hover:transition-all after:hover:duration-500 overflow-hidden cursor-pointer after:-translate-y-full after:hover:translate-y-0">
@@ -48,8 +34,8 @@ const QuizCard = ({ item }) => {
                 <p>Published on: {new Date(item?.createAt).toLocaleString()}</p>
             </div>
 
-            <Button onClick={handleStartQuiz} className="hidden group-hover:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"> Start Now
-                {/* <Link href={`/quizes/${item?._id}`}>Start Now</Link> */}
+            <Button className="hidden group-hover:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Link href={`/quizes/${item?._id}`}>Start Now</Link>
             </Button>
 
             {item?.featured === "Yes" && (

@@ -1,6 +1,5 @@
-import React from 'react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import './info.css';
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '../ui/tooltip';
 
 const InfoRank = ({user,rank}) => {
   console.log(user);

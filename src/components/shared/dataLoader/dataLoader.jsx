@@ -1,4 +1,3 @@
-import React from 'react';
 import './dataLoader.css';
 const DataLoader = () => {
     return (
