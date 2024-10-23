@@ -18,24 +18,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         const newAnswers = [...userAnswers];
         newAnswers[currentQuestionIndex] = optionIndex;
         setUserAnswers(newAnswers);
-    };
-
-    // Calculate correct and incorrect answers
-    const calculateResult = () => {
-        // let correct = 0;
-        // let incorrect = 0;
-        // quiz.questions.forEach((question, index) => {
-        //     if (userAnswers[index] !== null) {
-        //         if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
-        //             correct++;
-        //         } else {
-        //             incorrect++;
-        //         }
-        //     }
-        // });
-        // setCorrectCount(correct);
-        // setIncorrectCount(incorrect);
-    };
+    };   
 
     // Handle navigation to next question or submitting the quiz
     const handleNext = () => {
