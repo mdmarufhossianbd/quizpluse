@@ -6,9 +6,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
+import Link from "next/link";
 import { Autoplay, Pagination, Parallax } from "swiper/modules";
 import "./banner.css";
-import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -26,11 +26,11 @@ const Banner = () => {
         loop={true}
         // navigation={true}
         autoplay={{
-          delay: 3000, // Change slide every 3 seconds
+          delay: 5000, // Change slide every 3 seconds
           disableOnInteraction: false, // Continue autoplay after interaction
         }}
         modules={[Parallax, Pagination, Autoplay]}
-        className="mySwiper"
+        className="mySwiper min-[800px]"
       >
         <div
           slot="container-start"

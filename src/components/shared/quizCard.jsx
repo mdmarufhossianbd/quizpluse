@@ -43,7 +43,7 @@ const QuizCard = ({ item }) => {
                     Featured
                 </p>
             )}
-            {item?.totalParticipated > 5 && (
+            {item?.totalParticipated >= 5 && (
                 <p className="absolute top-5 -right-8 bg-[#005eeb] text-white text-sm px-10 py-1 transform rotate-45 shadow-lg">
                     Popular
                 </p>

@@ -1,15 +1,22 @@
-import React from 'react';
+import { IconCreditCard } from '@tabler/icons-react'; // Importing a payment-related icon
 import Link from 'next/link'; // If using Next.js for navigation
-import { IconArrowForwardUp, IconCreditCard } from '@tabler/icons-react'; // Importing a payment-related icon
 
 const PaymentAd = () => {
     return (
-        <section className="bg-gradient-to-r from-blue-800 via-purple-800 to-indigo-800 text-white py-16">
+        <section className="bg-gradient-to-r from-[#595AED] via-purple-800 to-[#595AED] text-white py-16">
             <div className="container mx-auto text-center px-6">
-                <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">
-                    Unlock Premium Features with Our Membership Plans
+                <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight flex flex-col">
+                    <span>
+                        Unlock Premium Features
+                    </span>
+                    <span className='md:my-3'>
+                        with
+                    </span>
+                    <span>
+                        Our Membership Plans
+                    </span>
                 </h2>
-                <p className="text-lg md:text-xl mb-10 leading-relaxed">
+                <p className="text-lg md:text-xl mb-10 leading-relaxed max-w-4xl mx-auto">
                     Elevate your learning experience with exclusive quizzes, advanced analytics, and much more. Choose the plan that’s right for you and start your journey today.
                 </p>
 
@@ -40,7 +47,7 @@ const PaymentAd = () => {
                 {/* Navigation Button */}
                 <div className="mt-10">
                     <Link href="/user-dashboard/plans">
-                        <button className="inline-flex items-center bg-white hover:bg-[#5C0096] text-[#5C0096] hover:text-white border-3 border-[#5C0096] hover:border-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform duration-300 hover:scale-105">
+                        <button className="inline-flex items-center bg-white hover:bg-[#5C0096] text-[#5C0096] hover:text-white border border-[#5C0096] hover:border-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-transform duration-400 hover:scale-105">
                             <IconCreditCard className="mr-2" />
                             Explore Membership Plans
                             {/* <IconArrowForwardUp className="ml-2" /> */}
