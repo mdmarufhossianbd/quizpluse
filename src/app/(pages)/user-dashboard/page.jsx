@@ -47,9 +47,6 @@ const UserDashboard = () => {
 
   const topFeaturedQuizzes = quizes.filter(quiz => quiz?.featured === "Yes").sort((a, b) => b.totalParticipated - a.totalParticipated).slice(0, 3);
 
-  // console.log(quizes)
-  // console.log(featuredQuiz)
-
   if (status === "loading") {
     return <DataLoader />;
   }
@@ -70,21 +67,21 @@ const UserDashboard = () => {
           <FiClipboard className="text-[#5C0096] text-4xl mr-4" />
           <div>
             <h2 className="text-xl font-semibold">Total Quizzes</h2>
-            <p className="text-3xl font-bold">12</p>
+            <p className="text-3xl font-bold"><span>20</span></p>
           </div>
         </div>
         <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
           <FiActivity className="text-[#5C0096] text-4xl mr-4" />
           <div>
             <h2 className="text-xl font-semibold">Total Attempts</h2>
-            <p className="text-3xl font-bold">45</p>
+            <p className="text-3xl font-bold"><span>45</span></p>
           </div>
         </div>
         <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
           <FiStar className="text-[#5C0096] text-4xl mr-4" />
           <div>
-            <h2 className="text-xl font-semibold">Average Score</h2>
-            <p className="text-3xl font-bold">85%</p>
+            <h2 className="text-xl font-semibold">Average Point</h2>
+            <p className="text-3xl font-bold"><span>85%</span></p>
           </div>
         </div>
       </div>
