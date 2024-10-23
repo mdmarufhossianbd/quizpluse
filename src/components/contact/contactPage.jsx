@@ -2,7 +2,7 @@
 import Input from "@/components/contact/input";
 import Image from "next/image";
 import { AiFillMessage } from "react-icons/ai";
-
+import { FaFacebook, FaMailBulk, FaTwitter } from "react-icons/fa";
 
 const ContactPage = () => {
   const handleSubmit = (e) => {
@@ -41,7 +41,7 @@ const ContactPage = () => {
       <section className="m-6 md:m-12 flex flex-col md:flex-row justify-center gap-5">
         <div className="w-full md:w-1/2 bg-purple-100 p-4 pt-10 rounded-lg shadow-md text-center space-y-10">
           <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-          <div className="text-base ">
+          <div className="p-4 text-lg">
             <p>
               Have any questions or feedback about our Quiz App? We would love
               to hear from you! Contact us using the form below, and we will get
@@ -49,23 +49,18 @@ const ContactPage = () => {
             </p>
           </div>
           <div className="mb-5">
-
             <p className="text-lg font-semibold">Massage us directly at</p>
 
             <a href="quizePulse@gmail.com" className="text-xl text-blue-500">
-
               quizePulse@gmail.com
-
-
             </a>
 
+            
           </div>
-          <div>
-            <button className="flex justify-center items-center mx-auto bg-purple-900 text-white py-2 px-4 rounded gap-2">
-              {/* <MessageCircle/> */}
-              <AiFillMessage className="ml-2" />
-              chat
-            </button>
+          <div className="flex justify-center items-center gap-6">
+            <FaFacebook/>
+            <FaTwitter/>
+            <FaMailBulk/>
           </div>
         </div>
 
@@ -90,15 +85,14 @@ const ContactPage = () => {
               placeholder="Enter your message here..."
             ></textarea>
 
-            <div className="flex justify-center">
+            <div className="flex justify-end">
               <button
                 type="submit"
-                className="mt-4 bg-purple-900 text-white py-2 px-4 rounded hover:bg-purple-500 w-64"
+                className="mt-4 bg-purple-900 text-white py-2 px-4 rounded hover:bg-purple-500"
               >
                 Submit
               </button>
             </div>
-
           </div>
         </form>
       </section>

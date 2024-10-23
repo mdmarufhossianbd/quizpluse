@@ -1,52 +1,56 @@
-import React from "react";
-import { FaClipboard, FaHeadset, FaMobileAlt, FaRocket } from "react-icons/fa";
+
+import { BsTrophy } from "react-icons/bs";
+import { FaRegHandshake, FaRegUser } from "react-icons/fa";
+import { PiCertificateBold } from "react-icons/pi";
 
 const HowItWorks = () => {
   const cards = [
     {
-      icon: <FaRocket size={40} />,
-      title: "Fast Performance",
+      icon: <FaRegHandshake size={80} />,
+      title: "1. Join",
       description:
-        "This website is Optimized for a all devices by Next Js. You can enjoy the website smoothly",
+        "You can create an account by clicking the Sign Up button on the homepage. You will need to provide your email address, create a password, and verify your email to complete the process. That's how you join",
     },
     {
-      icon: <FaMobileAlt size={40} />,
-      title: "Perfect Responsive",
+      icon: <FaRegUser size={80} />,
+      title: "2. Participate",
       description:
-        "Our template is full perfect for all devices. You can visit our template on any device easily.",
+        "When the quiz starts, answer questions carefully, manage your time, and submit your answers.Check results for feedback, engage in discussions with other participants, and celebrate your involvement.",
     },
     {
-      icon: <FaHeadset size={40} />,
-      title: "Fast & Friendly Support",
+      icon: <BsTrophy size={80} />,
+      title: "3. Rewards",
       description:
-        "We provide 24/7 support for all clients. You can purchase without hesitation.",
+        "Users can earn rewards by achieving high scores on quizzes. Incentives may include points, badges, gift cards, or exclusive content access.",
     },
     {
-      icon: <FaClipboard size={40} />,
-      title: "Easy to Use",
+      icon: <PiCertificateBold size={80} />,
+      title: "4. Certification",
       description:
-        "Create your own custom quizzes, participate quizzes, Boost yourself very easily.",
+        "Certification in Quiz pulse applications adds significant value by validating users' knowledge and skills, motivating them to learn, and enhancing their career prospects.",
     },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto">
-      <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-semibold py-10">
+    <div className="max-w-7xl mx-auto mt-5">
+      <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-semibold py-10 ">
         How it Works
       </h1>
-      <div className="p-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+      <div className="py-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
           {cards.map((card, index) => (
             <div
               key={index}
-              className="bg-[#7534f7] p-10 shadow-lg text-start rounded-lg transition duration-200 ease-in-out hover:bg-gray-800 hover:scale-105"
+              className="bg-gradient-to-t from-[#595AED] to-purple-800 hover:from-gray-800 hover:to-purple-800 p-10 shadow-lg text-start rounded-lg transition duration-200 ease-in-out hover:bg- hover:scale-105"
               style={{ minHeight: "300px" }}
             >
-              <div className="text-white mb-4">{card.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
+              <div className="text-white mb-4 flex justify-center items-center">
+                {card.icon}
+              </div>
+              <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-white">
                 {card.title}
               </h3>
-              <p className="text-gray-200 group-hover:text-white text-lg">
+              <p className="text-gray-200 text-justify group-hover:text-white">
                 {card.description}
               </p>
             </div>

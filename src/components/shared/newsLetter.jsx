@@ -25,7 +25,7 @@ const NewsLetter = () => {
 
 
     return (
-        <section className="bg-gray-100 py-12 my-8">
+        <section className="bg-gray-100 py-12 mt-8">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
                 {/* Lottie Animation Section */}
                 <div className="flex justify-center w-full md:w-1/2 mb-8 md:mb-0">
