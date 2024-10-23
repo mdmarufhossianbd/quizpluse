@@ -8,10 +8,11 @@ import "swiper/css/pagination";
 // import required modules
 import { Autoplay, Pagination, Parallax } from "swiper/modules";
 import "./banner.css";
+import Link from "next/link";
 
 const Banner = () => {
   return (
-    <div className="mt-10">
+    <div className="">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -35,12 +36,13 @@ const Banner = () => {
           slot="container-start"
           className="parallax-bg"
           style={{
-            backgroundImage: "url(https://i.ibb.co.com/NS79yVJ/Banner2.jpg)",
+            backgroundImage: "url('/assets/banner1.png')"
           }}
+
           data-swiper-parallax="-23%"
         ></div>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-5xl font-bold text-white"
               data-swiper-parallax="-300"
@@ -55,17 +57,17 @@ const Banner = () => {
                 Get the chance to test your knowledge and improve your skills by
                 taking this quiz.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/register"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center  h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-4xl font-bold text-white"
               data-swiper-parallax="-300"
@@ -80,17 +82,17 @@ const Banner = () => {
                 The quiz tournaments will give you a chance to have fun, learn,
                 and grow at the same time.
               </p>
-              <a
-                href="#"
+              <Link
+                href="/login"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Join Now
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="flex items-center justify-center h-full flex-col text-center py-8 lg:py-16">
+          <div className="flex items-center justify-center  h-full w-full flex-col text-center py-8 lg:py-14 my-6 md:my-16">
             <div
               className="title text-4xl font-bold text-white"
               data-swiper-parallax="-300"
@@ -104,13 +106,13 @@ const Banner = () => {
               <p className="mb-4">
                 You will have the chance to compete in QuizPulse and become a
                 champion if you challenge yourself.
-              </p>{" "}
-              <a
-                href="#"
+              </p>
+              <Link
+                href="/quizes"
                 className="inline-block px-8 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
                 Compete Now
-              </a>
+              </Link>
             </div>
           </div>
         </SwiperSlide>

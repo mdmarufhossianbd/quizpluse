@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const UserDashInfo = ({ user }) => {
-  console.log(user);
+  // console.log(user);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="border border-[#5C0096] rounded-full">

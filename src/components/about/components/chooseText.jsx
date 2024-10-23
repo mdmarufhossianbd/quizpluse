@@ -5,8 +5,8 @@ import { TbCheckbox } from "react-icons/tb";
 
 const ChooseText = () => {
   return (
-    <div className='sm:w-full  lg:w-[50%] m-4 p-4'>
-      <h1 className='lg:text-4xl text-xl  text-[#7555FD] font-semibold'>
+    <div className='w-full lg:w-1/2 m-4 p-4'>
+      <h1 className='w-full lg:text-4xl text-xl  text-[#7555FD] font-semibold mb-4'>
         Why Students Choose Us For Gaining Their Knowledge!
       </h1>
       <p className='opacity-50 my-2 text-sm md:text-base'>
@@ -14,7 +14,7 @@ const ChooseText = () => {
       </p>
       <ul className='grid grid-cols-1 md:grid-cols-2 gap-2'>
         <li className='flex items-center gap-1 text-lg md:text-2xl'>
-          <TbCheckbox className='text-[#9782f2]' /> Personalized Quiz 
+          <TbCheckbox className='text-[#9782f2]' /> Personalized Quiz
         </li>
         <li className='flex items-center gap-1 text-lg md:text-2xl'>
           <TbCheckbox className='text-[#9782f2]' /> Real-Time Feedback

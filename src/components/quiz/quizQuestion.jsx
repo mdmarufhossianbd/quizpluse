@@ -18,24 +18,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         const newAnswers = [...userAnswers];
         newAnswers[currentQuestionIndex] = optionIndex;
         setUserAnswers(newAnswers);
-    };
-
-    // Calculate correct and incorrect answers
-    const calculateResult = () => {
-        // let correct = 0;
-        // let incorrect = 0;
-        // quiz.questions.forEach((question, index) => {
-        //     if (userAnswers[index] !== null) {
-        //         if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
-        //             correct++;
-        //         } else {
-        //             incorrect++;
-        //         }
-        //     }
-        // });
-        // setCorrectCount(correct);
-        // setIncorrectCount(incorrect);
-    };
+    };   
 
     // Handle navigation to next question or submitting the quiz
     const handleNext = () => {
@@ -54,24 +37,24 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         }
     };
-    
+
     // Submit result to the database
-    const submitResult = async() => {
+    const submitResult = async () => {
         setLoading(true)
-        
+
         let correct = 0;
-            let incorrect = 0;
-            quiz.questions.forEach((question, index) => {
-                if (userAnswers[index] !== null) {
-                    if (userAnswers[index] === question.options.indexOf(question.correctOption)) {
-                        correct++;
-                    } else {
-                        incorrect++;
-                    }
+        let incorrect = 0;
+        quiz.questions.forEach((question, index) => {
+            if (userAnswers[index] !== null) {
+                if (userAnswers[index] === question.options.indexOf(question.correctAnswer)) {
+                    correct++;
+                } else {
+                    incorrect++;
                 }
-            });
-            setCorrectCount(correct);
-            setIncorrectCount(incorrect);
+            }
+        });
+        setCorrectCount(correct);
+        setIncorrectCount(incorrect);
 
         const quizResult = {
             quizId: quiz?._id,
@@ -79,19 +62,19 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
             userEmail: data?.user?.email,
             earnedPoint: correct,
             totalPoint: parseInt(quiz?.totalQuestions),
-            quizImage : quiz?.quizImage
+            quizImage: quiz?.quizImage
         };
-        console.log('quizResult =>', quizResult);  
+        // console.log('quizResult =>', quizResult);
         await axios.post('/api/v1/quiz/result', quizResult)
-        .then(res => {
-            if(res.data.success)
-            setTimeLeft(0)
-            setLoading(false)
-        })
+            .then(res => {
+                if (res.data.success)
+                    setTimeLeft(0)
+                setLoading(false)
+            })
     };
 
-    
-    
+
+
     // Display result when quiz is completed or time runs out
     if (quizCompleted || timeLimit === 0) {
         return (
@@ -105,7 +88,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
     }
 
     // loader for showing result
-    if(loading){
+    if (loading) {
         return <Loading />
     }
 

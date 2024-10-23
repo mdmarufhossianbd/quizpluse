@@ -14,7 +14,7 @@ const PreviewQuiz = ({ formData }) => {
                             <li key={optIdx}>{opt}</li>
                         ))}
                     </ul>
-                    <p><strong>Correct Option:</strong> {q.correctOption}</p>
+                    <p><strong>Correct Option:</strong> {q.correctAnswer}</p>
                 </div>
             ))}
         </div>

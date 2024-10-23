@@ -8,7 +8,7 @@ export async function PUT(request) {
     const userCollection = db.collection('users')
     try {
         const data = await request.json()
-        console.log(data);
+        // console.log(data);
         const password = data.currentPassword
         const hashNewPassWord = bcrypt.hashSync(data.newPassword, 14)
         const query = {email : data.userEmail}

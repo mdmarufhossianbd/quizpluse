@@ -1,111 +1,66 @@
-'use client'
-import axios from "axios";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import InfoRank from "./infoRank";
-import "./rank.css";
+'use client';
+import axios from 'axios';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import InfoRank from './infoRank';
+import './rank.css';
 
 const Ranking = () => {
-  const [users, setUser] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    axios.get(`/api/v1/user`)
-      .then((respons) => {
-        setUser(respons.data.result)
-        console.log(respons.data.result)
-        setLoading(false)
-      })
-  }, [])
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/v1/user');
+        setUsers(response.data.result);
+        console.log(response.data.result);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   if (loading) {
-    return "loading";
+    return 'loading...';
   }
 
-  return (
-    <div className=" container mx-auto max-w-7xl pt-6 grid xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center ">
-      {/* 1st card */}
-      {
-        users.map((user, idx) => {
-          return (
-            <div class="card wallet max-w-7xl mx-auto mb-6 px-4 sm:px-6 lg:px-8 border-b" key={idx}>
-              <div class="overlay"></div>
-              <div className="ml-2 p-2 bg-[#E7E7E7] rounded-tr-md w-auto grid h-[200px] absolute top-[23px] right-[30px] rounded-bl-lg">
-                <InfoRank user={user}></InfoRank>
-              </div>
+  const fallbackImage = "https://engineering.unl.edu/images/staff/Kayla-Person.jpg";
 
-              <Image
-                className="bg-[#E7E7E7] rounded-md"
-                src="https://engineering.unl.edu/images/staff/Kayla-Person.jpg"
-                height={200}
-                width={220}
-                alt={user.name}
-              />
-              <div className="content w-[75%] text-black">
-                <p className="text-2xl font-semibold">{user.name}</p>
-                <p>Rewards: {user.total_reward}</p>
-              </div>
-            </div>
-          )
-        })
-      }
+  return (
+    <div className="container gap-2 mx-auto max-w-7xl pt-6 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center">
+      {users.map((user, idx) => (
+        <div
+          className="card wallet max-w-7xl mx-auto mb-6 px-4 sm:px-6 lg:px-8 border-b"
+          key={idx}
+        >
+          <div className="overlay"></div>
+          <div className="ml-2 p-2 bg-[#E7E7E7] rounded-tr-md w-auto grid h-[200px] absolute top-[23px] right-[30px] rounded-bl-lg">
+            <InfoRank user={user} />
+          </div>
+
+          <Image
+            className="bg-[#E7E7E7] rounded-md"
+            src={user.image || fallbackImage} // Use fallback image if user.image is null/undefined
+            height={200}
+            width={220}
+            alt={user.name || 'User'}
+          />
+          <div className="content w-[75%] text-black">
+            <p className="text-2xl font-semibold">{user.name}</p>
+            <p>Rewards: {user.rewards}</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
 export default Ranking;
 
-// const users = [
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 2,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 250,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 5,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 150,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 2,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 250,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 5,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 150,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 2,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 250,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-//   {
-//     name: "John Doe",
-//     email: "johndoe@example.com",
-//     top_ranking: 5,
-//     average_quiz_mark: 87.5,
-//     total_quiz_number: 150,
-//     total_reward: 1200,
-//     user_image: "https://engineering.unl.edu/images/staff/Kayla-Person.jpg",
-//   },
-// ];
+
+// "https://engineering.unl.edu/images/staff/Kayla-Person.jpg"

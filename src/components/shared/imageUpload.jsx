@@ -46,7 +46,7 @@ const ImageUpload = ({ setFormData, boxHeight, quizBanner, bannerTitle }) => {
                             <IoIosCloseCircle className='text-red-400 hover:text-red-500 duration-200 text-xl' />
                         </button>
                     </div> :
-                    <div className={`h-[${boxHeight}] w-full rounded-md bg-[#f5f5f5] flex items-center cursor-pointer`}>
+                    <div className={`h-[${boxHeight}] py-6 w-full rounded-md bg-[#f5f5f5] flex items-center cursor-pointer`}>
                         <p className="text-center w-full font-semibold">{bannerTitle}</p>
                     </div>
             }

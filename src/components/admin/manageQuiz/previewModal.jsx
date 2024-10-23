@@ -69,7 +69,7 @@ const PreviewModal = ({ id }) => {
                                                             {option}
                                                         </li>)
                                                     }
-                                                    <span>Collect Ans : {item?.correctOption}</span>
+                                                    <span>Collect Ans : {item?.correctAnswer}</span>
                                                 </p>
                                             ))
                                         }
@@ -81,7 +81,7 @@ const PreviewModal = ({ id }) => {
                                 <Button color="danger" variant="light" onPress={onClose}>
                                     Close
                                 </Button>
-                               
+
                             </ModalFooter>
                         </>
                     )}

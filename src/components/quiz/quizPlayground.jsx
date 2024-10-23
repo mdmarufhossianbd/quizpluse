@@ -1,11 +1,17 @@
 "use client";
 
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import QuizQuestion from './quizQuestion';
 
 const QuizPlayground = ({ quiz }) => {
+    const {data} = useSession()
+    const router = useRouter()
     const [timeLeft, setTimeLeft] = useState(quiz.quizDuration * 60); // Time in seconds
-
+    if(!data?.user){
+        router.push('/login')
+    }
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));

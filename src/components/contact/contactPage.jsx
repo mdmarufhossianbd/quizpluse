@@ -1,8 +1,6 @@
 "use client";
-import React from "react";
 import Input from "@/components/contact/input";
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
 import { AiFillMessage } from "react-icons/ai";
 
 
@@ -15,7 +13,7 @@ const ContactPage = () => {
       email: formData.get("email"),
       message: formData.get("message"),
     };
-    console.log("Form Data:", formValues);
+    // console.log("Form Data:", formValues);
 
     e.target.reset();
   };
@@ -40,10 +38,10 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <section className="m-12 flex flex-col md:flex-row justify-center gap-5">
-        <div className="w-full md:w-1/2 bg-purple-100 p-3 pt-10 rounded-lg shadow-md text-center space-y-10">
+      <section className="m-6 md:m-12 flex flex-col md:flex-row justify-center gap-5">
+        <div className="w-full md:w-1/2 bg-purple-100 p-4 pt-10 rounded-lg shadow-md text-center space-y-10">
           <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
-          <div className="text-xl ">
+          <div className="text-base ">
             <p>
               Have any questions or feedback about our Quiz App? We would love
               to hear from you! Contact us using the form below, and we will get
@@ -63,7 +61,7 @@ const ContactPage = () => {
 
           </div>
           <div>
-            <button className="bg-purple-900 text-white py-2 px-4 rounded">
+            <button className="flex justify-center items-center mx-auto bg-purple-900 text-white py-2 px-4 rounded gap-2">
               {/* <MessageCircle/> */}
               <AiFillMessage className="ml-2" />
               chat
@@ -73,7 +71,7 @@ const ContactPage = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="border-2 border-violet-100 rounded-lg w-full mx-auto px-8 py-6 space-y-5"
+          className="border-2 border-violet-100 rounded-lg w-full mx-auto px-6 md:px-8 py-6 space-y-5"
         >
           <h1 className="text-center text-3xl font-bold text-purple-900 ">
             Massage Us
