@@ -4,5 +4,5 @@ export const getAllQuizes = async () => {
     const res = await fetch(`${baseUrl}/api/v1/quiz`, { cache: 'no-store' })
     const data = await res?.json();
     const quizes = data?.result;
-    return quizes, data || []
+    return quizes || []
 }
