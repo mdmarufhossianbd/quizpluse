@@ -2,34 +2,38 @@ import React from "react";
 import { TbScoreboard } from "react-icons/tb";
 import { FiClock } from "react-icons/fi";
 import { LuClipboardCheck } from "react-icons/lu";
-import { FaRegQuestionCircle } from "react-icons/fa";
+import { FaRegQuestionCircle, FaTrophy, FaUser } from "react-icons/fa";
 
+import { FaRegHandshake } from "react-icons/fa";
+import { PiCertificateBold } from "react-icons/pi";
+import { BsTrophy } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
 
 const HowItWorks = () => {
   const cards = [
     {
-      icon: <FaRegQuestionCircle  size={40} />,
-      title: "Question Display",
+      icon: <FaRegHandshake size={80} />,
+      title: "Join",
       description:
-        "Feature: Display questions one by one or all at once.Store the questions in an array of objects where each object contains a question, multiple options, and the correct answer.",
+        "You can create an account by clicking the Sign Up button on the homepage. You will need to provide your email address, create a password, and verify your email to complete the process. That's how you join",
     },
     {
-      icon: <FiClock size={40} />,
-      title: "Timer",
+      icon: <FaRegUser size={80} />,
+      title: "Participate",
       description:
-        "Feature: Set a timer for each question or for the entire quiz.Display a countdown timer for each question, and automatically move to the next question or submit the answer once the time is up.",
+        "When the quiz starts, answer questions carefully, manage your time, and submit your answers. Check results for feedback, engage in discussions with other participants, and celebrate your involvement.",
     },
     {
-      icon: <TbScoreboard size={40} />,
-      title: "Score Calculation",
+      icon: <BsTrophy size={80} />,
+      title: "Reward",
       description:
-        "Feature: Track the user’s score based on correct answers. For each correct answer, award points (e.g., 1 point per correct answer). Sum up the points at the end of the quiz to display the total score.",
+        "Quiz rewards enhance engagement and motivation, offering online prizes, certificates, recognition, discounts, or educational benefits. These incentives not only celebrate participants’ achievements but also encourage ongoing involvement and create a positive atmosphere for learning and competition.",
     },
     {
-      icon: <LuClipboardCheck size={40} />,
-      title: "Result Display",
+      icon: <PiCertificateBold size={80} />,
+      title: "Certification",
       description:
-        "Feature: Show the final score and feedback when the quiz is completed.After quiz completion, display the total score along with the number of correct, incorrect, and unanswered questions.",
+        "Certification in quiz applications adds significant value by validating users' knowledge and skills, motivating them to learn, and enhancing their career prospects. As the demand for continuous learning grows, certifications from quiz applications can play a crucial role in personal and professional development.",
     },
   ];
 
@@ -46,11 +50,13 @@ const HowItWorks = () => {
               className="bg-[#7534f7] p-10 shadow-lg text-start rounded-lg transition duration-200 ease-in-out hover:bg-gray-800 hover:scale-105"
               style={{ minHeight: "300px" }}
             >
-              <div className="text-white mb-4">{card.icon}</div>
+              <div className="text-white mb-4 flex justify-center items-center">
+                {card.icon}
+              </div>
               <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
                 {card.title}
               </h3>
-              <p className="text-gray-200 group-hover:text-white text-lg">
+              <p className="text-gray-200 text-justify group-hover:text-white text-lg">
                 {card.description}
               </p>
             </div>
