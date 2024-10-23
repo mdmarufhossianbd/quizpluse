@@ -26,7 +26,7 @@ const UpgreadCard = () => {
         <p class="font-bold text-xl tracking-wider text-gray-500">Quize</p>
       </div>
       <div class="img w-[180px] aspect-square bg-gray-100 z-40 rounded-md">
-        <Image src={upgradLogo}></Image>
+        <Image src={upgradLogo} alt="upgrade" />
       </div>
       <div class="btm-_container z-40 flex flex-row justify-between items-end gap-10">
         <div class="btn">
