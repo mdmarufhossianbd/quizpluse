@@ -47,18 +47,18 @@ const UserDashboard = () => {
 
   const topFeaturedQuizzes = quizes.filter(quiz => quiz?.featured === "Yes").sort((a, b) => b.totalParticipated - a.totalParticipated).slice(0, 3);
 
-  console.log(quizes)
+  // console.log(quizes)
   // console.log(featuredQuiz)
 
   if (status === "loading") {
     return <DataLoader />;
   }
 
-  console.log(quizResult)
+  // console.log(quizResult)
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      {/* Dashboard Header */}
+      {/* Dashboard Header // Welcome Message */}
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-[#5C0096]">User Dashboard</h1>
         <p className="text-lg text-gray-600">Welcome back, {data?.user?.name}!</p>
@@ -113,7 +113,6 @@ const UserDashboard = () => {
 
 
       {/* Featured Quizzes Section */}
-
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
