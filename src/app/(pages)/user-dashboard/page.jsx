@@ -1,6 +1,7 @@
 "use client";
 import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Chart from "@/components/ui/chart.jsx";
+import RecentlyCompletedQuiz from "@/components/userDashboard/userDashboardHome/recentlyCompletedQuiz";
 import { getAllQuizes } from "@/utils/fetchQuizes";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -97,86 +98,13 @@ const UserDashboard = () => {
         </div>
       </div>
 
-
-      {/* Recently Completed Quizzes Section */}
-      {/* <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
-        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recently Completed Quizzes</h2>
-        {quizResult.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {quizResult.map((result) => (
-              <div key={result._id} className="bg-gray-100 p-4 rounded-lg shadow-md">
-                <img
-                  src={result.quizImage}
-                  alt={result.quizName}
-                  className="w-full h-32 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-2">{result.quizName}</h3>
-                <p className="text-lg text-gray-600 mb-1">
-                  Earned Points:{" "}
-                  <span className="font-bold text-gray-800">
-                    {result.earnedPoint}
-                  </span>
-                  /{result.totalPoint}
-                </p>
-                <Link
-                  href={`/quizes/${result.quizId}`}
-                  className="text-[#5C0096] font-bold hover:underline"
-                >
-                  View Quiz Details
-                </Link>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-600">No quizzes completed yet.</p>
-        )}
-      </div> */}
-
       {/* Recently Completed Quizzes Section */}
       <div className="bg-white p-8 rounded-lg shadow-lg mb-8">
         <h2 className="text-2xl font-bold text-[#5C0096] mb-6">Recently Completed Quizzes</h2>
 
         {quizResult.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {quizResult
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // Sort by most recent first
-              .slice(0, 3) // Take only the most recent 3 results
-              .map((result) => (
-                <div
-                  key={result._id}
-                  className="bg-gray-100 hover:bg-gray-50 p-6 rounded-lg shadow-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                >
-                  {/* Quiz Image */}
-                  <div className="relative h-40 mb-6">
-                    <img
-                      src={result.quizImage}
-                      alt={result.quizName}
-                      className="w-full h-full object-cover rounded-lg shadow-sm"
-                    />
-                  </div>
-
-                  {/* Quiz Info */}
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{result.quizName}</h3>
-
-                  <div className="text-lg text-gray-600">
-                    <p className="mb-2">
-                      <span className="font-semibold text-gray-800">Earned Points:</span>{" "}
-                      <span className="font-bold text-[#5C0096]">{result.earnedPoint}</span>
-                      /{result.totalPoint}
-                    </p>
-                    <p className="text-sm text-gray-500">Completed on: {new Date(result.createdAt).toLocaleDateString()}</p>
-                  </div>
-
-
-                  {/* View Quiz Details Link */}
-                  {/* <Link
-                    href={`/quizes/${result.quizId}`}
-                    className="inline-block mt-4 text-sm font-bold text-[#5C0096] hover:text-[#370a69] hover:underline"
-                  >
-                    View Quiz Details
-                  </Link> */}
-                </div>
-              ))}
+          <div >
+            <RecentlyCompletedQuiz quizResult={quizResult} />
           </div>
         ) : (
           <p className="text-gray-600 text-center">You haven't completed any quizzes yet.</p>
