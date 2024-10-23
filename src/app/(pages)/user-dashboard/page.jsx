@@ -167,6 +167,7 @@ const UserDashboard = () => {
                     <p className="text-sm text-gray-500">Completed on: {new Date(result.createdAt).toLocaleDateString()}</p>
                   </div>
 
+
                   {/* View Quiz Details Link */}
                   {/* <Link
                     href={`/quizes/${result.quizId}`}
