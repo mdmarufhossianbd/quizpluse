@@ -15,25 +15,25 @@ const HowItWorks = () => {
       icon: <FaRegHandshake size={80} />,
       title: "Join",
       description:
-        "You can create an account by clicking the Sign Up button on the homepage. You will need to provide your email address, create a password, and verify your email to complete the process. That's how you join",
+        "You can create an account by clicking the Sign Up button on the homepage. You will need to provide your email address, create a password,and verify your email to complete the process.That's how you join",
     },
     {
       icon: <FaRegUser size={80} />,
       title: "Participate",
       description:
-        "When the quiz starts, answer questions carefully, manage your time, and submit your answers. Check results for feedback, engage in discussions with other participants, and celebrate your involvement.",
+        "When the quiz starts,answer questions carefully,manage your time, and submit your answers.Check results for feedback,engage in discussions with other participants,and celebrate your involvement.",
     },
     {
       icon: <BsTrophy size={80} />,
       title: "Reward",
       description:
-        "Quiz rewards enhance engagement and motivation, offering online prizes, certificates, recognition, discounts, or educational benefits. These incentives not only celebrate participants’ achievements but also encourage ongoing involvement and create a positive atmosphere for learning and competition.",
+        "Users can earn rewards by achieving high scores on quizzes.Incentives may include points,badges,gift cards,or exclusive content access.",
     },
     {
       icon: <PiCertificateBold size={80} />,
       title: "Certification",
       description:
-        "Certification in quiz applications adds significant value by validating users' knowledge and skills, motivating them to learn, and enhancing their career prospects. As the demand for continuous learning grows, certifications from quiz applications can play a crucial role in personal and professional development.",
+        "Certification in Quiz pulse applications adds significant value by validating users' knowledge and skills,motivating them to learn,and enhancing their career prospects.",
     },
   ];
 
@@ -53,7 +53,7 @@ const HowItWorks = () => {
               <div className="text-white mb-4 flex justify-center items-center">
                 {card.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-white">
+              <h3 className="text-2xl font-semibold mb-2 text-white group-hover:text-white">
                 {card.title}
               </h3>
               <p className="text-gray-200 text-justify group-hover:text-white text-lg">
