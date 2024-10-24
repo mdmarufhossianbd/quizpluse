@@ -1,4 +1,5 @@
 "use client";
+import StateCard from "@/components/admin/adminHome/stateCard";
 import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import { useSession } from "next-auth/react";
 import { FiClipboard, FiUser, FiUserCheck, FiUserPlus, FiUsers } from "react-icons/fi";
@@ -13,34 +14,12 @@ const AdminDashboard = () => {
   return (
     <div className="p-6">
       {/* Dashboard Header */}
-      <div className="flex justify-between items-center mb-10">
+      <div className="flex justify-between items-center mb-4">
         <h1 className="text-3xl font-semibold text-[#5C0096]">Admin Dashboard</h1>
       </div>
 
       {/* Stat Cards Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 text-white">
-        <div className="bg-[#5C0096] p-6 rounded-lg shadow-lg flex items-center">
-          <FiClipboard className="text-4xl text-white mr-4" />
-          <div>
-            <h2 className="text-xl font-bold">Quizzes</h2>
-            <p className="text-3xl font-semibold">12</p>
-          </div>
-        </div>
-        <div className="bg-[#00A859] p-6 rounded-lg shadow-lg flex items-center">
-          <FiUsers className="text-4xl text-white mr-4" />
-          <div>
-            <h2 className="text-xl font-bold">Attempts</h2>
-            <p className="text-3xl font-semibold">45</p>
-          </div>
-        </div>
-        <div className="bg-[#FFA400] p-6 rounded-lg shadow-lg flex items-center">
-          <FiUsers className="text-4xl text-white mr-4" />
-          <div>
-            <h2 className="text-xl font-bold">Users</h2>
-            <p className="text-3xl font-semibold">150</p>
-          </div>
-        </div>
-      </div>
+      <StateCard />
 
       {/* User Management Section */}
       <div>
