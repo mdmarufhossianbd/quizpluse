@@ -15,9 +15,9 @@ const Login = () => {
 
                     {/* <Image className="w-full h-[700px] rounded-l-md" src={loginImage} width={500} height={800} alt="login" unoptimized priority /> */}
                 </div>
-                <div className="w-full md:w-1/2 p-8">
+                <div className="w-full md:w-1/2 md:p-4 lg:p-8">
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Welcome to QuizPulse</h2>
-                    <h2 className="font-semibold text-2xl md:text-2xl lg:text-3xl text-center my-10">Login</h2>
+                    <h2 className="font-semibold text-2xl md:text-2xl lg:text-3xl text-center my-6">Please Login</h2>
                     <LoginForm />
                 </div>
             </div>
