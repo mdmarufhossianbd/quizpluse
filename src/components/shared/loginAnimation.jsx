@@ -11,7 +11,7 @@ const LoginAnimation = () => {
                 autoplay
                 loop
                 src={loginAnimation}
-                style={{ height: '400px', width: '400px' }}
+                style={{ height: 'auto', width: "auto" }}
             />
         </div>
     );
