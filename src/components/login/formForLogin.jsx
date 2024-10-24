@@ -6,10 +6,13 @@ import { useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import SocialLogin from '../shared/socialLogin';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const FormForLogin = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
 
     const handleLogin = async (e) => {
         setLoading(true)
@@ -39,8 +42,22 @@ const FormForLogin = () => {
             <Toaster richColors position='top-center' />
             <form onSubmit={handleLogin} className="flex flex-col gap-5">
                 <input className="border focus:outline-none px-5 py-2 rounded" type="email" name="email" placeholder="Enter email" />
-                <input className="border focus:outline-none px-5 py-2 rounded" type="password" name="password" placeholder="Enter password" />
-                {
+                {/* Password */}
+                <div className="relative">
+                    <input
+                        className="border focus:outline-none px-5 py-2 rounded w-full"
+                        type={passwordVisible ? "text" : "password"} // Toggle between password and text
+                        name="password"
+                        placeholder="Enter password"
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-3 top-3 text-gray-500"
+                        onClick={() => setPasswordVisible(!passwordVisible)} // Toggle visibility
+                    >
+                        {passwordVisible ? <FiEyeOff /> : <FiEye />}
+                    </button>
+                </div>                {
                     loading ? <button disabled className='cursor-not-allowed flex items-center gap-2 justify-center py-2 rounded border   bg-[#5C0096] hover:bg-[#500081] text-white border-none'><ImSpinner9 className='animate-spin' /> Logging your account</button> : <input className="py-2 rounded border hover:cursor-pointer bg-[#5C0096] hover:bg-[#500081] text-white border-none" type="submit" value="Login" />
                 }
             </form>
