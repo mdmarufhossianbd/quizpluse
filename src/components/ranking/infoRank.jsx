@@ -1,8 +1,9 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import './info.css';
 
-const InfoRank = ({user}) => {
+const InfoRank = ({user,rank}) => {
   console.log(user);
+  const avarageMark=user.rewards/user.participatedQuizes || 0;
   return (
     <>
     {/* rank */}
@@ -10,7 +11,7 @@ const InfoRank = ({user}) => {
       <Tooltip>
         {/* The element that triggers the tooltip */}
         <TooltipTrigger asChild>
-          <button className="bg-[#c6bbf9] hover:bg-[#8077f4] mb-1 text-black p-3 rounded-full">5</button>
+          <button className="bg-[#c6bbf9] hover:bg-[#8077f4] mb-1 text-black p-3 rounded-full">{rank}</button>
         </TooltipTrigger>
         
         {/* Tooltip content */}
@@ -38,7 +39,7 @@ const InfoRank = ({user}) => {
       <Tooltip>
         {/* The element that triggers the tooltip */}
         <TooltipTrigger asChild>
-          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">100</button>
+          <button className="bg-[#c6bbf9] mb-1 hover:bg-[#8077f4] text-black p-2 rounded-full">{avarageMark}</button>
         </TooltipTrigger>
         
         {/* Tooltip content */}

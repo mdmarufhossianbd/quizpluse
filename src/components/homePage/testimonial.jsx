@@ -3,7 +3,7 @@ import Marquee from '../ui/marquee'
 const Testimonial = () => {
   return (
     <div className='my-16 w-full'>
-      <div className='grid justify-center mb-5'>
+      <div className='grid justify-center mb-10'>
         <h1 className='flex justify-center lg:text-5xl md:text-2xl text-xl mb-2 font-semibold'>Testimonials</h1>
       </div>
       <div>

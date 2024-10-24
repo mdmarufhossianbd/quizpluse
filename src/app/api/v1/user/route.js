@@ -14,11 +14,19 @@ export async function GET(request) {
         const filter = email ? { email } : {};
         const result = await userCollection.find(filter).sort(sort).skip(skip).limit(limit).toArray()
         const totalUsers = await userCollection.countDocuments(filter);
+        // sort for Ranking
+        const sortArrayObjects = result.sort((a, b) => {
+            const ratioA = a.participatedQuizes / (a.rewards || 1); 
+            const ratioB = b.participatedQuizes / (b.rewards || 1);
+          
+            return ratioA - ratioB;
+          });
+        console.log("This is total users",sortArrayObjects);
         return NextResponse.json({
             message : 'Successfully loaded data',
             status : 200,
             success : true,
-            result,
+            result: sortArrayObjects,
             currentPage : page,
             totalPages : Math.ceil(totalUsers / limit),
             totalUsers
