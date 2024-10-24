@@ -91,7 +91,14 @@ const UserDashboard = () => {
         {/* Quiz Participation Line Chart */}
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Quiz Participation Over Score</h2>
-          <Chart quizResult={quizResult}></Chart>
+          {quizResult.length > 0 ? (
+            <div >
+              <Chart quizResult={quizResult}></Chart>
+            </div>
+          ) : (
+            <p className="text-gray-600 text-center">You haven&apos;t Participated any quizzes yet.</p>
+          )}
+
         </div>
       </div>
 
