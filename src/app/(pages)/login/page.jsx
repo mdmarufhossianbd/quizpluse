@@ -3,8 +3,8 @@
 import LoginForm from "@/components/login/LoginForm"; // Ensure correct naming
 import Image from "next/image";
 import loginImage from '../../../../public/assets/login.webp'; // Login image
-
 import LoginAnimation from "@/components/shared/loginAnimation";
+
 
 const Login = () => {
     return (
@@ -13,6 +13,7 @@ const Login = () => {
                 <div className="w-full md:w-1/2">
                     {/* Lottie Animation */}
                     <LoginAnimation />
+
                     {/* <Image className="w-full h-[700px] rounded-l-md" src={loginImage} width={500} height={800} alt="login" unoptimized priority /> */}
                 </div>
                 <div className="w-full md:w-1/2">
