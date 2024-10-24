@@ -5,7 +5,7 @@ import { FiClipboard, FiUsers } from 'react-icons/fi';
 
 const StateCard = () => {
     const [totalQuizzes, setTotalQuizzes] = useState(0);
-    const [totalParticipated, setTotalParticipated] = useState(0)
+    const [totalParticipated, setTotalParticipated] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,7 +17,6 @@ const StateCard = () => {
                         return acc + (quiz.totalParticipated || 0);
                     }, 0);
                     setTotalParticipated(totalParticipatedCount);
-
                 }
             } catch (error) {
                 console.error("Error fetching quizzes:", error);
@@ -26,9 +25,6 @@ const StateCard = () => {
 
         fetchData();
     }, []);
-
-
-    console.log(totalParticipated);
 
     return (
         <div>
@@ -44,7 +40,7 @@ const StateCard = () => {
                     <FiUsers className="text-4xl text-white mr-4" />
                     <div>
                         <h2 className="text-xl font-bold">Attempts</h2>
-                        <p className="text-3xl font-semibold">45</p>
+                        <p className="text-3xl font-semibold">{totalParticipated}</p>
                     </div>
                 </div>
                 <div className="bg-[#FFA400] p-6 rounded-lg shadow-lg flex items-center">
