@@ -29,7 +29,7 @@ const QuizzesSlider = ({ quizes }) => {
     >
 
       {quizes?.map((item, index) => (
-        <SwiperSlide key={item?._id} virtualIndex={index}>
+        <SwiperSlide className="" key={item?._id} virtualIndex={index}>
           <QuizCard item={item} />
         </SwiperSlide>
       ))}
