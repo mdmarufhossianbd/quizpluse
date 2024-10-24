@@ -58,6 +58,7 @@ const RegisterFrom = () => {
                 <label className='font-semibold'>Your Email</label>
                 <input className="border focus:outline-none px-5 py-2 rounded" type="email" name="email" placeholder="Enter email" />
                 <label className='font-semibold'>Your Password</label>
+                {/* Password */}
                 <div className="relative">
                     <input
                         className="border focus:outline-none px-5 py-2 rounded w-full"
@@ -73,6 +74,7 @@ const RegisterFrom = () => {
                         {passwordVisible ? <FiEyeOff /> : <FiEye />}
                     </button>
                 </div>
+                {/* Confirm Password */}
                 <div className="relative">
                     <input
                         className="border focus:outline-none px-5 py-2 rounded w-full"
