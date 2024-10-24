@@ -215,9 +215,9 @@ const Banner = () => {
               </p>
               <Link
                 href="/login"
-                className="inline-block px-10 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
+
               >
-                Join Now
+                <button className="banner-button">Join Now</button>
               </Link>
             </div>
           </div>
@@ -240,9 +240,9 @@ const Banner = () => {
               </p>
               <Link
                 href="/quizes"
-                className="inline-block px-10 py-3 rounded-lg bg-[#5C0096] text-white hover:bg-[#500081] transition"
               >
-                Compete Now
+                <button className="banner-button">Compete Now</button>
+
               </Link>
             </div>
           </div>
