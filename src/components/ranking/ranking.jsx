@@ -8,6 +8,7 @@ import './rank.css';
 const Ranking = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const avarage=user.rewards
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,7 +41,7 @@ const Ranking = () => {
         >
           <div className="overlay"></div>
           <div className="ml-2 p-2 bg-[#E7E7E7] rounded-tr-md w-auto grid h-[200px] absolute top-[23px] right-[30px] rounded-bl-lg">
-            <InfoRank user={user} />
+            <InfoRank user={user} rank={idx+1} />
           </div>
 
           <Image
