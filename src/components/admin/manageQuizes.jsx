@@ -107,11 +107,45 @@ const ManageQuizzes = () => {
               <TableCell>{item.quizDuration}</TableCell>
               <TableCell>{item.featured}</TableCell>
               <TableCell>
-                {item.quizStatus === "publish" && (
+              {item.quizStatus === "publish" && (
+                < div className="flex">
                   <Chip color="success" variant="dot" className="border-none">
-                    Published
+                  publish
                   </Chip>
-                )}
+                  <div style={{ position: "relative" }}>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <button className="btn text-sm p-2 ">
+                          <FaChevronDown></FaChevronDown>
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          zIndex: 10,
+                          backgroundColor: "white",
+                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                          padding: "0.5rem",
+                          borderRadius: "0.375rem",
+                        }}
+                      >
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('rejected',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                          Reject
+                          </button>
+                        </DropdownMenuLabel>
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('pending',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                          pending
+                          </button>
+                        </DropdownMenuLabel>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </ div>
+              )}
                  {item.quizStatus === "pending" && (
                 < div className="flex">
                   <Chip color="primary" variant="dot" className="border-none">
@@ -152,10 +186,44 @@ const ManageQuizzes = () => {
                 </ div>
               )}
                 {item.quizStatus === "rejected" && (
+                < div className="flex">
                   <Chip color="danger" variant="dot" className="border-none">
-                    Rejected
+                  rejected
                   </Chip>
-                )}
+                  <div style={{ position: "relative" }}>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger>
+                        <button className="btn text-sm p-2 ">
+                          <FaChevronDown></FaChevronDown>
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent
+                        style={{
+                          position: "absolute",
+                          top: "100%",
+                          left: 0,
+                          zIndex: 10,
+                          backgroundColor: "white",
+                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                          padding: "0.5rem",
+                          borderRadius: "0.375rem",
+                        }}
+                      >
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('publish',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                            Publish
+                          </button>
+                        </DropdownMenuLabel>
+                        <DropdownMenuLabel>
+                          <button onClick={()=>handelStatus('pending',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                          Pending
+                          </button>
+                        </DropdownMenuLabel>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </ div>
+              )}
               </TableCell>
               <TableCell className="flex justify-start gap-2">
                 <Tooltip content="View">
