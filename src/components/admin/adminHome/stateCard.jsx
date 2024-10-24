@@ -6,7 +6,10 @@ import { FiClipboard, FiUsers } from 'react-icons/fi';
 const StateCard = () => {
     const [totalQuizzes, setTotalQuizzes] = useState(0);
     const [totalParticipated, setTotalParticipated] = useState(0);
+    const [totalUser, setTotalUser] = useState(0);
+    const [proUser, setProUser] = useState(0);
 
+    // quiz info
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -26,6 +29,23 @@ const StateCard = () => {
         fetchData();
     }, []);
 
+
+    // user Info
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`/api/v1/user`);
+                if (res?.data?.success) {
+                    setTotalUser(res?.data?.totalUsers);
+                    setProUser()
+                }
+            } catch (error) {
+                console.error("Error fetching quizzes:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
     return (
         <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 text-white">
