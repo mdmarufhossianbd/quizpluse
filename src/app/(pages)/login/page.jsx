@@ -1,9 +1,6 @@
 
-import LoginForm from "@/components/login/LoginForm"; // Ensure correct naming
-import Image from "next/image";
-import loginImage from '../../../../public/assets/login.webp'; // Login image
+import FormForLogin from "@/components/login/formForLogin";
 import LoginAnimation from "@/components/shared/loginAnimation";
-
 
 const Login = () => {
     return (
@@ -18,7 +15,7 @@ const Login = () => {
                 <div className="w-full md:w-1/2 p-2 md:p-4 lg:p-8">
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">Welcome to QuizPulse</h2>
                     <h2 className="font-semibold text-2xl md:text-2xl lg:text-3xl text-center my-6">Please Login</h2>
-                    <LoginForm />
+                    <FormForLogin />
                 </div>
             </div>
         </div>

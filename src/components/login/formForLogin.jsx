@@ -7,7 +7,7 @@ import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import SocialLogin from '../shared/socialLogin';
 
-const LoginForm = () => {
+const FormForLogin = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
@@ -41,7 +41,7 @@ const LoginForm = () => {
                 <input className="border focus:outline-none px-5 py-2 rounded" type="email" name="email" placeholder="Enter email" />
                 <input className="border focus:outline-none px-5 py-2 rounded" type="password" name="password" placeholder="Enter password" />
                 {
-                    loading ? <button disabled className='cursor-not-allowed flex items-center gap-2 justify-center py-2 rounded border     bg-[#5C0096] hover:bg-[#500081] text-white border-none'><ImSpinner9 className='animate-spin' /> Logging your account</button> : <input className="py-2 rounded border hover:cursor-pointer bg-[#5C0096] hover:bg-[#500081] text-white border-none" type="submit" value="Login" />
+                    loading ? <button disabled className='cursor-not-allowed flex items-center gap-2 justify-center py-2 rounded border   bg-[#5C0096] hover:bg-[#500081] text-white border-none'><ImSpinner9 className='animate-spin' /> Logging your account</button> : <input className="py-2 rounded border hover:cursor-pointer bg-[#5C0096] hover:bg-[#500081] text-white border-none" type="submit" value="Login" />
                 }
             </form>
             <div className='mt-5 text-center'>
@@ -53,4 +53,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default FormForLogin;
