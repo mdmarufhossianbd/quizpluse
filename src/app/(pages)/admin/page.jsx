@@ -1,4 +1,5 @@
 "use client";
+import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import { useSession } from "next-auth/react";
 import { FiClipboard, FiUser, FiUserCheck, FiUserPlus, FiUsers } from "react-icons/fi";
 
@@ -6,7 +7,7 @@ const AdminDashboard = () => {
   const { data, status } = useSession();
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <DataLoader />;
   }
 
   return (
