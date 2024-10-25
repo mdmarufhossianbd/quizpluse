@@ -44,7 +44,7 @@ const NewsLetter = () => {
                 </div>
 
                 {/* Form Section */}
-                <div className="w-full md:w-1/2">
+                <div className="w-full md:w-1/2 p-4">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Subscribe to our newsletter</h2>
                     <p className="text-lg mb-6">
                         Receive our latest news and get a special gift.
