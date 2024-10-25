@@ -2,6 +2,7 @@
 import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Chart from "@/components/ui/chart.jsx";
 import RecentlyCompletedQuiz from "@/components/userDashboard/userDashboardHome/recentlyCompletedQuiz";
+import UserState from "@/components/userDashboard/userDashboardHome/userState";
 import { getAllQuizes } from "@/utils/fetchQuizes";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -62,27 +63,22 @@ const UserDashboard = () => {
       </div>
 
       {/* Stat Cards Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
-          <FiClipboard className="text-[#5C0096] text-4xl mr-4" />
-          <div>
-            <h2 className="text-xl font-semibold">Total Quizzes</h2>
-            <p className="text-3xl font-bold"><span>20</span></p>
-          </div>
-        </div>
-        <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
-          <FiActivity className="text-[#5C0096] text-4xl mr-4" />
-          <div>
-            <h2 className="text-xl font-semibold">Total Attempts</h2>
-            <p className="text-3xl font-bold"><span>45</span></p>
-          </div>
-        </div>
-        <div className="p-6 bg-white rounded-lg shadow-md flex items-center">
-          <FiStar className="text-[#5C0096] text-4xl mr-4" />
-          <div>
-            <h2 className="text-xl font-semibold">Average Point</h2>
-            <p className="text-3xl font-bold"><span>85%</span></p>
-          </div>
+      <UserState userEmail={userEmail}></UserState>
+
+      {/* Featured Quizzes Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {topFeaturedQuizzes.map((quiz) => (
+            <Link href={`/quizes/${quiz?._id}`} key={quiz?._id}>
+              <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
+                <h3 className="text-xl font-semibold">{quiz?.quizName}</h3>
+                <p className="mt-2">{quiz?.totalQuestions} Questions</p>
+                <p className="mt-1">Attempts: {quiz?.totalParticipated}</p>
+                <p className="mt-1">Category: {quiz?.quizCategory}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -116,22 +112,7 @@ const UserDashboard = () => {
       </div>
 
 
-      {/* Featured Quizzes Section */}
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-[#5C0096] mb-4">Recommended Quizzes</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {topFeaturedQuizzes.map((quiz) => (
-            <Link href={`/quizes/${quiz?._id}`} key={quiz?._id}>
-              <div key={quiz._id} className={`bg-[#5C0096] text-white p-4 rounded-lg`}>
-                <h3 className="text-xl font-semibold">{quiz?.quizName}</h3>
-                <p className="mt-2">{quiz?.totalQuestions} Questions</p>
-                <p className="mt-1">Attempts: {quiz?.totalParticipated}</p>
-                <p className="mt-1">Category: {quiz?.quizCategory}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+
     </div>
   );
 };
