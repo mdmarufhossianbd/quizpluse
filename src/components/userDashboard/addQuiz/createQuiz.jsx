@@ -115,6 +115,7 @@ const CreateQuiz = () => {
                     if (res.data.result.acknowledged) {
                         toast.success(res.data.message)
                         setLoading(false)
+                        setFormData(null)
                     } else {
                         toast.error(res.data.message)
                         setLoading(false)
