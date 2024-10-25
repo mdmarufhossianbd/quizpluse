@@ -111,6 +111,7 @@ export const handler = NextAuth({
                     token.email = existingUser.email;
                     token.username = existingUser.username;
                     token.role = existingUser.role;
+                    token.level = existingUser.level;
                     token.image = existingUser.image
                 }
             }
@@ -122,6 +123,7 @@ export const handler = NextAuth({
             session.user.email = token.email;
             session.user.username = token.username;
             session.user.role = token.role;
+            session.user.level = token.level;
             session.user.image = token.image;
             return session
         }
