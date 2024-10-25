@@ -91,7 +91,7 @@ const NewsLetter = () => {
                         </button>
                         {/* Privacy Notice */}
                         <p className="text-center text-sm text-gray-400 mt-4">
-                            We care about your privacy. No spam, unsubscribe anytime.
+                            (We care about your privacy. No spam, unsubscribe anytime.)
                         </p>
                     </form>
                 </div>
