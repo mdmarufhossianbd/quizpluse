@@ -25,7 +25,7 @@ const Sidebar = ({ navLinks, isSidebarOpen }) => {
                     </Link>
                 </div>
                 {/* user info */}
-                <div className="flex items-center py-5 border-b pl-2">
+                <div className="flex items-center py-5 border-b pl-4">
                     <div className="mr-3">
                         {data ? (
                             <Image
@@ -46,16 +46,17 @@ const Sidebar = ({ navLinks, isSidebarOpen }) => {
                     <div>
                         <h2 className="text-lg font-semibold">{data?.user?.name}</h2>
                         <p className="text-sm text-gray-500">{data?.user?.email}</p>
+                        <p className="text-sm text-gray-500">User Level: {data?.user?.level}</p>
                     </div>
                 </div>
                 {/* nav links */}
                 <nav className="overflow-hidden">
                     {
-                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
+                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-4 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
                             <Link href={item.url} className="flex items-center gap-2">{item.icon}{item.name}</Link>
                         </div>)
                     }
-                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
+                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-4 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
                 </nav>
             </div>
             {/* Upgrade */}
