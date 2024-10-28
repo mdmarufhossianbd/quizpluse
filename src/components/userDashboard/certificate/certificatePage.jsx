@@ -7,7 +7,7 @@ const CertificatePage = () => {
             This is Certificate Page
             <Certificate
                 userName="John Doe"
-                courseName="QuizPulse Programming Quiz"
+                courseName="QuizPulse 10 Quizzes and Achieved 80% Marks"
                 issueDate="October 27, 2024"
                 certificateId="671e7f073ae2d"
             />
