@@ -70,7 +70,7 @@ const FaQ = () => {
           users to challenge themselves or compete with others while gaining
           knowledge on various topics.
         </AccordionItem>
-        <AccordionItem key="9" aria-label="Accordion 9" title="Is it profitable, and what factors contribute to its
+        <AccordionItem key="10" aria-label="Accordion 10" title="Is it profitable, and what factors contribute to its
               profitability?">
           Yes, the quiz app can be profitable. Revenue can come from several
           sources, such as in-app ads, offering a paid version with additional
