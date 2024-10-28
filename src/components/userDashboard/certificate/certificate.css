@@ -1,0 +1,69 @@
+.certificate-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.certificate {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 3px solid #371168;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: "Georgia", serif;
+    text-align: center;
+    color: #000;
+}
+
+.header h2 {
+    color: #5c0096;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.header p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #371168;
+    margin: 1.5rem 0;
+}
+
+.statement p {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.course-name {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #371168;
+    margin: 1.5rem 0;
+}
+
+.details p {
+    font-size: 0.9rem;
+    color: #777777;
+    margin: 0.5rem 0;
+}
+
+.signature-section {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #371168;
+}
+
+.signature p {
+    margin: 0;
+    font-size: 0.9rem;
+}
