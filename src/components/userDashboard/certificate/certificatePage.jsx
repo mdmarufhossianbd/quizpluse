@@ -7,7 +7,7 @@ const CertificatePage = () => {
         <div>
             This is Certificate Page
             <Certificate
-                courseName="QuizPulse 10 Quizzes and Achieved 80% Marks"
+                courseName={`Participated on ${"10"} Quizzes and Achieved ${40} Points`}
                 issueDate="October 27, 2024"
                 certificateId="671e7f073ae2d"
             />
