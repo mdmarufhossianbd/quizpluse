@@ -84,12 +84,12 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                             </div>
 
                             {/* Recipient's Name */}
-                            <div className="text-purple-900 font-bold text-xl sm:text-2xl md:text-3xl my-4">
+                            <div className="text-purple-900 font-bold text-xl sm:text-2xl md:text-3xl my-4 font-sil fontTtwinkleStar">
                                 {userName}
                             </div>
 
                             {/* Completion Statement */}
-                            <p className="text-base sm:text-lg md:text-xl">has successfully completed</p>
+                            <p className="text-base sm:text-lg md:text-xl">has successfully Participated</p>
 
                             {/* Course Name */}
                             <div className="text-purple-900 font-semibold text-lg sm:text-xl md:text-2xl my-4 sm:my-6">
