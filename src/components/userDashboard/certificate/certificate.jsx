@@ -88,14 +88,14 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                             </div>
 
                             {/* Additional Details */}
-                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 sm:space-y-3">
+                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 sm:space-y-3 pb-4">
                                 <p>an online quiz offered by QuizPulse</p>
                                 <p>Issue Date: {issueDate}</p>
                                 <p className="mt-3">Certificate ID: {certificateId}</p>
                             </div>
 
                             {/* Signature Section */}
-                            <div className="flex justify-between mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-purple-800">
+                            <div className="flex justify-between mt-4 sm:mt-6 pt-6 sm:pt-6 border-t border-purple-800">
                                 <div>
                                     <p className="text-gray-700 font-semibold">Signature</p>
                                     <p className="text-gray-500 text-xs sm:text-sm">CEO, QuizPulse</p>
