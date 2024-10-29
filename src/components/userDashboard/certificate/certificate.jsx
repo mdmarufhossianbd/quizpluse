@@ -9,10 +9,19 @@ import { useSession } from "next-auth/react";
 import generatePDF, { Resolution, Margin, Options } from "react-to-pdf";
 import { Button } from "@nextui-org/react";
 
+
+const getCurrentDate = () => {
+    const today = new Date();
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return today.toLocaleDateString(undefined, options);
+};
+
 const Certificate = ({ courseName, issueDate, certificateId }) => {
     const { data } = useSession();
     const userName = data?.user?.name;
     const certificateRef = useRef();
+    const currentDate = getCurrentDate(); // Get today's date
+
 
     const options = {
         filename: `certificate_${userName}.pdf`,
@@ -51,7 +60,7 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                     ref={certificateRef}
                     className="bg-white  rounded-lg shadow-xl text-center font-serif my-4 transform
                                w-full max-w-[95%] sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1123px] 
-                               p-4 sm:p-10 md:p-16 lg:py-16 lg:px-36 ml-10"
+                               p-4 sm:p-10 md:p-16 lg:py-16 lg:px-36 ml-8"
                 >
                     <div className="flex justify-center place-items-center">
                         <div className="w-full">
@@ -88,21 +97,23 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                             </div>
 
                             {/* Additional Details */}
-                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 sm:space-y-3 pb-4">
+                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 sm:space-y-3 ">
                                 <p>an online quiz offered by QuizPulse</p>
                                 <p>Issue Date: {issueDate}</p>
                                 <p className="mt-3">Certificate ID: {certificateId}</p>
                             </div>
 
-                            {/* Signature Section */}
-                            <div className="flex justify-between mt-4 sm:mt-6 pt-6 sm:pt-6 border-t border-purple-800">
-                                <div>
-                                    <p className="text-gray-700 font-semibold">Signature</p>
+                            {/* Signature Section with Current Date */}
+                            <div className="flex justify-between mt-8 pt-4 border-t border-purple-800">
+                                <div className="text-gray-700 text-left">
+                                    <p className="font-semibold">Signature</p>
                                     <p className="text-gray-500 text-xs sm:text-sm">CEO, QuizPulse</p>
+                                    <p className="text-gray-500 text-xs sm:text-sm mt-1">{currentDate}</p>
                                 </div>
-                                <div>
-                                    <p className="text-gray-700 font-semibold">Signature</p>
-                                    <p className="text-gray-500 text-xs sm:text-sm">Instructor</p>
+                                <div className="text-gray-700 text-right">
+                                    <p className="font-semibold">Signature</p>
+                                    <p className="text-gray-500 text-xs sm:text-sm">Manager, QuizPulse</p>
+                                    <p className="text-gray-500 text-xs sm:text-sm mt-1">{currentDate}</p>
                                 </div>
                             </div>
                         </div>
@@ -114,4 +125,3 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
 };
 
 export default Certificate;
-
