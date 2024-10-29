@@ -28,8 +28,8 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
         method: "save",
         resolution: Resolution.EXTREME,
         page: {
-            margin: Margin.SMALL,
-            format: "a4",
+            margin: Margin.MEDIUM,
+            format: "letter",
             orientation: "landscape"
         },
         canvas: {
@@ -58,9 +58,11 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
             <div id="container" className="">
                 <div
                     ref={certificateRef}
+                    // className="bg-white  rounded-lg shadow-xl text-center font-serif my-4 transform
+                    //            w-full max-w-[95%] sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1123px] 
+                    //            p-4 sm:p-10 md:p-16 lg:py-12 lg:px-32 ml-4"
                     className="bg-white  rounded-lg shadow-xl text-center font-serif my-4 transform
-                               w-full max-w-[95%] sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1123px] 
-                               p-4 sm:p-10 md:p-16 lg:py-16 lg:px-36 ml-8"
+                               lg:w-[1000px]  p-4 sm:p-10 md:p-16 lg:py-12 lg:px-24 ml-4"
                 >
                     <div className="flex justify-center place-items-center">
                         <div className="w-full">
@@ -75,7 +77,7 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                                         className="border-b-4 border-purple-800"
                                     />
                                 </div>
-                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 mt-8 sm:mt-10 md:mt-14">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 mt-4 sm:mt-6 md:mt-8">
                                     Certificate of Achievement
                                 </h2>
                                 <p className="text-base sm:text-lg md:text-2xl">
@@ -84,7 +86,7 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                             </div>
 
                             {/* Recipient's Name */}
-                            <div className="text-purple-900 font-bold text-xl sm:text-2xl md:text-3xl my-4 font-sil fontTtwinkleStar">
+                            <div className="text-purple-900 font-bold text-xl sm:text-2xl md:text-3xl my-2 font-sil fontTtwinkleStar">
                                 {userName}
                             </div>
 
@@ -92,12 +94,12 @@ const Certificate = ({ courseName, issueDate, certificateId }) => {
                             <p className="text-base sm:text-lg md:text-xl">has successfully Participated</p>
 
                             {/* Course Name */}
-                            <div className="text-purple-900 font-semibold text-lg sm:text-xl md:text-2xl my-4 sm:my-6">
+                            <div className="text-purple-900 font-semibold text-lg sm:text-xl md:text-2xl my-2">
                                 {courseName}
                             </div>
 
                             {/* Additional Details */}
-                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 sm:space-y-3 ">
+                            <div className="text-gray-600 text-xs sm:text-sm md:text-base mt-2 space-y-2 ">
                                 <p>an online quiz offered by QuizPulse</p>
                                 <p>Issue Date: {issueDate}</p>
                                 <p className="mt-3">Certificate ID: {certificateId}</p>

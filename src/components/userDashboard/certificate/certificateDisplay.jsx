@@ -4,7 +4,7 @@ import Certificate from './certificate';
 const CertificateDisplay = () => {
     return (
         <div className="">
-            <div className="">
+            <div className="max-w-5xl">
                 <Certificate
                     courseName={`On ${"10"} Quizzes and Achieved ${40} Points`}
                     issueDate="October 27, 2024"
