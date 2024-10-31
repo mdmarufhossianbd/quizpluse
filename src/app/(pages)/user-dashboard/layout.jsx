@@ -85,7 +85,7 @@ const Layout = ({ children }) => {
             url: '/user-dashboard/profile',
             icon: <IconUserFilled />
         },
-       
+
 
     ]
 
@@ -114,7 +114,7 @@ const Layout = ({ children }) => {
             </button>
 
             {/* Sidebar Component */}
-            <div ref={sidebarRef}>
+            <div className='bg-[#f5f5f5]' ref={sidebarRef}>
                 <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
 
             </div>
