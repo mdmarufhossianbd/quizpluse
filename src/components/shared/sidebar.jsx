@@ -47,29 +47,17 @@ const Sidebar = ({ navLinks, isSidebarOpen }) => {
                     <div>
                         <h2 className="text-lg font-semibold">{data?.user?.name}</h2>
                         <p className="text-sm text-gray-500">{data?.user?.email}</p>
+                        <p className="text-sm text-gray-500">User Level: {data?.user?.level}</p>
                     </div>
                 </div>
                 {/* Navigation links */}
                 <nav className="overflow-hidden">
-                    {navLinks?.map((item, idx) => (
-                        <div
-                            key={idx}
-                            className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'
-                                }`}
-                        >
-                            <Link href={item.url} className="flex items-center gap-2">
-                                {item.icon}
-                                {item.name}
-                            </Link>
-                        </div>
-                    ))}
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"
-                    >
-                        <IconLogout stroke={2} />
-                        Sign Out
-                    </button>
+                    {
+                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
+                            <Link href={item.url} className="flex items-center gap-2">{item.icon}{item.name}</Link>
+                        </div>)
+                    }
+                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
                 </nav>
             </div>
             {/* Upgrade section */}
