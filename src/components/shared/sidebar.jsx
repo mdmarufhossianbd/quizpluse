@@ -6,26 +6,27 @@ import { usePathname } from "next/navigation";
 import { FaUser } from "react-icons/fa";
 import logo from "../.../../../../public/assets/logo.png";
 import SimpleCardPromo from "./simpleCardPromo";
+
 const Sidebar = ({ navLinks, isSidebarOpen }) => {
     const { data } = useSession();
-    const pathname = usePathname()
+    const pathname = usePathname();
 
-    const adminPaths = pathname.startsWith('/admin')
+    const adminPaths = pathname.startsWith('/admin');
 
     const handleLogout = () => {
         signOut();
     };
 
     return (
-        <div className={`bg-[#f5f5f5] w-[270px] pl-2 fixed top-0 right-2 min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} lg:relative lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}>
+        <div>
             <div>
-                <div>
+                <div className="flex justify-center py-4">
                     <Link href={'/'} target="_blank">
                         <Image src={logo} width={230} height={80} alt="Logo" />
                     </Link>
                 </div>
-                {/* user info */}
-                <div className="flex items-center py-5 border-b pl-4">
+                {/* User info */}
+                <div className="flex items-center py-5 border-b pl-2">
                     <div className="mr-3">
                         {data ? (
                             <Image
@@ -49,19 +50,19 @@ const Sidebar = ({ navLinks, isSidebarOpen }) => {
                         <p className="text-sm text-gray-500">User Level: {data?.user?.level}</p>
                     </div>
                 </div>
-                {/* nav links */}
+                {/* Navigation links */}
                 <nav className="overflow-hidden">
                     {
-                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-4 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
+                        navLinks?.map((item, idx) => <div key={idx} className={`py-2 w-full border-b hover:scale-105 duration-300 pl-2 ${pathname === item.url && 'bg-[#7556ff] text-white'}`}>
                             <Link href={item.url} className="flex items-center gap-2">{item.icon}{item.name}</Link>
                         </div>)
                     }
-                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-4 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
+                    <button onClick={handleLogout} className="flex items-center w-full gap-2 pl-2 border-b py-2 hover:scale-105 duration-300"><IconLogout stroke={2} />Sign Out</button>
                 </nav>
             </div>
-            {/* Upgrade */}
+            {/* Upgrade section */}
             <div className={`relative w-[250px] ${adminPaths && 'hidden'}`}>
-                <SimpleCardPromo></SimpleCardPromo>
+                <SimpleCardPromo />
             </div>
         </div>
     );
