@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { GiArmorUpgrade } from "react-icons/gi";
 
-
 const Layout = ({ children }) => {
     const { data } = useSession();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,79 +21,34 @@ const Layout = ({ children }) => {
     // Handle click outside the sidebar
     useEffect(() => {
         const handleClickOutside = (event) => {
-            // If the click is outside the sidebar and not on the toggle button, toggle the sidebar
             if (sidebarRef.current && !sidebarRef.current.contains(event.target) && !event.target.closest('button')) {
                 setIsSidebarOpen(false);
             }
         };
 
-        // Check if the click is on the sidebar toggle button
-        const handlePageClick = (event) => {
-            if (!event.target.closest('.sidebar-toggle-button')) {
-                handleClickOutside(event);
-            }
-        };
-
-        document.addEventListener('mousedown', handlePageClick);
-
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handlePageClick);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [sidebarRef]);
 
-
-
     const navLinks = [
-        {
-            name: 'Dashboard',
-            url: '/user-dashboard',
-            icon: <IconLayoutDashboardFilled />
-        },
-        {
-            name: 'Add Quiz',
-            url: '/user-dashboard/add-quiz',
-            icon: <IconSquareRoundedPlusFilled />
-        },
-        {
-            name: 'Manage Quiz',
-            url: '/user-dashboard/manage-quiz',
-            icon: <IconSettingsFilled />
-        },
-        {
-            name: 'Participated Quiz',
-            url: '/user-dashboard/participated-quiz',
-            icon: <IconRosetteDiscountCheckFilled />
-        },
-        {
-            name: 'Progress',
-            url: '/user-dashboard/progress',
-            icon: <IconTimelineEventFilled />
-        },
-        {
-            name: 'Transactions',
-            url: '/user-dashboard/transactions',
-            icon: <IconCoin stroke={2} />
-        },
-        {
-            name: 'Plans',
-            url: '/user-dashboard/plans',
-            icon: <GiArmorUpgrade />
-        },
-        {
-            name: 'Profile',
-            url: '/user-dashboard/profile',
-            icon: <IconUserFilled />
-        },
-
-
-    ]
+        { name: 'Dashboard', url: '/user-dashboard', icon: <IconLayoutDashboardFilled /> },
+        { name: 'Add Quiz', url: '/user-dashboard/add-quiz', icon: <IconSquareRoundedPlusFilled /> },
+        { name: 'Manage Quiz', url: '/user-dashboard/manage-quiz', icon: <IconSettingsFilled /> },
+        { name: 'Participated Quiz', url: '/user-dashboard/participated-quiz', icon: <IconRosetteDiscountCheckFilled /> },
+        { name: 'Progress', url: '/user-dashboard/progress', icon: <IconTimelineEventFilled /> },
+        { name: 'Transactions', url: '/user-dashboard/transactions', icon: <IconCoin stroke={2} /> },
+        { name: 'Plans', url: '/user-dashboard/plans', icon: <GiArmorUpgrade /> },
+        { name: 'Profile', url: '/user-dashboard/profile', icon: <IconUserFilled /> },
+    ];
 
     return (
-        <div className="min-h-screen flex ">
+        <div className="min-h-screen flex">
 
             {/* Mobile Menu Toggle Button */}
             <button className="lg:hidden fixed top-3 right-3 z-50 h-10 w-10 border-2 border-[#5C0096] rounded-full" onClick={toggleSidebar}>
-                <div className="">
+                <div>
                     {data ? (
                         <Image
                             src={
@@ -114,22 +68,23 @@ const Layout = ({ children }) => {
             </button>
 
             {/* Sidebar Component */}
-            <div className={`bg-[#f5f5f5] w-[270px] pl-2 fixed top-0 right-2 min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} lg:relative lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto `}
-                ref={sidebarRef}>
+            <div
+                className={`bg-[#f5f5f5] w-[270px] pl-4 fixed lg:left-0 lg:top-0 lg:min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
+                ref={sidebarRef}
+            >
                 <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
-
             </div>
 
-
             {/* Main Content Area */}
-            <div className="flex-1 p-6 pt-4 lg:pt-6 md:ml-4 transition-all duration-300 overflow-scroll">
+            <div className="flex-1 p-6 pt-4 lg:pl-[290px] lg:pt-6 transition-all duration-300 overflow-y-auto">
                 <div className='lg:hidden mb-2'>
                     <Link href="/">
                         <Image
                             src="/assets/logo.png"
                             alt="QuizPulse Logo"
                             width={120}
-                            height={40} // Adjust the height to make it fit nicely
+                            height={40}
                             className="object-contain"
                         />
                     </Link>
