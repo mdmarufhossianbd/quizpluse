@@ -114,9 +114,8 @@ const Layout = ({ children }) => {
             </button>
 
             {/* Sidebar Component */}
-            <div className={`bg-[#f5f5f5] w-[270px] pl-2 fixed top-0 left-0 min-h-screen flex flex-col justify-between 
-            ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} 
-            lg:translate-x-0 lg:pl-4 lg:fixed transition-transform duration-300 z-40 overflow-y-auto`} ref={sidebarRef}>
+            <div className={`bg-[#f5f5f5] w-[270px] pl-2 fixed top-0 right-2 min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"} lg:relative lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto `}
+                ref={sidebarRef}>
                 <Sidebar isSidebarOpen={isSidebarOpen} navLinks={navLinks} />
 
             </div>
