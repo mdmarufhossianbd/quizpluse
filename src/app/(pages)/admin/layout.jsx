@@ -66,7 +66,7 @@ export default function AdminLayout({ children }) {
       ></button>
 
       <div
-        className={`bg-[#f5f5f5] w-[270px] pl-4 fixed lg:left-0 lg:top-0 lg:min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`bg-[#f5f5f5] w-[270px] pl-4 fixed right-0 lg:left-0 lg:top-0 lg:min-h-screen flex flex-col justify-between transform ${isSidebarOpen ? "translate-x-0" : "translate-x-full"
           } lg:translate-x-0 transition-transform duration-300 z-40 overflow-y-auto`}
         ref={sidebarRef}
       >
