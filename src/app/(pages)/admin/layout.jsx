@@ -2,10 +2,11 @@
 
 import Sidebar from "@/components/shared/sidebar";
 import { IconCoin, IconLayoutDashboardFilled, IconSettingsFilled, IconUserFilled, IconUsers } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function AdminLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const sidebarRef = useRef(null);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
