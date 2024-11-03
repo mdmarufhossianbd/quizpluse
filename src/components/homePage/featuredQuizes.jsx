@@ -42,7 +42,7 @@ const FeaturedQuizes = () => {
   }
 
   return (
-    <div className="lg:max-w-7xl xl:max-w-full mx-auto lg:px-16 px-5 pt-4 pb-8 my-16 bg-gray-100">
+    <div className="lg:max-w-7xl xl:max-w-full mx-auto lg:px-16 px-5 pt-4 pb-8 my-16 bg-gray-100" id="featured-quiz">
       <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold lg:text-black text-center lg:my-10 md:my-8 my-6">Featured Quizes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {FeaturedQuizzes?.map(item => <QuizCard key={item._id} item={item} />)}
@@ -51,7 +51,7 @@ const FeaturedQuizes = () => {
           <Spinner size="lg" color="secondary" />
         </div>}
       </div>
-      
+
       {totalQuiz === FeaturedQuizzes.length ? '' : <div className="flex justify-center my-10">
         <button onClick={handleSeeMore} className="px-6 py-2 rounded-full text-xl font-semibold bg-gradient-to-r from-[#203fae] to-[#6a21a8] text-white hover:form-[#6a21a8] hover:to-[#203fae] duration-300 hover:scale-105 hover:shadow-xl">See More</button>
       </div>}

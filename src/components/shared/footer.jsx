@@ -61,13 +61,13 @@ const Footer = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
-                      Recent Quiz
+                    <a href="/#featured-quiz" className="hover:text-[#5C0096]">
+                      Featured Quiz
                     </a>
                   </li>
                   <li>
                     <a href="#" className="hover:text-[#5C0096]">
-                      Quiz Tournaments
+                      Quiz Progress
                     </a>
                   </li>
                   <li>
