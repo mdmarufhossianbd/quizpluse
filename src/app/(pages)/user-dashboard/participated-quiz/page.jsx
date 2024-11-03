@@ -1,4 +1,5 @@
 "use client";
+import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Pagination from "@/components/shared/pagination";
 import SimpleLoading from "@/components/shared/simpleLoading";
 import ParticipationQuizzes from "@/components/userDashboard/participatedQuizzes/participationQuizzes";
@@ -41,9 +42,10 @@ const ParticipatedQuizzes = () => {
 
   return (
     <div className="w-full">
-      {loading && <SimpleLoading />}
 
       <h1 className="text-3xl font-bold mb-8 lg:mb-7 text-center">My Participation ({totalParticipatedQuiz} Quizzes)</h1>
+      {loading && <DataLoader />}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {quizzes?.map((quiz) => (
           <ParticipationQuizzes key={quiz._id} quiz={quiz} />
