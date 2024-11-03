@@ -56,7 +56,7 @@ const Footer = () => {
                 <h4 className="font-bold mb-3">Useful Links</h4>
                 <ul>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
+                    <a href="/#popular-quiz" className="hover:text-[#5C0096]">
                       Popular Quiz
                     </a>
                   </li>

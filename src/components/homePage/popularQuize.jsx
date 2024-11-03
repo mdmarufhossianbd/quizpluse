@@ -36,12 +36,12 @@ const PopularQuize = () => {
     getPopularQuizzes()
   }, [page])
 
-  const handleSeeMore =() => {
-    setPage(page +1)
+  const handleSeeMore = () => {
+    setPage(page + 1)
   }
 
   return (
-    <div className="lg:max-w-7xl xl:max-w-full mx-auto lg:px-16 px-5 my-16">
+    <div className="lg:max-w-7xl xl:max-w-full mx-auto lg:px-16 px-5 my-16" id="popular-quiz">
       <h2 className='text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold lg:text-black text-center lg:my-10 md:my-8 my-6'>Popular Quizes</h2>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
         {popularQuizzes?.map(item => <QuizCard key={item?._id} item={item} />)}
