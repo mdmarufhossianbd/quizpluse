@@ -53,7 +53,6 @@ const FeaturedQuizes = () => {
         ))}
       </div>
 
-      {/* Center DataLoader when loading */}
       {loading && (
         <div className="flex justify-center items-center w-full mt-5">
           <DataLoader />
