@@ -1,5 +1,6 @@
 "use client"
 
+import DataLoader from '@/components/shared/dataLoader/dataLoader';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -29,7 +30,7 @@ const ThankYou = () => {
     if (!paymentDetails) {
         return (
             <div className="min-h-screen flex justify-center items-center">
-                <p className="text-xl text-gray-700">Loading payment details...</p>
+                <DataLoader />
             </div>
         )
     }

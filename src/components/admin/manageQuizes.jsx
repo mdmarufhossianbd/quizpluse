@@ -13,9 +13,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 import { useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import Pagination from "../shared/pagination";
-import SimpleLoading from "../shared/simpleLoading";
 import DeleteQuiz from "../userDashboard/manageQuiz/deleteQuiz";
 import PreviewModal from "./manageQuiz/previewModal";
+import DataLoader from "../shared/dataLoader/dataLoader";
 
 const ManageQuizzes = () => {
   // const { data } = useSession();
@@ -26,7 +26,7 @@ const ManageQuizzes = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [deleted, setDelete] = useState(false);
   const [statusUpdated, setStatusUpdated] = useState(false);
-  
+
 
   const handelStatus = async (status, id) => {
     try {
@@ -37,7 +37,7 @@ const ManageQuizzes = () => {
       console.log(res.data);
 
       // Trigger re-fetch of quizzes
-      setStatusUpdated(prev => !prev); 
+      setStatusUpdated(prev => !prev);
     } catch (error) {
       console.error("Error updating quiz status:", error);
     }
@@ -61,7 +61,7 @@ const ManageQuizzes = () => {
       }
     };
     fetchQuizzes(activeTab);
-  }, [page, activeTab, deleted,statusUpdated]);
+  }, [page, activeTab, deleted, statusUpdated]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -82,7 +82,7 @@ const ManageQuizzes = () => {
         </Tab>
       </Tabs>
 
-      {loading && <SimpleLoading />}
+      {loading && <DataLoader />}
 
       <Table>
         <TableHeader>
@@ -107,128 +107,128 @@ const ManageQuizzes = () => {
               <TableCell>{item.quizDuration}</TableCell>
               <TableCell>{item.featured}</TableCell>
               <TableCell>
-              {item.quizStatus === "publish" && (
-                < div className="flex">
-                  <Chip color="success" variant="dot" className="border-none">
-                  publish
-                  </Chip>
-                  <div style={{ position: "relative" }}>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <button className="btn text-sm p-2 ">
-                          <FaChevronDown></FaChevronDown>
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: 0,
-                          zIndex: 10,
-                          backgroundColor: "white",
-                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                          padding: "0.5rem",
-                          borderRadius: "0.375rem",
-                        }}
-                      >
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('rejected',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                          Reject
+                {item.quizStatus === "publish" && (
+                  < div className="flex">
+                    <Chip color="success" variant="dot" className="border-none">
+                      publish
+                    </Chip>
+                    <div style={{ position: "relative" }}>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <button className="btn text-sm p-2 ">
+                            <FaChevronDown></FaChevronDown>
                           </button>
-                        </DropdownMenuLabel>
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('pending',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                          pending
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          style={{
+                            position: "absolute",
+                            top: "100%",
+                            left: 0,
+                            zIndex: 10,
+                            backgroundColor: "white",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                            padding: "0.5rem",
+                            borderRadius: "0.375rem",
+                          }}
+                        >
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('rejected', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              Reject
+                            </button>
+                          </DropdownMenuLabel>
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('pending', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              pending
+                            </button>
+                          </DropdownMenuLabel>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </ div>
+                )}
+                {item.quizStatus === "pending" && (
+                  < div className="flex">
+                    <Chip color="primary" variant="dot" className="border-none">
+                      Pending
+                    </Chip>
+                    <div style={{ position: "relative" }}>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <button className="btn text-sm p-2 ">
+                            <FaChevronDown></FaChevronDown>
                           </button>
-                        </DropdownMenuLabel>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </ div>
-              )}
-                 {item.quizStatus === "pending" && (
-                < div className="flex">
-                  <Chip color="primary" variant="dot" className="border-none">
-                    Pending
-                  </Chip>
-                  <div style={{ position: "relative" }}>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <button className="btn text-sm p-2 ">
-                          <FaChevronDown></FaChevronDown>
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: 0,
-                          zIndex: 10,
-                          backgroundColor: "white",
-                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                          padding: "0.5rem",
-                          borderRadius: "0.375rem",
-                        }}
-                      >
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('publish',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                            Publish
-                          </button>
-                        </DropdownMenuLabel>
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('rejected',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                            Reject
-                          </button>
-                        </DropdownMenuLabel>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </ div>
-              )}
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          style={{
+                            position: "absolute",
+                            top: "100%",
+                            left: 0,
+                            zIndex: 10,
+                            backgroundColor: "white",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                            padding: "0.5rem",
+                            borderRadius: "0.375rem",
+                          }}
+                        >
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('publish', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              Publish
+                            </button>
+                          </DropdownMenuLabel>
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('rejected', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              Reject
+                            </button>
+                          </DropdownMenuLabel>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </ div>
+                )}
                 {item.quizStatus === "rejected" && (
-                < div className="flex">
-                  <Chip color="danger" variant="dot" className="border-none">
-                  rejected
-                  </Chip>
-                  <div style={{ position: "relative" }}>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger>
-                        <button className="btn text-sm p-2 ">
-                          <FaChevronDown></FaChevronDown>
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        style={{
-                          position: "absolute",
-                          top: "100%",
-                          left: 0,
-                          zIndex: 10,
-                          backgroundColor: "white",
-                          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-                          padding: "0.5rem",
-                          borderRadius: "0.375rem",
-                        }}
-                      >
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('publish',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                            Publish
+                  < div className="flex">
+                    <Chip color="danger" variant="dot" className="border-none">
+                      rejected
+                    </Chip>
+                    <div style={{ position: "relative" }}>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <button className="btn text-sm p-2 ">
+                            <FaChevronDown></FaChevronDown>
                           </button>
-                        </DropdownMenuLabel>
-                        <DropdownMenuLabel>
-                          <button onClick={()=>handelStatus('pending',item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
-                          Pending
-                          </button>
-                        </DropdownMenuLabel>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </ div>
-              )}
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          style={{
+                            position: "absolute",
+                            top: "100%",
+                            left: 0,
+                            zIndex: 10,
+                            backgroundColor: "white",
+                            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+                            padding: "0.5rem",
+                            borderRadius: "0.375rem",
+                          }}
+                        >
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('publish', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              Publish
+                            </button>
+                          </DropdownMenuLabel>
+                          <DropdownMenuLabel>
+                            <button onClick={() => handelStatus('pending', item._id)} className="btn p-2 hover:bg-[#5C1296] hover:text-white">
+                              Pending
+                            </button>
+                          </DropdownMenuLabel>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  </ div>
+                )}
               </TableCell>
               <TableCell className="flex justify-start gap-2">
                 <Tooltip content="View">
-                  <span className="text-lg cursor-pointer active:opacity-50">                    
-                    <PreviewModal id={item._id} />  
+                  <span className="text-lg cursor-pointer active:opacity-50">
+                    <PreviewModal id={item._id} />
                   </span>
                 </Tooltip>
                 <Tooltip color="danger" content="Delete Quiz">
