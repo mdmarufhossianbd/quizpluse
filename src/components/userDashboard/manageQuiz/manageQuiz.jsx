@@ -3,7 +3,6 @@
 import DataLoader from '@/components/shared/dataLoader/dataLoader';
 import Pagination from '@/components/shared/pagination';
 import QuizTable from '@/components/shared/quizTable';
-import SimpleLoading from '@/components/shared/simpleLoading';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';

@@ -1,7 +1,6 @@
 "use client";
 import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Pagination from "@/components/shared/pagination";
-import SimpleLoading from "@/components/shared/simpleLoading";
 import ParticipationQuizzes from "@/components/userDashboard/participatedQuizzes/participationQuizzes";
 import axios from "axios";
 import { useSession } from "next-auth/react";

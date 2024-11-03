@@ -1,6 +1,5 @@
 "use client"
 
-import SimpleLoading from '@/components/shared/simpleLoading';
 import { IconPointFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
