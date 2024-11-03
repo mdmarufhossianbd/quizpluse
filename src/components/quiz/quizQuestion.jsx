@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Loading from '../shared/loading';
 import QuizNavigation from './quizNavigation';
 import QuizResult from './quizResult';
+import DataLoader from '../shared/dataLoader/dataLoader';
 
 const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
     const { data } = useSession();
@@ -18,7 +19,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
         const newAnswers = [...userAnswers];
         newAnswers[currentQuestionIndex] = optionIndex;
         setUserAnswers(newAnswers);
-    };   
+    };
 
     // Handle navigation to next question or submitting the quiz
     const handleNext = () => {
@@ -89,7 +90,7 @@ const QuizQuestion = ({ quiz, timeLimit, setTimeLeft }) => {
 
     // loader for showing result
     if (loading) {
-        return <Loading />
+        return <DataLoader />
     }
 
     return (

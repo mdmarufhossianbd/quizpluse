@@ -56,23 +56,23 @@ const Footer = () => {
                 <h4 className="font-bold mb-3">Useful Links</h4>
                 <ul>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
+                    <a href="/#popular-quiz" className="hover:text-[#5C0096]">
                       Popular Quiz
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
-                      Recent Quiz
+                    <a href="/#featured-quiz" className="hover:text-[#5C0096]">
+                      Featured Quiz
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
-                      Quiz Tournaments
+                    <a href="/user-dashboard/progress" className="hover:text-[#5C0096]">
+                      Quiz Progress
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="hover:text-[#5C0096]">
-                      Winners
+                    <a href="/ranking" className="hover:text-[#5C0096]">
+                      Top Scorrer
                     </a>
                   </li>
                 </ul>

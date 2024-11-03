@@ -121,7 +121,7 @@ const PaymentInvoice = () => {
                     className="bg-[#5C0096] hover:bg-[#4a0078] text-white py-2 px-6 rounded-lg font-semibold shadow-lg flex items-center space-x-2 transition duration-300 ease-in-out"
                     onClick={() => generatePDF(contentRef, { filename: `invoice_${paymentDetails?.transactionId}.pdf` })}
                 >
-                    <FiDownload className="text-xl" /> {/* Download icon */}
+                    <FiDownload className="text-xl" />
                     <span>Download PDF</span>
                 </button>
 

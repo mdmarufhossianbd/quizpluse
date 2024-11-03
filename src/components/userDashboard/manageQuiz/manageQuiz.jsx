@@ -1,8 +1,8 @@
 "use client";
 
+import DataLoader from '@/components/shared/dataLoader/dataLoader';
 import Pagination from '@/components/shared/pagination';
 import QuizTable from '@/components/shared/quizTable';
-import SimpleLoading from '@/components/shared/simpleLoading';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
@@ -36,8 +36,13 @@ const ManageQuiz = () => {
 
     return (
         <div>
-            {loading && <SimpleLoading />}
+
             <QuizTable quizzes={quizzes} setDelete={setDelete} setFeatured={setFeatured} email={email} />
+            {loading && (
+                <div className="flex justify-center items-center w-full ">
+                    <DataLoader />
+                </div>
+            )}
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </div>
     );

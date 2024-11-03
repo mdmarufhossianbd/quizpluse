@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import ImageUpload from '../../shared/imageUpload';
-import SimpleLoading from '../../shared/simpleLoading';
 import QuizCategory from './quizCategory';
+import DataLoader from '@/components/shared/dataLoader/dataLoader';
 
 const CreateQuiz = () => {
     const { data, status } = useSession()
@@ -138,9 +138,11 @@ const CreateQuiz = () => {
 
     return (
         <div className="max-w-xl mx-auto my-8">
-            {
-                status === 'loading' && <SimpleLoading />
-            }
+            {loading && (
+                <div className="flex justify-center items-center w-full mt-5">
+                    <DataLoader />
+                </div>
+            )}
             <Toaster position='top-right' richColors />
             <h1 className="text-3xl font-bold mb-4 text-center">Create a Quiz</h1>
 

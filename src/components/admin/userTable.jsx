@@ -3,8 +3,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "../shared/pagination";
-import SimpleLoading from "../shared/simpleLoading";
 import { Button } from "../ui/button";
+import DataLoader from "../shared/dataLoader/dataLoader";
 
 const UserTable = () => {
   const [searchEmail, setSearchEmail] = useState("");
@@ -18,28 +18,28 @@ const UserTable = () => {
     const getAllUsers = async () => {
       setLoading(true)
       await axios.get(`/api/v1/user?email=${searchEmail}&page=${page}&limit=10`)
-      .then(res => {
-        // console.log(res.data);
-        if(res.data.success){
-          setUsers(res.data.result);
-          setPage(res.data.currentPage);
-          setTotalPages(res.data.totalPages);
-          setTotalUsers(res.data.totalUsers);
-          setLoading(false)
-        }
-      })
+        .then(res => {
+          // console.log(res.data);
+          if (res.data.success) {
+            setUsers(res.data.result);
+            setPage(res.data.currentPage);
+            setTotalPages(res.data.totalPages);
+            setTotalUsers(res.data.totalUsers);
+            setLoading(false)
+          }
+        })
     };
     getAllUsers();
   }, [page, searchEmail]);
-  
+
   const handleSearch = (e) => {
     e.preventDefault()
-    const email = e.target.email.value;    
+    const email = e.target.email.value;
     setSearchEmail(email)
   }
 
-  if(loading){
-    return <SimpleLoading />
+  if (loading) {
+    return <DataLoader />
   }
 
   return (
@@ -71,7 +71,7 @@ const UserTable = () => {
             {
               users.map((item, idx) => (
                 <TableRow key={idx}>
-                  <TableCell>{idx +1}</TableCell>
+                  <TableCell>{idx + 1}</TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.username}</TableCell>
                   <TableCell>{item.role}</TableCell>

@@ -1,6 +1,5 @@
 "use client"
 
-import SimpleLoading from '@/components/shared/simpleLoading';
 import { IconPointFilled } from '@tabler/icons-react';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
@@ -8,6 +7,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import ChangePassword from '../userDashboard/profile/changePassword';
 import UpdateProfile from '../userDashboard/profile/updateProfile';
+import DataLoader from './dataLoader/dataLoader';
 
 const UserProfile = () => {
     const { data, status } = useSession();
@@ -32,7 +32,7 @@ const UserProfile = () => {
     }, [userEmail, status])
 
     if (status === "loading") {
-        return <SimpleLoading />;
+        return <DataLoader />;
     }
 
     const handleEdit = () => { };

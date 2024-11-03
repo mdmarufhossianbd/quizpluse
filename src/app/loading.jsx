@@ -1,3 +1,4 @@
+import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import {
     AlertDialog,
     AlertDialogContent,
@@ -22,7 +23,8 @@ const Loading = () => {
                             {/* title here */}
                         </AlertDialogTitle>
                         <AlertDialogDescription className='flex items-center justify-center py-20'>
-                            <AiOutlineLoading3Quarters className="animate-spin" size={50} />
+                            {/* <AiOutlineLoading3Quarters className="animate-spin" size={50} /> */}
+                            <DataLoader />
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     {/* <AlertDialogFooter>
