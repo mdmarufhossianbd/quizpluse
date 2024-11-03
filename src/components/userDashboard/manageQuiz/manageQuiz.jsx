@@ -1,5 +1,6 @@
 "use client";
 
+import DataLoader from '@/components/shared/dataLoader/dataLoader';
 import Pagination from '@/components/shared/pagination';
 import QuizTable from '@/components/shared/quizTable';
 import SimpleLoading from '@/components/shared/simpleLoading';
@@ -36,8 +37,13 @@ const ManageQuiz = () => {
 
     return (
         <div>
-            {loading && <SimpleLoading />}
+
             <QuizTable quizzes={quizzes} setDelete={setDelete} setFeatured={setFeatured} email={email} />
+            {loading && (
+                <div className="flex justify-center items-center w-full ">
+                    <DataLoader />
+                </div>
+            )}
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </div>
     );
