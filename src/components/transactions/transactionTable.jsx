@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import Pagination from "../shared/pagination";
 import TransactionTable from "../shared/transactionTable";
+import DataLoader from "../shared/dataLoader/dataLoader";
 
 const Transaction = () => {
     const { data } = useSession();
@@ -37,11 +38,11 @@ const Transaction = () => {
         <>
             <div className="border rounded-md">
                 <TransactionTable transactions={transactions} />
-                {
-                    loading && <div className="flex items-center justify-center w-full my-10">
-                        <ImSpinner9 size={50} className="animate-spin" />
+                {loading && (
+                    <div className="flex justify-center items-center w-full mt-5">
+                        <DataLoader />
                     </div>
-                }
+                )}
             </div>
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </>
