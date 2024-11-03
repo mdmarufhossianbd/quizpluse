@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { ImSpinner9 } from 'react-icons/im';
 import { toast, Toaster } from 'sonner';
 import ImageUpload from '../../shared/imageUpload';
-import SimpleLoading from '../../shared/simpleLoading';
 import QuizCategory from './quizCategory';
 import DataLoader from '@/components/shared/dataLoader/dataLoader';
 

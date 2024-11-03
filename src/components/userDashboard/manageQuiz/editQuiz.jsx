@@ -1,7 +1,6 @@
 "use client";
 
 import ImageUpload from '@/components/shared/imageUpload';
-import SimpleLoading from '@/components/shared/simpleLoading';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
