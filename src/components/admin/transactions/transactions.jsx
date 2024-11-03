@@ -1,4 +1,5 @@
 'use client'
+import DataLoader from "@/components/shared/dataLoader/dataLoader";
 import Pagination from "@/components/shared/pagination";
 import TransactionTable from "@/components/shared/transactionTable";
 import axios from "axios";
@@ -34,11 +35,13 @@ const Transactions = () => {
         <>
             <div className="border rounded-md">
                 <TransactionTable transactions={transactions} />
-                {
+                {/* {
                     loading && <div className="flex items-center justify-center w-full my-10">
                         <ImSpinner9 size={50} className="animate-spin" />
                     </div>
-                }
+                } */}
+                {loading && <DataLoader />}
+
             </div>
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </>
