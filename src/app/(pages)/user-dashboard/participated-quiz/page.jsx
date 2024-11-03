@@ -11,7 +11,7 @@ const ParticipatedQuizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalParticipatedQuiz,setTotalParticipatedQuiz] = useState(0);
+  const [totalParticipatedQuiz, setTotalParticipatedQuiz] = useState(0);
 
   const [loading, setLoading] = useState(false);
 
